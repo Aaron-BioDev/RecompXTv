@@ -443,7 +443,7 @@
         query: '',
     };
 
-    const APP_VERSION = '2026.11.06.2';
+    const APP_VERSION = '2026.11.07.1';
     const UPDATE_CHECK_INTERVAL = 5 * 60 * 1000;
 
     let els = {};
@@ -490,6 +490,12 @@
             privacyModal: document.getElementById('privacyModal'),
             toast: document.getElementById('toast'),
             toastMsg: document.getElementById('toastMsg'),
+            adblockModal: document.getElementById('adblockModal'),
+            adblockCard: document.getElementById('adblockCard'),
+            adblockCheckBtn: document.getElementById('adblockCheckBtn'),
+            adblockStatusMsg: document.getElementById('adblockStatusMsg'),
+            braveDetectedBadge: document.getElementById('braveDetectedBadge'),
+            braveGuideBox: document.getElementById('braveGuideBox'),
         };
     }
 
@@ -989,7 +995,9 @@
         if (els.modal.hidden) return;
 
         els.modal.hidden = true;
-        if (els.privacyModal.hidden) document.body.classList.remove('modal-open');
+        if (els.privacyModal.hidden && (!els.adblockModal || els.adblockModal.hidden)) {
+            document.body.classList.remove('modal-open');
+        }
 
         restoreFocus();
     }
@@ -1010,7 +1018,9 @@
         if (els.privacyModal.hidden) return;
 
         els.privacyModal.hidden = true;
-        if (els.modal.hidden) document.body.classList.remove('modal-open');
+        if (els.modal.hidden && (!els.adblockModal || els.adblockModal.hidden)) {
+            document.body.classList.remove('modal-open');
+        }
 
         restoreFocus();
     }
@@ -1149,6 +1159,152 @@
     }
 
     /* ======================================================================
+       12c. Anti-Adblock y Detección de Brave Shields
+       ====================================================================== */
+    let isAdblockOpen = false;
+
+    async function detectIsBrave() {
+        try {
+            if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
+                return Boolean(await navigator.brave.isBrave());
+            }
+        } catch {
+            /* Error en API de Brave */
+        }
+        return false;
+    }
+
+    function checkDomBait() {
+        try {
+            const bait = document.createElement('div');
+            bait.className = 'ad-banner adsbox ad_unit ad-zone banner-ad pub_300x250 textads text-ad';
+            bait.style.cssText =
+                'position:absolute!important;top:-9999px!important;left:-9999px!important;width:100px!important;height:100px!important;pointer-events:none!important;';
+            bait.setAttribute('aria-hidden', 'true');
+            document.body.appendChild(bait);
+
+            const computed = window.getComputedStyle(bait);
+            const isBlocked =
+                bait.offsetParent === null ||
+                bait.offsetHeight === 0 ||
+                bait.offsetWidth === 0 ||
+                computed.display === 'none' ||
+                computed.visibility === 'hidden';
+
+            bait.remove();
+            return isBlocked;
+        } catch {
+            return false;
+        }
+    }
+
+    async function checkNetworkBait() {
+        if (navigator.onLine === false) return false;
+        try {
+            // URL publicitaria de referencia que es bloqueada por EasyList, uBlock y Brave Shields
+            const baitUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+            await fetch(baitUrl, {
+                method: 'HEAD',
+                mode: 'no-cors',
+                cache: 'no-store',
+            });
+            return false;
+        } catch {
+            return true;
+        }
+    }
+
+    function checkScriptError() {
+        return Boolean(window.__adsterraBlocked);
+    }
+
+    async function verifyAdBlockActive() {
+        const isDom = checkDomBait();
+        const isScript = checkScriptError();
+        const isNet = await checkNetworkBait();
+        return isDom || isScript || isNet;
+    }
+
+    function showAdblockModal(isBrave) {
+        if (!els.adblockModal) return;
+        isAdblockOpen = true;
+        els.adblockModal.hidden = false;
+        document.body.classList.add('modal-open');
+
+        if (els.braveDetectedBadge) {
+            els.braveDetectedBadge.hidden = !isBrave;
+        }
+
+        if (isBrave && els.braveGuideBox) {
+            els.braveGuideBox.classList.add('border-orange-500/60', 'bg-orange-500/10');
+        }
+
+        if (els.adblockCheckBtn) {
+            els.adblockCheckBtn.focus();
+        }
+    }
+
+    function hideAdblockModal() {
+        if (!els.adblockModal || els.adblockModal.hidden) return;
+        isAdblockOpen = false;
+        els.adblockModal.hidden = true;
+
+        if (els.modal.hidden && els.privacyModal.hidden) {
+            document.body.classList.remove('modal-open');
+        }
+
+        if (els.adblockStatusMsg) {
+            els.adblockStatusMsg.hidden = true;
+            els.adblockStatusMsg.textContent = '';
+        }
+    }
+
+    async function handleAdblockCheck() {
+        if (!els.adblockCheckBtn) return;
+
+        const originalHtml = els.adblockCheckBtn.innerHTML;
+        els.adblockCheckBtn.disabled = true;
+        els.adblockCheckBtn.innerHTML =
+            '<i class="fa-solid fa-circle-notch fa-spin mr-2" aria-hidden="true"></i> Comprobando bloqueador...';
+
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        const stillBlocked = await verifyAdBlockActive();
+
+        els.adblockCheckBtn.disabled = false;
+        els.adblockCheckBtn.innerHTML = originalHtml;
+
+        if (stillBlocked) {
+            if (els.adblockCard) {
+                els.adblockCard.classList.remove('animate-shake');
+                void els.adblockCard.offsetWidth; // reiniciar animación
+                els.adblockCard.classList.add('animate-shake');
+            }
+
+            if (els.adblockStatusMsg) {
+                els.adblockStatusMsg.hidden = false;
+                els.adblockStatusMsg.innerHTML =
+                    '<i class="fa-solid fa-triangle-exclamation mr-1.5" aria-hidden="true"></i> El bloqueador sigue activo. Recuerda apagar los <strong>Escudos de Brave (Shields DOWN)</strong> o pausar tu extensión y vuelve a pulsar aquí.';
+            }
+        } else {
+            hideAdblockModal();
+            showToast('¡Gracias por apoyar a RecompXtv! Ya puedes navegar.');
+        }
+    }
+
+    async function initAdblockDetector() {
+        // Breve espera para que los estilos y peticiones del navegador se inicialicen
+        await new Promise((resolve) => setTimeout(resolve, 350));
+
+        const isBrave = await detectIsBrave();
+        const isBlocked = await verifyAdBlockActive();
+
+        if (isBlocked) {
+            showAdblockModal(isBrave);
+        }
+    }
+
+    /* ======================================================================
        13. Eventos
        ====================================================================== */
     function bindEvents() {
@@ -1187,6 +1343,11 @@
             if (trigger) openModal(trigger.dataset.appId);
         });
 
+        // Botón de comprobación del Anti-Adblock
+        if (els.adblockCheckBtn) {
+            els.adblockCheckBtn.addEventListener('click', handleAdblockCheck);
+        }
+
         // Acciones globales y copiado (delegación de eventos)
         document.addEventListener('click', (event) => {
             const actionElement = event.target.closest('[data-action]');
@@ -1209,15 +1370,21 @@
 
         // Cerrar modales con Escape y atrapar el foco
         document.addEventListener('keydown', (event) => {
-            const activeModal = !els.privacyModal.hidden
-                ? els.privacyModal
-                : !els.modal.hidden
-                  ? els.modal
-                  : null;
+            const activeModal = !els.adblockModal?.hidden
+                ? els.adblockModal
+                : !els.privacyModal.hidden
+                  ? els.privacyModal
+                  : !els.modal.hidden
+                    ? els.modal
+                    : null;
 
             if (!activeModal) return;
 
             if (event.key === 'Escape') {
+                if (activeModal === els.adblockModal) {
+                    event.preventDefault();
+                    return;
+                }
                 event.preventDefault();
                 if (activeModal === els.privacyModal) closePrivacy();
                 else closeModal();
@@ -1227,13 +1394,24 @@
             trapFocus(event, activeModal);
         });
 
-        // Cerrar modales al hacer clic en el fondo
+        // Cerrar modales al hacer clic en el fondo (el modal de adblock no se cierra con clic)
         els.modal.addEventListener('click', (event) => {
             if (event.target === els.modal) closeModal();
         });
 
         els.privacyModal.addEventListener('click', (event) => {
             if (event.target === els.privacyModal) closePrivacy();
+        });
+
+        // Comprobación automática al recuperar el foco de la ventana
+        window.addEventListener('focus', async () => {
+            if (isAdblockOpen) {
+                const stillBlocked = await verifyAdBlockActive();
+                if (!stillBlocked) {
+                    hideAdblockModal();
+                    showToast('¡Bloqueador desactivado! Bienvenido a RecompXtv.');
+                }
+            }
         });
 
         // Sincroniza el buscador si el usuario vuelve con el historial
@@ -1253,6 +1431,7 @@
         renderDirectDownloads();
         setCategory('all');
         els.searchClear.hidden = true;
+        initAdblockDetector();
 
         if (/^https?:$/.test(window.location.protocol)) {
             checkForWebUpdate();

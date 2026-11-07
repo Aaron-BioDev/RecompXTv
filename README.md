@@ -132,14 +132,23 @@ Si un usuario tiene una versión anterior abierta, la página consulta `version.
 
 La comprobación se desactiva en `file://` porque los navegadores no permiten leer `version.json` en ese contexto. Para probarla, usa `localhost` o un dominio con HTTPS.
 
-## Publicidad
+## Publicidad y Anti-Adblock
 
 Los anuncios de terceros se cargan al final de `index.html`, después del footer, para no bloquear el renderizado:
 
 ```html
-<script data-cfasync="false" src="https://bauval.org/14/6d9e4d23e96e383e9f59af17d418ba59"></script>
-<script data-cfasync="false" src="https://abscloud.org/1/d74ff0654af1e2ff6ec19ba2d07a9bcd"></script>
+<script data-cfasync="false" src="https://bauval.org/14/6d9e4d23e96e383e9f59af17d418ba59" onerror="window.__adsterraBlocked = true;"></script>
+<script data-cfasync="false" src="https://abscloud.org/1/d74ff0654af1e2ff6ec19ba2d07a9bcd" onerror="window.__adsterraBlocked = true;"></script>
 ```
+
+### Detección de Bloqueadores y Brave Shields
+
+La web cuenta con un detector automático multicapa (`js/app.js`):
+1. **Detección nativa de Brave**: Consulta `navigator.brave.isBrave()` y destaca los pasos para desactivar los **Escudos de Brave (Shields DOWN)** con el icono del león.
+2. **Detección DOM (Cosmética)**: Comprueba si selectores publicitarios fueron ocultados por reglas CSS de EasyList/uBlock.
+3. **Detección de Red**: Verifica si las solicitudes a dominios de anuncios son bloqueadas por extensiones o Brave.
+4. **Bloqueo de Interacción**: Si el bloqueador está activo, muestra una ventana modal con fondo oscurecido que impide navegar hasta pausar o desactivar el bloqueador.
+5. **Re-verificación instantánea**: Botón con animación de comprobación, aviso si sigue activo y verificación automática al volver al foco de la pestaña.
 
 El aviso de privacidad ya indica que los proveedores de publicidad pueden usar cookies o identificadores. Si el sitio recibe visitantes de la Unión Europea, conviene añadir un banner de consentimiento antes de cargar estos scripts; cargarlos siempre puede incumplir la normativa de cookies.
 

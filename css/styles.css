@@ -54,6 +54,17 @@ body {
     box-shadow: 0 12px 25px -5px rgba(124, 58, 237, 0.25);
 }
 
+/* --------------------------- Animación Shake ----------------------------- */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+.animate-shake {
+    animation: shake 0.4s ease-in-out;
+}
+
 /* El foco visible solo debe aparecer con teclado */
 :focus:not(:focus-visible) {
     outline: none;

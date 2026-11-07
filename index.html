@@ -411,7 +411,7 @@
 
     <!-- Privacy / Legal Modal -->
     <div id="privacyModal" hidden
-         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+         class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
          role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
         <div class="bg-darkcard border border-darkborder rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative animate-fade-in">
             <button type="button" data-action="close-privacy"
@@ -447,6 +447,81 @@
             <div class="mt-6 flex justify-end pt-4 border-t border-darkborder/60">
                 <button type="button" data-action="close-privacy" class="px-4 py-2 rounded-xl bg-darkbg hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors">
                     Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Anti-Adblock / Advertencia de Bloqueador de Anuncios y Brave -->
+    <div id="adblockModal" hidden
+         class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
+         role="dialog" aria-modal="true" aria-labelledby="adblockTitle" aria-describedby="adblockDesc">
+        <div id="adblockCard" class="bg-darkcard border border-amber-500/30 rounded-2xl max-w-lg w-full max-h-[92vh] overflow-y-auto p-6 sm:p-7 shadow-2xl relative text-center">
+
+            <!-- Icono cabecera -->
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-amber-500/20 to-red-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 text-3xl mb-4 shadow-lg shadow-amber-500/10">
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+            </div>
+
+            <!-- Título y descripción -->
+            <h2 id="adblockTitle" class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                Bloqueador de anuncios detectado
+            </h2>
+            <p id="adblockDesc" class="text-xs sm:text-sm text-gray-300 mt-2 leading-relaxed">
+                <strong class="text-white">RecompXtv</strong> es un repositorio 100% gratuito. Para mantener los servidores y actualizar los códigos sin cobrar suscripciones, dependemos de la publicidad. Por favor, desactiva temporalmente tu bloqueador para acceder al sitio.
+            </p>
+
+            <!-- Badge si se detecta Brave -->
+            <div id="braveDetectedBadge" hidden class="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-400 text-xs font-semibold">
+                <i class="fa-brands fa-brave text-sm" aria-hidden="true"></i>
+                <span>Estás navegando desde Brave Browser</span>
+            </div>
+
+            <!-- Instrucciones paso a paso -->
+            <div class="mt-5 space-y-3 text-left">
+                <!-- Opción 1: Navegador Brave (Shields) -->
+                <div id="braveGuideBox" class="p-4 rounded-xl bg-darkbg/80 border border-darkborder transition-colors">
+                    <div class="flex items-center gap-2.5 mb-2">
+                        <span class="w-7 h-7 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center text-sm font-bold shrink-0">
+                            <i class="fa-brands fa-brave" aria-hidden="true"></i>
+                        </span>
+                        <h3 class="text-xs sm:text-sm font-bold text-white">Si usas Brave (Escudos / Shields)</h3>
+                    </div>
+                    <ol class="text-[11px] sm:text-xs text-gray-300 space-y-1.5 list-decimal list-inside ml-1">
+                        <li>Haz clic en el icono del <strong class="text-orange-400">león naranja</strong> en la barra de direcciones (URL).</li>
+                        <li>Apaga el interruptor principal de los <strong class="text-white">Escudos (Shields DOWN)</strong> para este sitio.</li>
+                        <li>La página se recargará automáticamente y tendrás acceso completo.</li>
+                    </ol>
+                </div>
+
+                <!-- Opción 2: Extensiones (uBlock Origin, AdBlock, AdGuard, etc.) -->
+                <div class="p-4 rounded-xl bg-darkbg/80 border border-darkborder transition-colors">
+                    <div class="flex items-center gap-2.5 mb-2">
+                        <span class="w-7 h-7 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center text-sm font-bold shrink-0">
+                            <i class="fa-solid fa-puzzle-piece" aria-hidden="true"></i>
+                        </span>
+                        <h3 class="text-xs sm:text-sm font-bold text-white">Si usas extensiones (uBlock, AdBlock, etc.)</h3>
+                    </div>
+                    <ol class="text-[11px] sm:text-xs text-gray-300 space-y-1.5 list-decimal list-inside ml-1">
+                        <li>Haz clic en el icono de la extensión en la barra superior del navegador.</li>
+                        <li>Selecciona <strong class="text-white">"Pausar en este sitio"</strong> o apaga el botón de encendido.</li>
+                        <li>Pulsa el botón de abajo para verificar y continuar.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Mensaje de estado dinámico al verificar -->
+            <div id="adblockStatusMsg" hidden class="mt-4 p-2.5 rounded-lg text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20"></div>
+
+            <!-- Botones de acción -->
+            <div class="mt-6 flex flex-col gap-2">
+                <button type="button" id="adblockCheckBtn"
+                        class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                    <span>Ya desactivé el bloqueador / Continuar</span>
+                </button>
+                <button type="button" data-action="privacy" class="text-[11px] text-gray-400 hover:text-gray-300 transition-colors py-1">
+                    Leer Aviso de Privacidad y Publicidad
                 </button>
             </div>
         </div>
@@ -499,8 +574,8 @@
     </footer>
 
     <!-- Publicidad de terceros -->
-    <script data-cfasync="false" src="https://bauval.org/14/6d9e4d23e96e383e9f59af17d418ba59"></script>
-    <script data-cfasync="false" src="https://abscloud.org/1/d74ff0654af1e2ff6ec19ba2d07a9bcd"></script>
+    <script data-cfasync="false" src="https://bauval.org/14/6d9e4d23e96e383e9f59af17d418ba59" onerror="window.__adsterraBlocked = true;"></script>
+    <script data-cfasync="false" src="https://abscloud.org/1/d74ff0654af1e2ff6ec19ba2d07a9bcd" onerror="window.__adsterraBlocked = true;"></script>
 
 </body>
 </html>
