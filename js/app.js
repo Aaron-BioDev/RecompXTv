@@ -7,7 +7,7 @@
  *   platforms:    ['androidtv' | 'lg' | 'tizen' | 'roku' | 'mobile']
  *   code:         código de Downloader o null si se instala desde tienda/APK
  *   verified:     true si el código fue comprobado; false muestra "Sin verificar"
- *   installLabel: texto del botón cuando no hay código (ej. 'Google Play')
+ *   installLabel: texto del enlace oficial o tienda (ej. 'Google Play')
  *   directUrl:    enlace oficial de descarga o null si aún no se conoce
  */
 (function () {
@@ -103,13 +103,49 @@
             categories: ['smarttv', 'mobile', 'reproductores'],
             platforms: ['androidtv', 'lg', 'tizen', 'mobile'],
             tag: 'Open source',
+            format: 'APK · IPK · WGT',
             code: null,
             installLabel: 'Web oficial',
             iconClass: 'fa-photo-film',
+            iconImage: 'img/apps/nuvio.png',
             bgColor: 'from-cyan-500 to-blue-700',
             desc: 'Cliente multimedia open source para organizar tu biblioteca, perfiles y progreso de reproducción en Android TV, Fire TV, LG webOS, Samsung Tizen y Android móvil.',
             guide: 'Descarga Nuvio desde nuvio.tv o desde sus releases oficiales de GitHub. En Android TV/Fire TV instala el APK; en LG webOS y Samsung Tizen requiere instalación manual (Developer Mode o TizenBrew). No hay versión oficial para Roku.',
             directUrl: 'https://nuvio.tv/',
+            downloads: [
+                {
+                    label: 'Android TV / Fire TV',
+                    format: 'APK',
+                    variant: 'Universal',
+                    version: '1.0.0',
+                    source: 'GitHub Releases',
+                    url: 'https://github.com/NuvioMedia/NuvioTV/releases/download/1.0.0/app-full-universal-release.apk',
+                },
+                {
+                    label: 'LG webOS',
+                    format: 'IPK',
+                    variant: 'webOS',
+                    version: '1.3.7',
+                    source: 'GitHub Releases',
+                    url: 'https://github.com/NuvioMedia/NuvioTVSmart/releases/download/1.3.7/NuvioTV-webOS-1.3.7.ipk',
+                },
+                {
+                    label: 'Samsung Tizen',
+                    format: 'WGT',
+                    variant: 'Tizen',
+                    version: '1.3.7',
+                    source: 'GitHub Releases',
+                    url: 'https://github.com/NuvioMedia/NuvioTVSmart/releases/download/1.3.7/NuvioTV-Tizen-1.3.7.wgt',
+                },
+                {
+                    label: 'Android móvil',
+                    format: 'APK',
+                    variant: 'ARM64',
+                    version: '0.6.9-beta',
+                    source: 'GitHub Releases',
+                    url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.9-beta/androidApp-full-arm64-v8a-release.apk',
+                },
+            ],
         },
         {
             id: 'stremio',
@@ -117,13 +153,25 @@
             categories: ['mobile', 'reproductores'],
             platforms: ['mobile'],
             tag: 'Android',
+            format: 'APK',
             code: null,
             installLabel: 'Google Play',
             iconClass: 'fa-clapperboard',
+            iconImage: 'img/apps/stremio.png',
             bgColor: 'from-indigo-500 to-purple-600',
             desc: 'Reproductor y centro multimedia para Android con catálogo de películas y series, addons y sincronización de progreso.',
             guide: 'Instala Stremio desde Google Play o descarga el APK oficial en stremio.com/downloads. Abre la app, crea tu cuenta y añade los addons que quieras. No requiere código de Downloader.',
             directUrl: 'https://play.google.com/store/apps/details?id=com.stremio.one',
+            downloads: [
+                {
+                    label: 'Android móvil',
+                    format: 'APK',
+                    variant: 'ARM64',
+                    version: '2.3.2',
+                    source: 'Stremio',
+                    url: 'https://dl.strem.io/android/v2.3.2-android/com.stremio.one-2.3.2-7145730-arm64-v8a.apk',
+                },
+            ],
         },
         {
             id: 'xuper-tv',
@@ -131,13 +179,16 @@
             categories: ['smarttv'],
             platforms: ['androidtv'],
             tag: 'Android TV / Firestick',
+            format: 'APK',
             code: '74829',
             verified: false,
+            installLabel: 'Google Play',
             iconClass: 'fa-tv',
+            iconImage: 'img/apps/xuper-tv.png',
             bgColor: 'from-purple-600 to-indigo-600',
             desc: 'Aplicación optimizada para streaming en Smart TV y TV Boxes. Interfaz ligera diseñada específicamente para control remoto sin necesidad de mouse.',
-            guide: 'Abre Downloader en tu Firestick o TV Box, ingresa el código que aparece en la tarjeta y pulsa Go. Permite la instalación de orígenes desconocidos si tu sistema lo solicita.',
-            directUrl: null,
+            guide: 'Abre Downloader en tu Firestick o TV Box, ingresa el código que aparece en la tarjeta y pulsa Go. Permite la instalación de orígenes desconocidos si tu sistema lo solicita. También puedes abrir la ficha oficial de Google Play desde el enlace.',
+            directUrl: 'https://play.google.com/store/apps/details?id=com.xuper.tv',
         },
         {
             id: 'downloader',
@@ -145,9 +196,12 @@
             categories: ['smarttv', 'herramientas'],
             platforms: ['androidtv'],
             tag: 'Herramienta Clave',
+            format: 'APK',
             code: '11111',
             verified: false,
+            installLabel: 'Sitio oficial',
             iconClass: 'fa-download',
+            iconImage: 'img/apps/downloader.png',
             bgColor: 'from-amber-600 to-orange-600',
             desc: 'La herramienta fundamental para instalar aplicaciones APK directamente en dispositivos Fire TV y Android TV mediante URLs o códigos cortos.',
             guide: 'Si tu Smart TV tiene Google Play Store, búscala directamente como "Downloader". Si usas una TV alternativa, usa este código de respaldo.',
@@ -159,13 +213,26 @@
             categories: ['smarttv', 'reproductores'],
             platforms: ['androidtv'],
             tag: 'Android 7.0+',
+            format: 'APK',
             code: '39201',
             verified: false,
+            installLabel: 'VideoLAN',
             iconClass: 'fa-play',
+            iconImage: 'img/apps/vlc.png',
             bgColor: 'from-orange-500 to-amber-600',
             desc: 'Reproductor multimedia libre y de código abierto compatible con todos los formatos de video, subtítulos y listas de reproducción externas.',
             guide: 'Excelente opción como reproductor secundario para aplicaciones que no tienen reproductor nativo integrado.',
-            directUrl: 'https://www.videolan.org/',
+            directUrl: 'https://www.videolan.org/vlc/download-android.html',
+            downloads: [
+                {
+                    label: 'Android TV / móvil',
+                    format: 'APK',
+                    variant: 'ARM64',
+                    version: '3.7.1',
+                    source: 'VideoLAN',
+                    url: 'https://download.videolan.org/pub/videolan/vlc-android/3.7.1/VLC-Android-3.7.1-arm64-v8a.apk',
+                },
+            ],
         },
         {
             id: 'smart-iptv-helper',
@@ -173,13 +240,16 @@
             categories: ['smarttv'],
             platforms: ['androidtv'],
             tag: 'Fire TV / Shield TV',
+            format: 'APK',
             code: '82043',
             verified: false,
+            installLabel: 'Google Play',
             iconClass: 'fa-list-check',
+            iconImage: 'img/apps/smart-iptv.png',
             bgColor: 'from-blue-600 to-cyan-600',
             desc: 'Utilidad ligera para organizar enlaces de reproducciones y listas M3U en pantallas grandes sin lag.',
-            guide: 'Descarga usando el código de la tarjeta, abre la app y conecta tu lista mediante la configuración de red rápida.',
-            directUrl: null,
+            guide: 'Instala Smart IPTV desde Google Play o usa el código de Downloader si está disponible. Abre la app y conecta tu lista M3U mediante la configuración de red rápida.',
+            directUrl: 'https://play.google.com/store/apps/details?id=iptv.app',
         },
         {
             id: 'send-files-tv',
@@ -187,9 +257,12 @@
             categories: ['smarttv', 'herramientas'],
             platforms: ['androidtv'],
             tag: 'Móvil & Smart TV',
+            format: 'APK',
             code: '50291',
             verified: false,
+            installLabel: 'Google Play',
             iconClass: 'fa-share-nodes',
+            iconImage: 'img/apps/send-files-tv.png',
             bgColor: 'from-emerald-600 to-teal-600',
             desc: 'Te permite enviar archivos APK y documentos desde tu teléfono celular a tu Smart TV a través de la red WiFi local en segundos.',
             guide: 'Instala esta app tanto en tu teléfono Android como en tu Smart TV para transferir archivos descargados en tu celular directamente a la TV.',
@@ -201,9 +274,11 @@
             categories: ['smarttv', 'reproductores'],
             platforms: ['androidtv'],
             tag: 'Optimizado TV',
+            format: 'APK',
             code: '94012',
             verified: false,
             iconClass: 'fa-film',
+            iconImage: 'img/apps/mx-player.png',
             bgColor: 'from-pink-600 to-rose-600',
             desc: 'Versión ligera de MX Player optimizada para hardware modesto en Smart TVs y decodificadores económicos.',
             guide: 'Recomendado si notas trabas en la reproducción de video en HD con reproductores tradicionales.',
@@ -215,9 +290,11 @@
             categories: ['smarttv', 'mobile', 'reproductores'],
             platforms: ['androidtv', 'lg', 'tizen', 'roku', 'mobile'],
             tag: 'Multiplataforma',
+            format: 'APK · IPK · WGT · ZIP',
             code: null,
             installLabel: 'Web oficial',
             iconClass: 'fa-film',
+            iconImage: 'img/apps/plex.png',
             bgColor: 'from-amber-500 to-yellow-600',
             desc: 'Cliente de streaming y servidor multimedia disponible en Android TV, LG webOS, Samsung Tizen, Roku y Android móvil.',
             guide: 'En Android TV/Fire TV puedes usar Google Play o el APK oficial. En LG usa LG Content Store; en Samsung, Smart Hub; en Roku, el Channel Store. No requiere código de Downloader.',
@@ -229,13 +306,41 @@
             categories: ['smarttv', 'mobile', 'reproductores'],
             platforms: ['androidtv', 'roku', 'mobile'],
             tag: 'Código abierto',
+            format: 'APK · ZIP',
             code: null,
             installLabel: 'Web oficial',
             iconClass: 'fa-server',
+            iconImage: 'img/apps/jellyfin.png',
             bgColor: 'from-indigo-600 to-blue-700',
             desc: 'Cliente libre para tu servidor multimedia. Disponible para Android TV, Roku y Android móvil.',
             guide: 'Instala el cliente desde Google Play o F-Droid en Android, desde el Channel Store en Roku o descarga el APK oficial. No requiere código de Downloader.',
             directUrl: 'https://jellyfin.org/downloads/',
+            downloads: [
+                {
+                    label: 'Android TV',
+                    format: 'APK',
+                    variant: 'Universal',
+                    version: '0.19.10',
+                    source: 'GitHub Releases',
+                    url: 'https://github.com/jellyfin/jellyfin-androidtv/releases/download/v0.19.10/jellyfin-androidtv-v0.19.10-release.apk',
+                },
+                {
+                    label: 'Roku',
+                    format: 'ZIP',
+                    variant: 'Sideload',
+                    version: '3.2.4',
+                    source: 'GitHub Releases',
+                    url: 'https://github.com/jellyfin/jellyfin-roku/releases/download/3.2.4/jellyfin-roku.zip',
+                },
+                {
+                    label: 'Android móvil',
+                    format: 'APK',
+                    variant: 'Libre',
+                    version: '2.7.3',
+                    source: 'GitHub Releases',
+                    url: 'https://github.com/jellyfin/jellyfin-android/releases/download/v2.7.3/jellyfin-android-v2.7.3-libre-release.apk',
+                },
+            ],
         },
         {
             id: 'emby',
@@ -243,9 +348,11 @@
             categories: ['smarttv', 'mobile', 'reproductores'],
             platforms: ['androidtv', 'lg', 'tizen', 'roku', 'mobile'],
             tag: 'Multiplataforma',
+            format: 'APK · IPK · WGT · ZIP',
             code: null,
             installLabel: 'Web oficial',
             iconClass: 'fa-photo-film',
+            iconImage: 'img/apps/emby.png',
             bgColor: 'from-emerald-600 to-green-700',
             desc: 'Cliente multimedia compatible con Android TV, LG webOS, Samsung Tizen, Roku y Android móvil.',
             guide: 'Busca Emby en la tienda de tu TV (LG Content Store, Samsung Smart Hub o Roku Channel Store) o descarga el APK para Android. No requiere código de Downloader.',
@@ -257,13 +364,25 @@
             categories: ['smarttv', 'mobile', 'reproductores'],
             platforms: ['androidtv', 'mobile'],
             tag: 'Código abierto',
+            format: 'APK',
             code: null,
             installLabel: 'APK oficial',
             iconClass: 'fa-play',
+            iconImage: 'img/apps/kodi.png',
             bgColor: 'from-sky-600 to-blue-700',
             desc: 'Centro multimedia libre para Android TV y Android móvil. No está disponible para LG webOS, Tizen ni Roku.',
             guide: 'Descarga el APK oficial desde kodi.tv, habilita orígenes desconocidos e instálalo. No requiere código de Downloader.',
             directUrl: 'https://kodi.tv/download/android/',
+            downloads: [
+                {
+                    label: 'Android TV / móvil',
+                    format: 'APK',
+                    variant: 'ARMv7',
+                    version: '21.3',
+                    source: 'Kodi',
+                    url: 'https://mirrors.kodi.tv/releases/android/arm/kodi-21.3-Omega-armeabi-v7a.apk',
+                },
+            ],
         },
         {
             id: 'vlc-mobile',
@@ -271,9 +390,11 @@
             categories: ['mobile', 'reproductores'],
             platforms: ['mobile'],
             tag: 'Android 5.0+',
+            format: 'APK',
             code: null,
             installLabel: 'APK oficial',
             iconClass: 'fa-play',
+            iconImage: 'img/apps/vlc.png',
             bgColor: 'from-orange-500 to-amber-600',
             desc: 'Reproductor de video y audio para Android con soporte para casi todos los formatos, subtítulos y transmisión en red.',
             guide: 'Descarga el APK desde el sitio oficial de VideoLAN, habilita "Instalar apps desconocidas" y abre el archivo. En móvil no se usa Downloader.',
@@ -285,9 +406,11 @@
             categories: ['mobile', 'reproductores'],
             platforms: ['mobile'],
             tag: 'Android',
+            format: 'APK',
             code: null,
             installLabel: 'Google Play',
             iconClass: 'fa-film',
+            iconImage: 'img/apps/mx-player.png',
             bgColor: 'from-pink-600 to-rose-600',
             desc: 'Reproductor multimedia para Android con gestos, subtítulos y decodificación por hardware.',
             guide: 'Instala desde Google Play o descarga el APK desde el enlace oficial de la app. No requiere código de Downloader.',
@@ -299,9 +422,11 @@
             categories: ['mobile', 'herramientas'],
             platforms: ['mobile'],
             tag: 'Móvil → TV',
+            format: 'APK',
             code: null,
             installLabel: 'Google Play',
             iconClass: 'fa-share-nodes',
+            iconImage: 'img/apps/send-files-tv.png',
             bgColor: 'from-emerald-600 to-teal-600',
             desc: 'Envía APKs, fotos y archivos desde tu móvil Android a tu Smart TV por WiFi local.',
             guide: 'Instala la app desde Google Play en el móvil y en la TV. Abre la app en ambos dispositivos, elige el archivo y envíalo. No requiere código de Downloader.',
@@ -318,10 +443,14 @@
         query: '',
     };
 
+    const APP_VERSION = '2026.11.06.2';
+    const UPDATE_CHECK_INTERVAL = 5 * 60 * 1000;
+
     let els = {};
     let searchTimer = null;
     let toastTimer = null;
     let lastFocusedElement = null;
+    let updateBannerShown = false;
 
     function cacheElements() {
         els = {
@@ -340,6 +469,8 @@
             modalIcon: document.getElementById('modalIcon'),
             modalTitle: document.getElementById('modalTitle'),
             modalTag: document.getElementById('modalTag'),
+            modalFormat: document.getElementById('modalFormat'),
+            modalFormatText: document.getElementById('modalFormatText'),
             modalDesc: document.getElementById('modalDesc'),
             modalGuide: document.getElementById('modalGuide'),
             modalCodeBox: document.getElementById('modalCodeBox'),
@@ -352,6 +483,10 @@
             modalDirectLink: document.getElementById('modalDirectLink'),
             modalDirectLinkLabel: document.getElementById('modalDirectLinkLabel'),
             modalCloseBtn: document.getElementById('modalCloseBtn'),
+            updateBanner: document.getElementById('updateBanner'),
+            directDownloadGrid: document.getElementById('directDownloadGrid'),
+            directDownloadEmpty: document.getElementById('directDownloadEmpty'),
+            officialDownloadList: document.getElementById('officialDownloadList'),
             privacyModal: document.getElementById('privacyModal'),
             toast: document.getElementById('toast'),
             toastMsg: document.getElementById('toastMsg'),
@@ -445,14 +580,15 @@
 
             return `
                 <div class="flex items-center justify-between gap-2 mb-3 bg-darkbg/60 p-2.5 rounded-xl border border-darkborder">
-                    <div>
+                    <div class="min-w-0">
                         <span class="text-[10px] text-gray-500 uppercase tracking-wider block font-semibold">Código Downloader:</span>
                         <span class="text-lg font-mono font-extrabold text-brand-400">${escapeHtml(app.code)}</span>${codeBadge}
+                        ${app.format ? `<span class="text-[10px] text-gray-500 block mt-0.5" data-format="${escapeHtml(app.format)}">Formato: <span class="text-gray-300 font-semibold">${escapeHtml(app.format)}</span></span>` : ''}
                     </div>
                     <button type="button"
                             data-copy="${escapeHtml(app.code)}"
                             data-copy-label="Código"
-                            class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-xs font-bold text-white shadow-sm transition-all flex items-center gap-1.5"
+                            class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-xs font-bold text-white shadow-sm transition-all flex items-center gap-1.5 shrink-0"
                             aria-label="Copiar código ${escapeHtml(app.code)} de ${escapeHtml(app.name)}">
                         <i class="fa-regular fa-copy" aria-hidden="true"></i> Copiar
                     </button>
@@ -466,6 +602,7 @@
                     <div class="min-w-0">
                         <span class="text-[10px] text-gray-500 uppercase tracking-wider block font-semibold">Instalación:</span>
                         <span class="text-xs font-semibold text-gray-400">Enlace pendiente de confirmar</span>
+                        ${app.format ? `<span class="text-[10px] text-gray-500 block mt-0.5" data-format="${escapeHtml(app.format)}">Formato: <span class="text-gray-300 font-semibold">${escapeHtml(app.format)}</span></span>` : ''}
                     </div>
                     <span class="px-3 py-1.5 rounded-lg bg-darkbg text-[11px] font-semibold text-gray-500 border border-darkborder shrink-0">
                         Próximamente
@@ -479,6 +616,7 @@
                 <div class="min-w-0">
                     <span class="text-[10px] text-gray-500 uppercase tracking-wider block font-semibold">Instalación:</span>
                     <span class="text-xs font-semibold text-emerald-400">${escapeHtml(app.installLabel || 'Enlace oficial')}</span>
+                    ${app.format ? `<span class="text-[10px] text-gray-500 block mt-0.5" data-format="${escapeHtml(app.format)}">Formato: <span class="text-gray-300 font-semibold">${escapeHtml(app.format)}</span></span>` : ''}
                 </div>
                 <a href="${escapeHtml(app.directUrl)}"
                    target="_blank"
@@ -496,8 +634,9 @@
         card.innerHTML = `
             <div>
                 <div class="flex items-start justify-between gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr ${escapeHtml(app.bgColor)} flex items-center justify-center text-white text-xl shadow-md shrink-0" aria-hidden="true">
+                    <div class="relative w-12 h-12 rounded-xl bg-gradient-to-tr ${escapeHtml(app.bgColor)} flex items-center justify-center text-white text-xl shadow-md shrink-0" aria-hidden="true">
                         <i class="fa-solid ${escapeHtml(app.iconClass)}"></i>
+                        ${app.iconImage ? `<img src="${escapeHtml(app.iconImage)}" alt="" class="absolute inset-0 m-auto w-8 h-8 object-contain drop-shadow" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">` : ''}
                     </div>
                     <div class="flex flex-col items-end gap-1.5 min-w-0">
                         <span class="px-2.5 py-1 rounded-md bg-darkbg/80 text-gray-300 text-[11px] font-medium border border-darkborder text-right">
@@ -522,6 +661,113 @@
             </div>
         `;
         return card;
+    }
+
+    function createAppIconMarkup(app, size = 'md') {
+        const sizes = {
+            sm: { box: 'w-9 h-9 rounded-lg text-base', image: 'w-6 h-6' },
+            md: { box: 'w-11 h-11 rounded-xl text-lg', image: 'w-7 h-7' },
+        };
+        const selected = sizes[size] || sizes.md;
+
+        return `
+            <div class="relative ${selected.box} bg-gradient-to-tr ${escapeHtml(app.bgColor)} flex items-center justify-center text-white font-bold shadow-md shrink-0" aria-hidden="true">
+                <i class="fa-solid ${escapeHtml(app.iconClass)}"></i>
+                ${app.iconImage ? `<img src="${escapeHtml(app.iconImage)}" alt="" class="absolute inset-0 m-auto ${selected.image} object-contain drop-shadow" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">` : ''}
+            </div>
+        `;
+    }
+
+    function createDirectDownloadCard(app) {
+        const card = document.createElement('article');
+        card.className = 'glass-card rounded-2xl p-5 flex flex-col gap-4';
+        card.dataset.downloadAppId = app.id;
+
+        const platformNames = (app.platforms || [])
+            .map((id) => platformConfig[id]?.short || id)
+            .join(' · ');
+
+        card.innerHTML = `
+            <div class="flex items-start gap-3">
+                ${createAppIconMarkup(app)}
+                <div class="min-w-0 flex-1">
+                    <h3 class="text-base font-bold text-white">${escapeHtml(app.name)}</h3>
+                    <p class="text-[11px] text-gray-500 mt-0.5">${escapeHtml(platformNames)}</p>
+                </div>
+                <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 text-[10px] font-bold border border-emerald-500/20 shrink-0">Directo</span>
+            </div>
+
+            <div class="space-y-2">
+                ${(app.downloads || []).map((item) => `
+                    <a href="${escapeHtml(item.url)}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       data-direct-download
+                       data-download-format="${escapeHtml(item.format)}"
+                       aria-label="Descargar ${escapeHtml(item.label)} de ${escapeHtml(app.name)} en formato ${escapeHtml(item.format)}"
+                       class="flex items-center justify-between gap-3 p-3 rounded-xl bg-darkbg/70 border border-darkborder hover:border-emerald-500/50 hover:bg-darkbg transition-colors group/download">
+                        <span class="min-w-0">
+                            <span class="block text-xs font-bold text-white">${escapeHtml(item.label)}</span>
+                            <span class="block text-[10px] text-gray-500 mt-0.5">
+                                ${escapeHtml(item.variant)}${item.version ? ` · v${escapeHtml(item.version)}` : ''}${item.source ? ` · ${escapeHtml(item.source)}` : ''}
+                            </span>
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-600 group-hover/download:bg-emerald-500 text-[10px] font-bold text-white shrink-0">
+                            ${escapeHtml(item.format)} <i class="fa-solid fa-download" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                `).join('')}
+            </div>
+
+            ${app.directUrl ? `
+                <a href="${escapeHtml(app.directUrl)}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Página oficial
+                </a>
+            ` : ''}
+        `;
+
+        return card;
+    }
+
+    function createOfficialDownloadItem(app) {
+        const link = document.createElement('a');
+        link.href = app.directUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.dataset.officialAppId = app.id;
+        link.className = 'flex items-center gap-3 p-3 rounded-xl bg-darkcard/70 hover:bg-darkcard border border-darkborder hover:border-emerald-500/40 transition-colors group/official';
+        link.innerHTML = `
+            ${createAppIconMarkup(app, 'sm')}
+            <span class="min-w-0 flex-1">
+                <span class="block text-xs font-bold text-white truncate">${escapeHtml(app.name)}</span>
+                <span class="block text-[10px] text-gray-500 truncate">${escapeHtml(app.installLabel || 'Página oficial')}</span>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover/official:text-emerald-400 transition-colors" aria-hidden="true"></i>
+        `;
+        return link;
+    }
+
+    function renderDirectDownloads() {
+        const directApps = apps.filter(
+            (app) => Array.isArray(app.downloads) && app.downloads.length > 0
+        );
+        const officialApps = apps.filter(
+            (app) =>
+                app.directUrl &&
+                !(Array.isArray(app.downloads) && app.downloads.length > 0)
+        );
+
+        if (els.directDownloadGrid) {
+            els.directDownloadGrid.replaceChildren(...directApps.map(createDirectDownloadCard));
+            els.directDownloadEmpty.hidden = directApps.length > 0;
+        }
+
+        if (els.officialDownloadList) {
+            els.officialDownloadList.replaceChildren(...officialApps.map(createOfficialDownloadItem));
+        }
     }
 
     function render() {
@@ -670,15 +916,32 @@
 
         els.modalTitle.textContent = app.name;
         els.modalTag.textContent = app.tag;
+        els.modalFormat.hidden = !app.format;
+        els.modalFormatText.textContent = app.format || '';
         els.modalDesc.textContent = app.desc;
         els.modalGuide.textContent = app.guide;
 
-        els.modalIcon.className = `w-14 h-14 rounded-2xl bg-gradient-to-tr ${app.bgColor} flex items-center justify-center text-white text-2xl font-bold shadow-lg shrink-0`;
+        els.modalIcon.className = `relative w-14 h-14 rounded-2xl bg-gradient-to-tr ${app.bgColor} flex items-center justify-center text-white text-2xl font-bold shadow-lg shrink-0`;
         els.modalIcon.replaceChildren();
         const icon = document.createElement('i');
         icon.className = `fa-solid ${app.iconClass}`;
         icon.setAttribute('aria-hidden', 'true');
         els.modalIcon.appendChild(icon);
+
+        if (app.iconImage) {
+            const iconImage = document.createElement('img');
+            iconImage.src = app.iconImage;
+            iconImage.alt = '';
+            iconImage.setAttribute('aria-hidden', 'true');
+            iconImage.className = 'absolute inset-0 m-auto w-9 h-9 object-contain drop-shadow';
+            iconImage.addEventListener('load', () => {
+                icon.style.display = 'none';
+            });
+            iconImage.addEventListener('error', () => {
+                iconImage.remove();
+            });
+            els.modalIcon.appendChild(iconImage);
+        }
 
         els.modalCodeBox.hidden = !hasCode;
 
@@ -712,7 +975,9 @@
         }
 
         els.modalDirectLinkLabel.textContent = hasCode
-            ? 'Enlace Directo APK'
+            ? app.installLabel
+                ? `Abrir ${app.installLabel}`
+                : 'Página oficial'
             : 'Abrir enlace oficial';
 
         els.modal.hidden = false;
@@ -842,6 +1107,48 @@
     }
 
     /* ======================================================================
+       12b. Actualización de la web
+       ====================================================================== */
+    function showUpdateBanner(version) {
+        if (!els.updateBanner || updateBannerShown) return;
+
+        updateBannerShown = true;
+        const detail = els.updateBanner.querySelector('[data-update-version]');
+        if (detail) {
+            detail.textContent = version
+                ? `Versión ${version} disponible. Actualiza para ver los cambios.`
+                : 'Actualiza la página para ver los últimos cambios.';
+        }
+        els.updateBanner.hidden = false;
+    }
+
+    async function checkForWebUpdate() {
+        if (!els.updateBanner) return;
+        if (!/^https?:$/.test(window.location.protocol)) return;
+
+        try {
+            const response = await fetch(`version.json?t=${Date.now()}`, {
+                cache: 'no-store',
+                headers: { 'Cache-Control': 'no-cache' },
+            });
+            if (!response.ok) return;
+
+            const data = await response.json();
+            if (data.version && data.version !== APP_VERSION) {
+                showUpdateBanner(data.version);
+            }
+        } catch {
+            /* Sin conexión o version.json no disponible */
+        }
+    }
+
+    function reloadForUpdate() {
+        const url = new URL(window.location.href);
+        url.searchParams.set('v', Date.now().toString());
+        window.location.replace(url.toString());
+    }
+
+    /* ======================================================================
        13. Eventos
        ====================================================================== */
     function bindEvents() {
@@ -890,6 +1197,7 @@
                 if (action === 'close-modal') closeModal();
                 if (action === 'close-privacy') closePrivacy();
                 if (action === 'privacy') openPrivacy();
+                if (action === 'reload-app') reloadForUpdate();
                 return;
             }
 
@@ -942,8 +1250,18 @@
         if (!els.grid || !els.emptyState) return;
 
         bindEvents();
+        renderDirectDownloads();
         setCategory('all');
         els.searchClear.hidden = true;
+
+        if (/^https?:$/.test(window.location.protocol)) {
+            checkForWebUpdate();
+            window.setInterval(checkForWebUpdate, UPDATE_CHECK_INTERVAL);
+            window.addEventListener('focus', checkForWebUpdate);
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) checkForWebUpdate();
+            });
+        }
     }
 
     if (document.readyState === 'loading') {

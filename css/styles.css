@@ -23,6 +23,8 @@ body {
 
 /* Compensa el header sticky al navegar por anclas */
 #downloader-guide,
+#appGrid,
+#descarga-directa,
 #apoya-seccion {
     scroll-margin-top: 6.5rem;
 }

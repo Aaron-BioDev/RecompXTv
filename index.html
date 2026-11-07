@@ -107,6 +107,9 @@
                 <a href="#downloader-guide" class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-lg bg-darkcard hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors">
                     <i class="fa-solid fa-circle-question text-brand-400" aria-hidden="true"></i> ¿Cómo usar Downloader?
                 </a>
+                <a href="#descarga-directa" class="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-lg bg-darkcard hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors">
+                    <i class="fa-solid fa-download text-emerald-400" aria-hidden="true"></i> Descarga directa
+                </a>
                 <a href="#apoya-seccion" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-xs font-bold text-white shadow-md shadow-brand-600/30 transition-all transform hover:scale-105">
                     <i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Apoya el proyecto
                 </a>
@@ -129,8 +132,14 @@
                         Repositorio de Apps para Smart TV, Roku y Móviles
                     </h1>
                     <p class="mt-2 text-sm text-gray-400 leading-relaxed">
-                        Encuentra apps para Android TV y Fire TV con códigos de <strong class="text-gray-300">Downloader</strong>, APKs para Android y accesos directos a las tiendas oficiales de LG webOS, Samsung Tizen y Roku TV.
+                        Encuentra apps para Android TV y Fire TV con códigos de <strong class="text-gray-300">Downloader</strong>, APKs para Android y accesos directos a las tiendas oficiales de LG webOS, Samsung Tizen y Roku TV. También tienes un apartado de <strong class="text-gray-300">descarga directa</strong> con archivos oficiales APK, IPK, WGT y ZIP.
                     </p>
+                    <div class="mt-4 flex flex-wrap items-center gap-2">
+                        <a href="#descarga-directa" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white shadow-md shadow-emerald-600/30 transition-all">
+                            <i class="fa-solid fa-download" aria-hidden="true"></i> Ir a descarga directa
+                        </a>
+                        <span class="text-[11px] text-gray-500">Solo archivos publicados por el desarrollador.</span>
+                    </div>
                 </div>
 
                 <!-- Downloader Quick Steps -->
@@ -144,7 +153,7 @@
                         <li>Haz clic en <strong class="text-white">"Go"</strong> y listo.</li>
                     </ol>
                     <p class="text-[11px] text-gray-500 leading-relaxed">
-                        Solo Android TV / Fire TV usan códigos. En LG, Tizen y Roku se instala desde su tienda oficial. Los códigos pueden caducar: si uno no funciona, usa el enlace oficial.
+                        Solo Android TV / Fire TV usan códigos. Formatos: <strong class="text-gray-300">APK</strong> (Android), <strong class="text-gray-300">IPK</strong> (LG webOS), <strong class="text-gray-300">WGT</strong> (Samsung Tizen) y <strong class="text-gray-300">ZIP</strong> (Roku sideload). En LG, Tizen y Roku también puedes instalar desde su tienda oficial. Los códigos pueden caducar: si uno no funciona, usa el enlace oficial.
                     </p>
                 </div>
             </div>
@@ -229,6 +238,41 @@
             </div>
         </section>
 
+        <!-- Direct Download Section -->
+        <section id="descarga-directa" class="mt-16 pt-8 border-t border-darkborder/60" aria-labelledby="directDownloadTitle">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                <div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold mb-3 border border-emerald-500/20">
+                        <i class="fa-solid fa-download" aria-hidden="true"></i> Descarga directa
+                    </span>
+                    <h2 id="directDownloadTitle" class="text-2xl font-bold text-white">Archivos oficiales APK, IPK, WGT y ZIP</h2>
+                    <p class="text-sm text-gray-400 mt-2 max-w-2xl leading-relaxed">
+                        Enlaces directos a los archivos publicados por el desarrollador. No alojamos archivos: abrimos la descarga oficial. Si tu equipo es antiguo, usa la página oficial para elegir la variante ARMv7 o x86.
+                    </p>
+                </div>
+                <a href="#appGrid" class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-darkcard hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors shrink-0">
+                    <i class="fa-solid fa-layer-group text-brand-400" aria-hidden="true"></i> Ver todas las apps
+                </a>
+            </div>
+
+            <div id="directDownloadGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+
+            <div id="directDownloadEmpty" hidden class="rounded-2xl border border-darkborder bg-darkcard/40 p-6 text-center text-sm text-gray-400">
+                Todavía no hay archivos directos oficiales. Usa los enlaces oficiales de cada app.
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-darkborder/60">
+                <h3 class="text-sm font-bold text-white">También desde la página oficial</h3>
+                <p class="text-xs text-gray-500 mt-1 mb-3">Apps sin archivo directo oficial: se instalan desde Google Play o la web del creador.</p>
+                <div id="officialDownloadList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+            </div>
+
+            <p class="text-[11px] text-gray-500 mt-5">
+                <i class="fa-solid fa-shield-halved text-gray-400 mr-1" aria-hidden="true"></i>
+                Solo enlaces oficiales. Verifica el nombre, formato y versión del archivo antes de instalarlo.
+            </p>
+        </section>
+
         <!-- Privacy-Friendly Donation Section -->
         <section id="apoya-seccion" class="mt-16 pt-8 border-t border-darkborder/60" aria-labelledby="donationTitle">
             <div class="max-w-4xl mx-auto rounded-2xl glass-panel p-6 sm:p-8 border border-brand-500/30 relative overflow-hidden">
@@ -265,7 +309,7 @@
                 </div>
 
                 <p class="text-center text-[11px] text-gray-500 mt-6">
-                    <i class="fa-solid fa-shield-halved text-gray-400 mr-1" aria-hidden="true"></i> Proyecto 100% independiente y libre de publicidad invasiva.
+                    <i class="fa-solid fa-shield-halved text-gray-400 mr-1" aria-hidden="true"></i> Proyecto 100% independiente. La publicidad de terceros ayuda a mantener el sitio.
                 </p>
             </div>
         </section>
@@ -291,9 +335,17 @@
                 </div>
                 <div class="min-w-0">
                     <h3 id="modalTitle" class="text-xl font-bold text-white break-words">---</h3>
-                    <span id="modalTag" class="inline-block mt-1 px-2.5 py-0.5 rounded-md bg-brand-500/10 text-brand-400 text-xs font-semibold border border-brand-500/20">
-                        ---
-                    </span>
+                    <div class="mt-1 flex flex-wrap items-center gap-2">
+                        <span id="modalTag" class="px-2.5 py-0.5 rounded-md bg-brand-500/10 text-brand-400 text-xs font-semibold border border-brand-500/20">
+                            ---
+                        </span>
+                        <span id="modalFormat" hidden
+                              class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-darkbg text-gray-300 text-xs font-semibold border border-darkborder"
+                              title="APK: Android · IPK: LG webOS · WGT: Samsung Tizen · ZIP: Roku (sideload)">
+                            <i class="fa-regular fa-file" aria-hidden="true"></i>
+                            <span>Formato: <span id="modalFormatText">---</span></span>
+                        </span>
+                    </div>
                 </div>
             </div>
 
@@ -372,13 +424,16 @@
 
             <div class="space-y-3 text-xs text-gray-300 leading-relaxed">
                 <p>
-                    <strong class="text-white">RecompXtv</strong> es un repositorio comunitario sin fines comerciales. No vendemos productos ni servicios.
+                    <strong class="text-white">RecompXtv</strong> es un repositorio comunitario independiente. No vendemos productos ni servicios; la publicidad de terceros ayuda a cubrir los costos del sitio.
                 </p>
                 <p>
-                    Todas las aplicaciones mostradas pertenecen a sus respectivos desarrolladores. Este sitio solo facilita el acceso mediante enlaces y códigos públicos de Downloader; no aloja archivos APK.
+                    Todas las aplicaciones mostradas pertenecen a sus respectivos desarrolladores. Este sitio solo facilita el acceso mediante enlaces y códigos públicos de Downloader; no aloja archivos de instalación (APK, IPK, WGT o ZIP).
                 </p>
                 <p>
-                    No recopilamos datos personales ni usamos cookies de seguimiento. Los enlaces a tiendas, sitios oficiales y plataformas de donación se abren en sitios de terceros con sus propias políticas.
+                    No recopilamos datos personales directamente ni vendemos información. Los enlaces a tiendas, sitios oficiales y plataformas de donación se abren en sitios de terceros con sus propias políticas.
+                </p>
+                <p>
+                    Este sitio puede mostrar anuncios de terceros para ayudar a mantener el proyecto. Los proveedores de publicidad pueden usar cookies, identificadores o tecnologías similares para medir los anuncios y, según su configuración, personalizarlos. No controlamos esos datos; revisa las políticas de privacidad de cada proveedor y configura tu navegador si deseas bloquearlos.
                 </p>
                 <p>
                     Los códigos de Downloader son públicos y pueden caducar en cualquier momento. Si un código no funciona, utiliza el enlace oficial de la app.
@@ -394,6 +449,24 @@
                     Cerrar
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Aviso de nueva versión de la web -->
+    <div id="updateBanner" role="status" aria-live="polite" hidden
+         class="fixed top-24 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg">
+        <div class="glass-panel rounded-2xl border border-emerald-500/30 p-4 shadow-2xl flex items-center gap-3">
+            <span class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0" aria-hidden="true">
+                <i class="fa-solid fa-rotate"></i>
+            </span>
+            <div class="min-w-0 flex-1">
+                <p class="text-xs font-bold text-white">Hay una versión nueva de RecompXtv</p>
+                <p class="text-[11px] text-gray-400 mt-0.5" data-update-version>Actualiza la página para ver los últimos cambios.</p>
+            </div>
+            <button type="button" data-action="reload-app"
+                    class="px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-[11px] font-bold text-white transition-colors shrink-0">
+                Actualizar
+            </button>
         </div>
     </div>
 
@@ -413,15 +486,21 @@
                 <span class="w-6 h-6 rounded-md bg-brand-600 flex items-center justify-center text-white font-bold text-xs shrink-0" aria-hidden="true">
                     R
                 </span>
-                <span>© 2026 <strong>RecompXtv</strong>. Repositorio comunitario sin fines comerciales. Última actualización: noviembre 2026.</span>
+                <span>© 2026 <strong>RecompXtv</strong>. Repositorio comunitario independiente. Última actualización: noviembre 2026.</span>
             </div>
-            <div class="flex items-center gap-4">
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#descarga-directa" class="hover:text-gray-400 transition-colors">Descarga directa</a>
+                <span aria-hidden="true">•</span>
                 <button type="button" data-action="privacy" class="hover:text-gray-400 transition-colors">Aviso de Privacidad</button>
                 <span aria-hidden="true">•</span>
                 <a href="#apoya-seccion" class="text-brand-400 hover:underline font-medium">Donar / Apoyar</a>
             </div>
         </div>
     </footer>
+
+    <!-- Publicidad de terceros -->
+    <script data-cfasync="false" src="https://bauval.org/14/6d9e4d23e96e383e9f59af17d418ba59"></script>
+    <script data-cfasync="false" src="https://abscloud.org/1/d74ff0654af1e2ff6ec19ba2d07a9bcd"></script>
 
 </body>
 </html>
