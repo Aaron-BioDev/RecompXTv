@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecompXtv - Repositorio de Apps para Smart TV & Android</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        darkbg: '#0b0f19',
+                        darkcard: '#161e2e',
+                        darkborder: '#26334d'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+        }
+        .glass-panel {
+            background: rgba(22, 30, 46, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(22, 30, 46, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 12px 25px -5px rgba(124, 58, 237, 0.25);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #26334d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6d28d9;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+
+    <div style="background:#7c3aed;color:#fff;padding:10px 16px;text-align:center;font:600 13px 'Inter',sans-serif;">
+        Versión antigua conservada solo como respaldo.
+        <a href="../index.html" style="color:#fff;text-decoration:underline;">Ir a la versión actual</a>.
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-darkborder/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="resetFilters()">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-brand-500/30">
+                    <i class="fa-solid font-bold text-white text-xl fa-tv"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-extrabold tracking-tight text-white">Recomp<span class="text-brand-400">Xtv</span></span>
+                    <span class="block text-xs text-gray-400 font-medium">Apps & Downloader Codes</span>
+                </div>
+            </div>
+
+            <!-- Quick Action Links -->
+            <div class="flex items-center gap-3">
+                <a href="#downloader-guide" class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-lg bg-darkcard hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors">
+                    <i class="fa-solid fa-circle-question text-brand-400"></i> ¿Cómo usar Downloader?
+                </a>
+                <a href="#apoya-seccion" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-xs font-bold text-white shadow-md shadow-brand-600/30 transition-all transform hover:scale-105">
+                    <i class="fa-solid fa-mug-hot"></i> Apoya el proyecto
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+
+        <!-- Hero Notice & Quick Info Banner -->
+        <section class="mb-8 rounded-2xl bg-gradient-to-r from-brand-900/40 via-darkcard to-darkcard p-6 border border-brand-500/20 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+                <div class="max-w-2xl">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 text-xs font-semibold mb-3 border border-brand-500/20">
+                        <i class="fa-solid fa-bolt"></i> Códigos Downloader Verificados
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                        Repositorio Directo de Apps para Smart TV y Firestick
+                    </h1>
+                    <p class="mt-2 text-sm text-gray-400 leading-relaxed">
+                        Encuentra aplicaciones difíciles de conseguir sin acortadores molestos ni trampas. Ingresa los códigos de 6 dígitos directamente en la app <strong>Downloader</strong> de tu Smart TV.
+                    </p>
+                </div>
+
+                <!-- Downloader Quick Steps -->
+                <div id="downloader-guide" class="w-full md:w-auto bg-darkbg/80 p-4 rounded-xl border border-darkborder/80 flex flex-col gap-2 min-w-[260px]">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-brand-400 flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i> Uso rápido de Códigos:
+                    </h3>
+                    <ol class="text-xs text-gray-300 space-y-1.5 list-decimal list-inside">
+                        <li>Abre la app <strong class="text-white">Downloader</strong> en tu TV.</li>
+                        <li>Escribe el <strong class="text-brand-400">código de 6 dígitos</strong>.</li>
+                        <li>Haz clic en <strong class="text-white">"Go"</strong> y listo.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Filter Controls -->
+        <section class="mb-8 space-y-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Instant Search Bar -->
+                <div class="relative w-full md:w-96">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <input type="text" id="searchInput" onkeyup="filterApps()" placeholder="Buscar app (ej. Xuper TV, VLC, IPTV)..." 
+                           class="w-full pl-10 pr-4 py-2.5 bg-darkcard text-sm text-white rounded-xl border border-darkborder focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-gray-500">
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
+                    <button onclick="setCategory('all')" id="cat-all" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-brand-600 text-white transition-all">
+                        Todas
+                    </button>
+                    <button onclick="setCategory('smarttv')" id="cat-smarttv" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-darkcard text-gray-400 hover:text-white hover:bg-gray-800 border border-darkborder transition-all">
+                        <i class="fa-solid fa-tv mr-1"></i> Smart TV / Streaming
+                    </button>
+                    <button onclick="setCategory('herramientas')" id="cat-herramientas" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-darkcard text-gray-400 hover:text-white hover:bg-gray-800 border border-darkborder transition-all">
+                        <i class="fa-solid fa-wrench mr-1"></i> Herramientas
+                    </button>
+                    <button onclick="setCategory('reproductores')" id="cat-reproductores" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-darkcard text-gray-400 hover:text-white hover:bg-gray-800 border border-darkborder transition-all">
+                        <i class="fa-solid fa-play mr-1"></i> Reproductores
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- App Grid -->
+        <section>
+            <div id="appGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- App cards rendered via JavaScript -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden text-center py-16">
+                <div class="w-16 h-16 bg-darkcard rounded-full flex items-center justify-center mx-auto text-gray-500 mb-4 border border-darkborder">
+                    <i class="fa-solid fa-box-open text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-white">No se encontraron aplicaciones</h3>
+                <p class="text-sm text-gray-400 mt-1">Intenta buscar con otro término o selecciona otra categoría.</p>
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-xs font-bold text-white transition-all">
+                    Ver todas las apps
+                </button>
+            </div>
+        </section>
+
+        <!-- Privacy-Friendly Donation Section -->
+        <section id="apoya-seccion" class="mt-16 pt-8 border-t border-darkborder/60">
+            <div class="max-w-4xl mx-auto rounded-2xl glass-panel p-6 sm:p-8 border border-brand-500/30 relative overflow-hidden">
+                <div class="text-center max-w-xl mx-auto mb-6">
+                    <span class="inline-block p-3 rounded-full bg-brand-500/10 text-brand-400 mb-3 border border-brand-500/20">
+                        <i class="fa-solid fa-heart text-xl"></i>
+                    </span>
+                    <h2 class="text-2xl font-bold text-white">Apoya a mantener RecompXtv</h2>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-2 leading-relaxed">
+                        Este repositorio es mantenido por un estudiante de forma independiente para ahorrarle tiempo a la comunidad. Si algún código te ahorró un dolor de cabeza, ¡considera invitarme un café!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Buy Me a Coffee / Ko-fi Option 1 -->
+                    <a href="https://ko-fi.com" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-darkcard hover:bg-gray-800 border border-darkborder hover:border-brand-500/50 flex flex-col items-center text-center transition-all group">
+                        <div class="w-10 h-10 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-cup-togo text-lg"></i>
+                        </div>
+                        <span class="text-sm font-bold text-white">Ko-fi</span>
+                        <span class="text-xs text-gray-400 mt-0.5">Donar desde $1 USD</span>
+                    </a>
+
+                    <!-- Buy Me a Coffee Option 2 -->
+                    <a href="https://buymeacoffee.com" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-darkcard hover:bg-gray-800 border border-darkborder hover:border-brand-500/50 flex flex-col items-center text-center transition-all group">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/10 text-yellow-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-mug-hot text-lg"></i>
+                        </div>
+                        <span class="text-sm font-bold text-white">Buy Me a Coffee</span>
+                        <span class="text-xs text-gray-400 mt-0.5">Apoyo directo rápido</span>
+                    </a>
+
+                    <!-- Crypto Wallet (USDT TRC20) Option 3 -->
+                    <div class="p-4 rounded-xl bg-darkcard border border-darkborder flex flex-col items-center text-center">
+                        <div class="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-2">
+                            <i class="fa-solid fa-wallet text-lg"></i>
+                        </div>
+                        <span class="text-sm font-bold text-white">Crypto USDT (TRC20)</span>
+                        <button onclick="copyUSDTAddress()" class="mt-2 text-xs bg-darkbg hover:bg-gray-900 border border-darkborder px-2.5 py-1 rounded-md text-emerald-400 font-mono flex items-center gap-1.5 transition-colors">
+                            <i class="fa-regular fa-copy"></i> Copiar Billetera
+                        </button>
+                    </div>
+                </div>
+
+                <p class="text-center text-[11px] text-gray-500 mt-6">
+                    <i class="fa-solid fa-shield-halved text-gray-400 mr-1"></i> Proyecto 100% independiente y libre de publicidad invasiva.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- App Detail / Tutorial Modal -->
+    <div id="appModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-darkcard border border-darkborder rounded-2xl max-w-lg w-full p-6 shadow-2xl relative overflow-hidden animate-fade-in">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white w-8 h-8 rounded-full bg-darkbg flex items-center justify-center border border-darkborder transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="flex items-center gap-4 mb-4">
+                <div id="modalIcon" class="w-14 h-14 rounded-2xl bg-brand-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                    <!-- Icon populated dynamically -->
+                </div>
+                <div>
+                    <h3 id="modalTitle" class="text-xl font-bold text-white">---</h3>
+                    <span id="modalTag" class="inline-block px-2.5 py-0.5 rounded-md bg-brand-500/10 text-brand-400 text-xs font-semibold border border-brand-500/20">
+                        ---
+                    </span>
+                </div>
+            </div>
+
+            <!-- Description & Instructions -->
+            <div class="space-y-4 text-sm text-gray-300">
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Descripción:</h4>
+                    <p id="modalDesc" class="text-xs text-gray-300 leading-relaxed">---</p>
+                </div>
+
+                <div class="bg-darkbg p-3.5 rounded-xl border border-darkborder">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-400 mb-1.5 flex items-center gap-1.5">
+                        <i class="fa-solid fa-tv"></i> Guía de instalación en Smart TV:
+                    </h4>
+                    <p id="modalGuide" class="text-xs text-gray-400 leading-relaxed">---</p>
+                </div>
+
+                <!-- Downloader Code Feature -->
+                <div class="bg-gradient-to-r from-brand-900/30 to-darkbg p-4 rounded-xl border border-brand-500/30">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-[11px] font-medium text-gray-400 block">Código Downloader:</span>
+                            <span id="modalCode" class="text-2xl font-mono font-extrabold text-brand-400 tracking-wider">00000</span>
+                        </div>
+                        <button id="modalCopyBtn" onclick="" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-xs font-bold text-white shadow-md shadow-brand-600/30 transition-all flex items-center gap-2">
+                            <i class="fa-regular fa-copy"></i> Copiar Código
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Actions Footer -->
+            <div class="mt-6 flex items-center justify-end gap-3 pt-4 border-t border-darkborder/60">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-darkbg hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors">
+                    Cerrar
+                </button>
+                <a id="modalDirectLink" href="#" target="_blank" class="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-xs font-semibold text-white border border-gray-600 flex items-center gap-1.5 transition-colors">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Enlace Directo APK
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-brand-600 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl border border-brand-400/30 flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-base"></i>
+            <span id="toastMsg">¡Código copiado al portapapeles!</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-16 bg-darkcard/40 border-t border-darkborder/60 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-md bg-brand-600 flex items-center justify-center text-white font-bold text-xs">
+                    R
+                </div>
+                <span>© 2026 <strong>RecompXtv</strong>. Repositorio comunitario sin fines comerciales.</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="hover:text-gray-400 cursor-pointer" onclick="alert('Todas las aplicaciones mostradas pertenecen a sus respectivos desarrolladores. Este sitio facilita el acceso mediante enlaces y códigos públicos de Downloader.')">Aviso de Privacidad</span>
+                <span>•</span>
+                <a href="#apoya-seccion" class="text-brand-400 hover:underline font-medium">Donar / Apoyar</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data & Interactivity Logic -->
+    <script>
+        // Database of hard-to-find apps and Downloader codes
+        const appsData = [
+            {
+                id: 'xuper-tv',
+                name: 'Xuper TV',
+                category: 'smarttv',
+                tag: 'Android TV / Firestick',
+                code: '74829',
+                iconClass: 'fa-tv',
+                bgColor: 'from-purple-600 to-indigo-600',
+                desc: 'Aplicación optimizada para streaming en Smart TV y TV Boxes. Interfaz ligera diseñada específicamente para control remoto sin necesidad de mouse.',
+                guide: 'Abre Downloader en tu Firestick o TV Box, ingresa el código 74829 y pulsa Go. Permite la instalación de orígenes desconocidos si tu sistema lo solicita.',
+                directUrl: 'https://mediafire.com'
+            },
+            {
+                id: 'downloader',
+                name: 'Downloader (Official)',
+                category: 'herramientas',
+                tag: 'Herramienta Clave',
+                code: '11111',
+                iconClass: 'fa-download',
+                bgColor: 'from-amber-600 to-orange-600',
+                desc: 'La herramienta fundamental para instalar aplicaciones APK directamente en dispositivos Fire TV y Android TV mediante URLs o códigos cortos.',
+                guide: 'Si tu Smart TV tiene Google Play Store, búscala directamente como "Downloader". Si usas una TV alternativa, usa este código de respaldo.',
+                directUrl: 'https://www.aftvnews.com/downloader/'
+            },
+            {
+                id: 'vlc-player',
+                name: 'VLC Media Player',
+                category: 'reproductores',
+                tag: 'Android 7.0+',
+                code: '39201',
+                iconClass: 'fa-play',
+                bgColor: 'from-orange-500 to-amber-600',
+                desc: 'Reproductor multimedia libre y de código abierto compatible con todos los formatos de video, subtítulos y listas de reproducción externas.',
+                guide: 'Excelente opción como reproductor secundario para aplicaciones que no tienen reproductor nativo integrado.',
+                directUrl: 'https://www.videolan.org/'
+            },
+            {
+                id: 'smart-iptv-helper',
+                name: 'Smart IPTV Utility',
+                category: 'smarttv',
+                tag: 'Fire TV / Shield TV',
+                code: '82043',
+                iconClass: 'fa-list-check',
+                bgColor: 'from-blue-600 to-cyan-600',
+                desc: 'Utilidad ligera para organizar enlaces de reproducciones y listas M3U en pantallas grandes sin lag.',
+                guide: 'Descarga con el código 82043, abre la app y conecta tu lista mediante la configuración de red rápida.',
+                directUrl: 'https://mediafire.com'
+            },
+            {
+                id: 'send-files-tv',
+                name: 'Send Files to TV',
+                category: 'herramientas',
+                tag: 'Móvil & Smart TV',
+                code: '50291',
+                iconClass: 'fa-share-nodes',
+                bgColor: 'from-emerald-600 to-teal-600',
+                desc: 'Te permite enviar archivos APK y documentos desde tu teléfono celular a tu Smart TV a través de la red WiFi local en segundos.',
+                guide: 'Instala esta app tanto en tu teléfono Android como en tu Smart TV para transferir archivos descargados en tu celular directamente a la TV.',
+                directUrl: 'https://mediafire.com'
+            },
+            {
+                id: 'mx-player-pro',
+                name: 'MX Player Lite TV',
+                category: 'reproductores',
+                tag: 'Optimizado TV',
+                code: '94012',
+                iconClass: 'fa-film',
+                bgColor: 'from-pink-600 to-rose-600',
+                desc: 'Versión ligera de MX Player optimizada para hardware modesto en Smart TVs y decodificadores económicos.',
+                guide: 'Recomendado si notas trabas en la reproducción de video en HD con reproductores tradicionales.',
+                directUrl: 'https://mediafire.com'
+            }
+        ];
+
+        let activeCategory = 'all';
+
+        // Render application cards into the grid
+        function renderApps(appsToRender) {
+            const grid = document.getElementById('appGrid');
+            const emptyState = document.getElementById('emptyState');
+            grid.innerHTML = '';
+
+            if (appsToRender.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            appsToRender.forEach(app => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl p-5 flex flex-col justify-between relative group';
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-start justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr ${app.bgColor} flex items-center justify-center text-white text-xl shadow-md">
+                                <i class="fa-solid ${app.iconClass}"></i>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-md bg-darkbg/80 text-gray-300 text-[11px] font-medium border border-darkborder">
+                                ${app.tag}
+                            </span>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition-colors">${app.name}</h3>
+                        <p class="text-xs text-gray-400 mt-1.5 line-clamp-2 leading-relaxed">${app.desc}</p>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-t border-darkborder/60">
+                        <div class="flex items-center justify-between mb-3 bg-darkbg/60 p-2.5 rounded-xl border border-darkborder">
+                            <div>
+                                <span class="text-[10px] text-gray-500 uppercase tracking-wider block font-semibold">Código Downloader:</span>
+                                <span class="text-lg font-mono font-extrabold text-brand-400">${app.code}</span>
+                            </div>
+                            <button onclick="copyCode('${app.code}', event)" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-xs font-bold text-white shadow-sm transition-all flex items-center gap-1.5">
+                                <i class="fa-regular fa-copy"></i> Copiar
+                            </button>
+                        </div>
+
+                        <button onclick="openModal('${app.id}')" class="w-full py-2 rounded-xl bg-darkcard hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder hover:border-gray-600 transition-colors flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-circle-info text-brand-400"></i> Ver Guía e Instalación
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter apps by search term and category
+        function filterApps() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            const filtered = appsData.filter(app => {
+                const matchesSearch = app.name.toLowerCase().includes(searchTerm) || 
+                                      app.desc.toLowerCase().includes(searchTerm) ||
+                                      app.code.includes(searchTerm);
+                const matchesCat = (activeCategory === 'all') || (app.category === activeCategory);
+                return matchesSearch && matchesCat;
+            });
+
+            renderApps(filtered);
+        }
+
+        // Switch active category
+        function setCategory(category) {
+            activeCategory = category;
+            
+            // Update active state of buttons
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-600', 'text-white');
+                btn.classList.add('bg-darkcard', 'text-gray-400');
+            });
+
+            const activeBtn = document.getElementById(`cat-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-darkcard', 'text-gray-400');
+                activeBtn.classList.add('bg-brand-600', 'text-white');
+            }
+
+            filterApps();
+        }
+
+        // Reset search and categories
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            setCategory('all');
+        }
+
+        // Modal Functionality
+        function openModal(appId) {
+            const app = appsData.find(a => a.id === appId);
+            if (!app) return;
+
+            document.getElementById('modalTitle').innerText = app.name;
+            document.getElementById('modalTag').innerText = app.tag;
+            document.getElementById('modalDesc').innerText = app.desc;
+            document.getElementById('modalGuide').innerText = app.guide;
+            document.getElementById('modalCode').innerText = app.code;
+            
+            const iconContainer = document.getElementById('modalIcon');
+            iconContainer.className = `w-14 h-14 rounded-2xl bg-gradient-to-tr ${app.bgColor} flex items-center justify-center text-white text-2xl font-bold shadow-lg`;
+            iconContainer.innerHTML = `<i class="fa-solid ${app.iconClass}"></i>`;
+
+            const copyBtn = document.getElementById('modalCopyBtn');
+            copyBtn.onclick = (e) => copyCode(app.code, e);
+
+            document.getElementById('modalDirectLink').href = app.directUrl;
+
+            document.getElementById('appModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('appModal').classList.add('hidden');
+        }
+
+        // Copy Code Functionality with Fallback for iframe environments
+        function copyCode(codeText, event) {
+            if (event) event.stopPropagation();
+
+            // Native execCommand copy fallback for framed environments
+            const tempInput = document.createElement('input');
+            tempInput.value = codeText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast(`Código ${codeText} copiado al portapapeles`);
+            } catch (err) {
+                showToast('No se pudo copiar automáticamente. Código: ' + codeText);
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        // Copy USDT Crypto Wallet Address
+        function copyUSDTAddress() {
+            const walletAddress = "TYD7s9Kx2mR4PqL81vWn3ZmA5bC0eF1uXg"; // Dummy anonymous TRC20 wallet
+            copyCode(walletAddress);
+            showToast('Billetera USDT (TRC20) copiada');
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            
+            toastMsg.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Initialize on DOM Ready
+        window.onload = function() {
+            renderApps(appsData);
+
+            // Close modal on click outside content
+            document.getElementById('appModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
