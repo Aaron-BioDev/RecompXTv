@@ -717,7 +717,7 @@
         query: '',
     };
 
-    const APP_VERSION = '2026.11.07.7';
+    const APP_VERSION = '2026.11.07.10';
     const UPDATE_CHECK_INTERVAL = 5 * 60 * 1000;
 
     let els = {};
@@ -767,6 +767,13 @@
             privacyModal: document.getElementById('privacyModal'),
             toast: document.getElementById('toast'),
             toastMsg: document.getElementById('toastMsg'),
+            adblockModal: document.getElementById('rxGateModal'),
+            adblockReason: document.getElementById('rxGateReason'),
+            adblockTitle: document.getElementById('rxGateTitle'),
+            adblockDesc: document.getElementById('rxGateDesc'),
+            adblockStatus: document.getElementById('rxGateStatus'),
+            adblockRetry: document.getElementById('rxGateRetry'),
+            adblockReload: document.getElementById('rxGateReload'),
         };
     }
 
@@ -1619,6 +1626,182 @@
         document.head.appendChild(script);
     }
 
+    /* ======================================================================
+       15. Detección de bloqueadores de anuncios
+       ====================================================================== */
+    const SITE_AD_PROBES = [
+        'https://bauval.org/14/6d9e4d23e96e383e9f59af17d418ba59',
+        'https://abscloud.org/1/d74ff0654af1e2ff6ec19ba2d07a9bcd',
+    ];
+
+    const GENERIC_AD_PROBES = [
+        'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+        'https://www.googletagservices.com/tag/js/gpt.js',
+    ];
+
+    let adblockCheckRunning = false;
+
+    function probeUrl(url) {
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => controller.abort(), 5000);
+
+        return fetch(url, {
+            mode: 'no-cors',
+            cache: 'no-store',
+            credentials: 'omit',
+            signal: controller.signal,
+        })
+            .then(() => true)
+            .catch(() => false)
+            .finally(() => window.clearTimeout(timer));
+    }
+
+    function detectBraveBrowser() {
+        if (!navigator.brave || typeof navigator.brave.isBrave !== 'function') {
+            return Promise.resolve(false);
+        }
+        return navigator.brave.isBrave().catch(() => false);
+    }
+
+    function detectBaitElement() {
+        const bait = document.createElement('div');
+        bait.className = 'adsbox ad-banner ad-placement pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-advertisement';
+        bait.setAttribute('aria-hidden', 'true');
+        bait.style.cssText = 'position:absolute!important;left:-9999px!important;top:-9999px!important;width:1px!important;height:1px!important;pointer-events:none!important;';
+        document.body.appendChild(bait);
+
+        const style = window.getComputedStyle(bait);
+        const blocked = bait.offsetHeight === 0
+            || bait.offsetWidth === 0
+            || style.display === 'none'
+            || style.visibility === 'hidden'
+            || style.opacity === '0';
+
+        bait.remove();
+        return blocked;
+    }
+
+    /**
+     * Devuelve si los anuncios están bloqueados. Se apoya en tres señales:
+     * 1) cebo cosmético (uBlock, AdBlock, AdGuard),
+     * 2) peticiones a dominios de anuncios (bloqueo de red o DNS tipo AdGuard),
+     * 3) detección de Brave (Shields).
+     * Si la comprobación de control falla (sin conexión), no se bloquea la web.
+     */
+    async function runAdblockCheck() {
+        if (adblockCheckRunning) return null;
+        adblockCheckRunning = true;
+
+        try {
+            const [controlOk, brave, baitBlocked, siteResults, genericResults] = await Promise.all([
+                probeUrl('version.json'),
+                detectBraveBrowser(),
+                Promise.resolve().then(detectBaitElement),
+                Promise.all(SITE_AD_PROBES.map(probeUrl)),
+                Promise.all(GENERIC_AD_PROBES.map(probeUrl)),
+            ]);
+
+            const siteAdsReachable = siteResults.some(Boolean);
+            const genericAdsReachable = genericResults.some(Boolean);
+            const adsBlocked = !siteAdsReachable && !genericAdsReachable;
+            const blocked = controlOk && (baitBlocked || adsBlocked);
+
+            return { blocked, brave, baitBlocked, siteAdsReachable, genericAdsReachable, controlOk };
+        } finally {
+            adblockCheckRunning = false;
+        }
+    }
+
+    function showAdblockWall(result) {
+        if (!els.adblockModal) return;
+
+        els.adblockReason.textContent = result.brave ? 'Brave detectado' : 'Bloqueador detectado';
+        els.adblockTitle.textContent = 'Desactiva el bloqueador para continuar';
+        els.adblockDesc.textContent = result.brave
+            ? 'RecompXTv es gratuito y se mantiene con publicidad. Hemos detectado que tu navegador, una extensión o tu DNS está bloqueando los anuncios. Parece que usas Brave: revisa también sus Shields.'
+            : 'RecompXTv es gratuito y se mantiene con publicidad. Hemos detectado que tu navegador, una extensión o tu DNS está bloqueando los anuncios.';
+
+        els.adblockStatus.textContent = '';
+        els.adblockStatus.removeAttribute('data-state');
+        els.adblockModal.hidden = false;
+        document.body.classList.add('rx-gate-locked');
+        els.adblockRetry.focus();
+    }
+
+    function hideAdblockWall() {
+        if (!els.adblockModal) return;
+        els.adblockModal.hidden = true;
+        document.body.classList.remove('rx-gate-locked');
+    }
+
+    // No bloquees a buscadores ni a navegadores automatizados: solo deben ver el aviso las personas.
+    function isSearchBotOrAutomation() {
+        if (navigator.webdriver) return true;
+        return /bot|crawler|spider|crawling|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandex|facebookexternalhit|twitterbot|linkedinbot|pinterest|slackbot|telegrambot|discordbot|whatsapp|ahrefsbot|semrushbot|mj12bot|headlesschrome|lighthouse|pagespeed|gtmetrix|pingdom/i.test(navigator.userAgent);
+    }
+
+    function initAdblockGuard() {
+        if (!els.adblockModal || !els.adblockRetry || !els.adblockReload) return;
+        if (!/^https?:$/.test(window.location.protocol)) return;
+        if (isSearchBotOrAutomation()) return;
+
+        els.adblockRetry.addEventListener('click', async () => {
+            els.adblockRetry.disabled = true;
+            els.adblockStatus.textContent = 'Comprobando…';
+            els.adblockStatus.removeAttribute('data-state');
+
+            const result = await runAdblockCheck();
+            els.adblockRetry.disabled = false;
+
+            if (!result) {
+                els.adblockStatus.textContent = 'No se pudo comprobar. Recarga la página e inténtalo de nuevo.';
+                els.adblockStatus.dataset.state = 'error';
+                return;
+            }
+
+            if (!result.blocked) {
+                hideAdblockWall();
+                return;
+            }
+
+            els.adblockStatus.textContent = 'El bloqueador sigue activo. Desactívalo y vuelve a intentarlo.';
+            els.adblockStatus.dataset.state = 'error';
+        });
+
+        els.adblockReload.addEventListener('click', () => {
+            window.location.reload();
+        });
+
+        // Mantén el foco dentro del aviso mientras esté visible.
+        els.adblockModal.addEventListener('keydown', (event) => {
+            if (event.key !== 'Tab') return;
+
+            const focusables = Array.from(els.adblockModal.querySelectorAll('button, [href]'))
+                .filter((element) => !element.disabled);
+
+            if (!focusables.length) return;
+
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        });
+
+        runAdblockCheck()
+            .then((result) => {
+                if (result && result.blocked) showAdblockWall(result);
+            })
+            .catch(() => {
+                // Si la comprobación falla, no se bloquea la navegación.
+            });
+    }
+
     function init() {
         cacheElements();
         if (!els.grid || !els.emptyState) return;
@@ -1627,6 +1810,7 @@
         renderDirectDownloads();
         buildSearchIndex();
         injectAppListSchema();
+        initAdblockGuard();
         updateCategoryCounts();
         setCategory('all');
         els.searchClear.hidden = true;

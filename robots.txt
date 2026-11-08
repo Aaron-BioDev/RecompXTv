@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO: cambia el dominio si publicas en otra URL
-Sitemap: https://recompxtv.com/sitemap.xml
+Sitemap: https://recompxtv.vercel.app/sitemap.xml

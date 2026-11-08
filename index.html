@@ -10,7 +10,9 @@
     <meta name="theme-color" content="#0b0f19">
     <meta name="robots" content="index, follow">
 
-    <link rel="canonical" href="https://recompxtv.com/">
+    <link rel="canonical" href="https://recompxtv.vercel.app/">
+    <link rel="alternate" hreflang="es" href="https://recompxtv.vercel.app/">
+    <link rel="alternate" hreflang="x-default" href="https://recompxtv.vercel.app/">
 
     <!-- Iconos / PWA -->
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
@@ -21,10 +23,10 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="RecompXTv">
     <meta property="og:locale" content="es_ES">
-    <meta property="og:url" content="https://recompxtv.com/">
+    <meta property="og:url" content="https://recompxtv.vercel.app/">
     <meta property="og:title" content="RecompXTv — Apps y códigos Downloader para Smart TV, Roku y Android">
     <meta property="og:description" content="Códigos de Downloader para Android TV, APKs para Android y apps oficiales para LG webOS, Samsung Tizen y Roku TV.">
-    <meta property="og:image" content="https://recompxtv.com/img/og-image.jpg">
+    <meta property="og:image" content="https://recompxtv.vercel.app/img/og-image.jpg">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:alt" content="RecompXTv">
     <meta property="og:image:width" content="1200">
@@ -32,7 +34,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="RecompXTv — Apps para Smart TV, Android TV, Roku y Móviles">
     <meta name="twitter:description" content="Códigos de Downloader para Android TV, APKs para Android y apps oficiales para LG webOS, Samsung Tizen y Roku TV.">
-    <meta name="twitter:image" content="https://recompxtv.com/img/og-image.jpg">
+    <meta name="twitter:image" content="https://recompxtv.vercel.app/img/og-image.jpg">
 
     <!-- CSS compilado en local (sin CDN de Tailwind) -->
     <link rel="stylesheet" href="css/tailwind.css">
@@ -42,6 +44,8 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//bauval.org">
+    <link rel="dns-prefetch" href="//abscloud.org">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -52,42 +56,42 @@
         "@graph": [
             {
                 "@type": "Organization",
-                "@id": "https://recompxtv.com/#organization",
+                "@id": "https://recompxtv.vercel.app/#organization",
                 "name": "RecompXTv",
-                "url": "https://recompxtv.com/",
+                "url": "https://recompxtv.vercel.app/",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://recompxtv.com/img/icon-512.png",
+                    "url": "https://recompxtv.vercel.app/img/icon-512.png",
                     "width": 512,
                     "height": 512
                 }
             },
             {
                 "@type": "WebSite",
-                "@id": "https://recompxtv.com/#website",
+                "@id": "https://recompxtv.vercel.app/#website",
                 "name": "RecompXTv",
-                "url": "https://recompxtv.com/",
+                "url": "https://recompxtv.vercel.app/",
                 "description": "Repositorio de apps para Android TV, Fire TV, LG webOS, Samsung Tizen, Roku TV y Android móvil con códigos de Downloader y enlaces oficiales.",
                 "publisher": {
-                    "@id": "https://recompxtv.com/#organization"
+                    "@id": "https://recompxtv.vercel.app/#organization"
                 },
                 "inLanguage": "es"
             },
             {
                 "@type": "WebPage",
-                "@id": "https://recompxtv.com/#webpage",
-                "url": "https://recompxtv.com/",
+                "@id": "https://recompxtv.vercel.app/#webpage",
+                "url": "https://recompxtv.vercel.app/",
                 "name": "RecompXTv - Apps y códigos Downloader para Smart TV, Roku y Android",
                 "description": "Repositorio de apps para Android TV, Fire TV, LG webOS, Samsung Tizen, Roku y Android. Códigos de Downloader, APKs y descargas directas.",
                 "isPartOf": {
-                    "@id": "https://recompxtv.com/#website"
+                    "@id": "https://recompxtv.vercel.app/#website"
                 },
                 "inLanguage": "es",
                 "dateModified": "2026-11-07"
             },
             {
                 "@type": "FAQPage",
-                "@id": "https://recompxtv.com/#faq",
+                "@id": "https://recompxtv.vercel.app/#faq",
                 "mainEntity": [
                     {
                         "@type": "Question",
@@ -384,6 +388,39 @@
 
     </main>
 
+    <!-- Bloqueo por bloqueador de anuncios -->
+    <div id="rxGateModal" hidden
+         class="rx-gate-overlay"
+         role="dialog" aria-modal="true" aria-labelledby="rxGateTitle" aria-describedby="rxGateDesc">
+        <div class="rx-gate-card">
+            <span class="rx-gate-icon" aria-hidden="true">
+                <i class="fa-solid fa-shield-halved"></i>
+            </span>
+            <span id="rxGateReason" class="rx-gate-eyebrow">Bloqueador detectado</span>
+            <h2 id="rxGateTitle" class="rx-gate-title">Desactiva el bloqueador para continuar</h2>
+            <p id="rxGateDesc" class="rx-gate-text">
+                RecompXTv es gratuito y se mantiene con publicidad. Hemos detectado que tu navegador, una extensión o tu DNS está bloqueando los anuncios.
+            </p>
+            <ul class="rx-gate-steps">
+                <li><strong>uBlock Origin, AdBlock o AdGuard:</strong> abre la extensión y desactívala para este sitio.</li>
+                <li><strong>Brave:</strong> pulsa el icono del león en la barra de direcciones y desactiva Shields.</li>
+                <li><strong>AdGuard DNS, NextDNS o Pi-hole:</strong> desactiva el filtrado para este dispositivo o permite <strong>bauval.org</strong> y <strong>abscloud.org</strong>.</li>
+            </ul>
+            <p id="rxGateStatus" class="rx-gate-status" role="status" aria-live="polite"></p>
+            <div class="rx-gate-actions">
+                <button type="button" id="rxGateRetry" class="btn btn-primary">
+                    <i class="fa-solid fa-rotate" aria-hidden="true"></i> Ya lo desactivé, comprobar
+                </button>
+                <button type="button" id="rxGateReload" class="btn btn-outline">
+                    <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Recargar página
+                </button>
+            </div>
+            <p class="rx-gate-note">
+                Si crees que es un error, desactiva el bloqueador y pulsa “comprobar”.
+            </p>
+        </div>
+    </div>
+
     <!-- App Detail / Tutorial Modal -->
     <div id="appModal" hidden
          class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
@@ -510,6 +547,9 @@
                 </p>
                 <p>
                     La publicidad es servida por proveedores externos, que pueden usar cookies, almacenamiento local o identificadores del dispositivo para mostrar y medir los anuncios. No controlamos esas prácticas; consulta sus propias políticas. Puedes bloquear o eliminar esas cookies desde la configuración de tu navegador.
+                </p>
+                <p>
+                    Si utilizas un bloqueador de anuncios o un DNS de filtrado, el sitio puede mostrar un aviso y limitar el acceso al contenido hasta que desactives el bloqueo.
                 </p>
                 <p>
                     Los códigos de Downloader son públicos y pueden caducar en cualquier momento. Si un código no funciona, utiliza el enlace oficial de la app.

@@ -111,7 +111,7 @@ Estos valores siguen siendo de ejemplo y **no deben publicarse tal cual**:
 1. **Códigos de Downloader**: deben ser de **6 dígitos**. Los códigos actuales (`74829`, `11111`, `39201`, `82043`, `50291`, `94012`) son de 5 dígitos y probablemente no funcionan. Mientras no los verifiques, la interfaz muestra la etiqueta **"Sin verificar"**. Cuando confirmes uno, cambia `verified: false` a `verified: true`.
 2. **Enlaces de descarga**: `mx-player-pro` sigue con `directUrl: null` a propósito hasta confirmar el enlace oficial. Las demás apps tienen página oficial o tienda; las que aparecen en `downloads` usan archivos oficiales. No uses la portada de MediaFire como enlace de descarga.
 3. **Donaciones**: `index.html` apunta a `https://ko-fi.com` y `https://buymeacoffee.com` genéricos. Reemplázalos por tus perfiles reales.
-4. **Dominio y contacto**: `canonical`, `og:url`, `sitemap.xml`, `robots.txt` y el correo del aviso de privacidad usan `recompxtv.com` / `contacto@recompxtv.com` como marcadores. Cámbialos si tu dominio o correo son distintos.
+4. **Dominio y contacto**: el sitio está publicado en `https://recompxtv.vercel.app/`, y esa URL se usa en `canonical`, `og:url`, `sitemap.xml`, `robots.txt` y el JSON-LD. El correo del aviso de privacidad (`contacto@recompxtv.com`) sigue siendo un marcador; cámbialo por uno real.
 
 ## Probar en local
 
@@ -149,6 +149,31 @@ El sitio muestra anuncios servidos por proveedores externos. Los scripts de publ
 No hay detección de bloqueadores: el contenido está disponible directamente para todos los usuarios.
 
 Los enlaces a tiendas, webs oficiales y plataformas de donación abren sitios externos con sus propias políticas.
+
+## Anuncios
+
+Los scripts de monetización están al final de `index.html`:
+
+```html
+<script data-cfasync="false" src="https://bauval.org/14/6d9e4d23e96e383e9f59af17d418ba59"></script>
+<script data-cfasync="false" src="https://abscloud.org/1/d74ff0654af1e2ff6ec19ba2d07a9bcd"></script>
+```
+
+Se cargan después del contenido para no bloquear el renderizado. Según la prueba en navegador, `bauval.org` corresponde al **Social Bar** de Adsterra (barra fija en la parte superior) y `abscloud.org` al **Popunder**. Ambos son autoinyectables, así que no necesitan un contenedor `<div>` en la página.
+
+Para añadir un banner visible dentro del contenido (por ejemplo 300x250 o 728x90) hay que crear una unidad **Banner** distinta en Adsterra y pegar su código, que normalmente incluye `atOptions` y un `invoke.js` con una clave propia. La clave del Social Bar no sirve para ese formato.
+
+Si cambias de red publicitaria, actualiza también `SITE_AD_PROBES` en `js/app.js` para que el detector de bloqueadores siga funcionando.
+
+## Bloqueo de anuncios
+
+`js/app.js` muestra el aviso `#adblockModal` cuando detecta que los anuncios no se cargan. Usa tres señales:
+
+- Un elemento cebo con clases típicas de publicidad (uBlock Origin, AdBlock, AdGuard).
+- Peticiones a los dominios de anuncios del sitio y a dominios publicitarios conocidos. Esto también detecta el bloqueo por DNS (AdGuard DNS, NextDNS, Pi-hole).
+- `navigator.brave.isBrave()` para identificar Brave y pedir que se desactiven los Shields.
+
+La comprobación se omite en `file://`, en buscadores y navegadores automatizados (`navigator.userAgent` / `navigator.webdriver`) y cuando falla la petición de control (`version.json`), para no bloquear a usuarios sin conexión ni afectar al SEO. Los dominios de prueba están en `SITE_AD_PROBES` y `GENERIC_AD_PROBES` dentro de `js/app.js`; actualízalos si cambias de red publicitaria.
 
 ## Alojamiento de descargas
 
