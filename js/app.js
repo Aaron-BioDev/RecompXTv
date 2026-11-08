@@ -1,5 +1,5 @@
 /**
- * RecompXtv - Configuración, datos y lógica de la interfaz.
+ * RecompXTV LIVE - Configuración, datos y lógica de la interfaz.
  *
  * Para añadir una app, agrega un objeto al array `apps`:
  *   id:           identificador único (sin espacios)
@@ -91,17 +91,8 @@
     };
 
     /* ======================================================================
-       Configuración de Descargas en GitHub Releases
+       Descargas directas: nombres de archivo -> URL oficial
        ====================================================================== */
-    const GITHUB_RELEASES_CONFIG = {
-        // Configuración para GitHub Releases (no usado cuando se usan MediaFire)
-        // Si se deja 'TU_USUARIO' o vacío, se usan URLs de MediaFire definidas en mediafireMap.
-        user: 'TU_USUARIO',
-        repo: 'RecompXTV',
-        tag: 'v1.0.0',
-    };
-
-    // Mapeo de nombres de archivo a URLs de MediaFire (descarga directa).
     const mediafireMap = {
         'WiwyXuper_patched.apk': 'https://www.mediafire.com/file/qts49wop40nj7mq/WiwyXuper_patched.apk/file',
         'Xuper NF.apk': 'https://www.mediafire.com/file/7gudjrd4klsy1q7/Xuper_NF.apk/file',
@@ -113,7 +104,7 @@
         'com.webosflux.xuptertv.fidelity_patched.ipk': 'https://www.mediafire.com/file/3ra3nosnnb47et9/com.webosflux.xuptertv.fidelity_patched.ipk/file',
         'XuperTV-LG-PLUS-v2.25patched.ipk': 'https://www.mediafire.com/file/8bdp62ez1qvjv7e/XuperTV-LG-PLUS-v2.25patched.ipk/file',
         '4k_xsuper_lil.zip': 'https://www.mediafire.com/file/gku6jtskir93gpi/4k_xsuper_lil.zip/file',
-        'Instalación_XUPER_TV_para_Roku.rtf': 'https://www.mediafire.com/file/kzdizfy5bzrk46b/Instalacio%25CC%2581n_XUPER_TV_para_Roku.rtf/file',
+        'Instalación XUPER TV para Roku.rtf': 'https://www.mediafire.com/file/kzdizfy5bzrk46b/Instalacio%25CC%2581n_XUPER_TV_para_Roku.rtf/file',
         'Roku_plus_X_HD_patched.zip': 'https://www.mediafire.com/file/71c1t26wibrl4sb/Roku_plus_X_HD_patched.zip/file',
         'XuperTV-v3_patched.zip': 'https://www.mediafire.com/file/hx9d1anokalb5ul/XuperTV-v3_patched.zip/file',
         'XuperTVnuevo_patched.zip': 'https://www.mediafire.com/file/uixktj2e3ecws50/XuperTVnuevo_patched.zip/file',
@@ -121,17 +112,11 @@
     };
 
 
+    /** Devuelve la URL oficial del archivo o el archivo local como respaldo. */
     function resolveDownloadUrl(filename, localPath) {
-        // If a MediaFire URL exists for the filename, return it (direct download).
-        if (mediafireMap.hasOwnProperty(filename)) {
-            return mediafireMap[filename];
-        }
-        // Fallback: if GitHub config is provided, build a GitHub Release URL.
-        if (GITHUB_RELEASES_CONFIG.user && GITHUB_RELEASES_CONFIG.user !== 'TU_USUARIO') {
-            return `https://github.com/${GITHUB_RELEASES_CONFIG.user}/${GITHUB_RELEASES_CONFIG.repo}/releases/download/${GITHUB_RELEASES_CONFIG.tag}/${encodeURIComponent(filename)}`;
-        }
-        // Default to the local path (useful for development).
-        return localPath;
+        return Object.prototype.hasOwnProperty.call(mediafireMap, filename)
+            ? mediafireMap[filename]
+            : localPath;
     }
     
 
@@ -163,7 +148,7 @@
                     format: 'APK',
                     variant: 'Universal',
                     version: '1.0.0',
-                    source: 'MediaFire',
+                    source: 'GitHub',
                     url: 'https://github.com/NuvioMedia/NuvioTV/releases/download/1.0.0/app-full-universal-release.apk',
                 },
                 {
@@ -171,7 +156,7 @@
                     format: 'IPK',
                     variant: 'webOS',
                     version: '1.3.7',
-                    source: 'MediaFire',
+                    source: 'GitHub',
                     url: 'https://github.com/NuvioMedia/NuvioTVSmart/releases/download/1.3.7/NuvioTV-webOS-1.3.7.ipk',
                 },
                 {
@@ -179,7 +164,7 @@
                     format: 'WGT',
                     variant: 'Tizen',
                     version: '1.3.7',
-                    source: 'MediaFire',
+                    source: 'GitHub',
                     url: 'https://github.com/NuvioMedia/NuvioTVSmart/releases/download/1.3.7/NuvioTV-Tizen-1.3.7.wgt',
                 },
                 {
@@ -187,7 +172,7 @@
                     format: 'APK',
                     variant: 'ARM64',
                     version: '0.6.9-beta',
-                    source: 'MediaFire',
+                    source: 'GitHub',
                     url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.9-beta/androidApp-full-arm64-v8a-release.apk',
                 },
             ],
@@ -584,7 +569,7 @@
                     format: 'APK',
                     variant: 'Universal',
                     version: '0.19.10',
-                    source: 'MediaFire',
+                    source: 'GitHub',
                     url: 'https://github.com/jellyfin/jellyfin-androidtv/releases/download/v0.19.10/jellyfin-androidtv-v0.19.10-release.apk',
                 },
                 {
@@ -592,7 +577,7 @@
                     format: 'ZIP',
                     variant: 'Sideload',
                     version: '3.2.4',
-                    source: 'MediaFire',
+                    source: 'GitHub',
                     url: 'https://github.com/jellyfin/jellyfin-roku/releases/download/3.2.4/jellyfin-roku.zip',
                 },
                 {
@@ -600,7 +585,7 @@
                     format: 'APK',
                     variant: 'Libre',
                     version: '2.7.3',
-                    source: 'MediaFire',
+                    source: 'GitHub',
                     url: 'https://github.com/jellyfin/jellyfin-android/releases/download/v2.7.3/jellyfin-android-v2.7.3-libre-release.apk',
                 },
             ],
@@ -697,6 +682,32 @@
         },
     ];
 
+    /**
+     * Precalcula el texto de búsqueda de cada app una sola vez.
+     * Evita repetir el mismo trabajo en cada pulsación del buscador.
+     */
+    function buildSearchIndex() {
+        apps.forEach((app) => {
+            const downloadTerms = (app.downloads || []).flatMap((item) => [
+                item.label,
+                item.variant,
+                item.format,
+                item.version,
+            ]);
+
+            app.searchText = normalize([
+                app.name,
+                app.desc,
+                app.tag,
+                app.code,
+                app.installLabel,
+                categoryLabels[app.categories[0]],
+                ...getPlatformNames(app),
+                ...downloadTerms,
+            ].join(' '));
+        });
+    }
+
     /* ======================================================================
        4. Estado y referencias del DOM
        ====================================================================== */
@@ -756,12 +767,6 @@
             privacyModal: document.getElementById('privacyModal'),
             toast: document.getElementById('toast'),
             toastMsg: document.getElementById('toastMsg'),
-            adblockModal: document.getElementById('adblockModal'),
-            adblockCard: document.getElementById('adblockCard'),
-            adblockCheckBtn: document.getElementById('adblockCheckBtn'),
-            adblockStatusMsg: document.getElementById('adblockStatusMsg'),
-            braveDetectedBadge: document.getElementById('braveDetectedBadge'),
-            braveGuideBox: document.getElementById('braveGuideBox'),
         };
     }
 

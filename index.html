@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RecompXtv - Apps para Smart TV, Android TV, Roku y Móviles</title>
-    <meta name="description" content="Repositorio de apps para Android TV, Fire TV, LG webOS, Samsung Tizen, Roku TV y Android móvil. Códigos de Downloader, APKs y enlaces oficiales.">
+    <title>RecompXTV LIVE — Apps y códigos Downloader para Smart TV, Roku y Android</title>
+    <meta name="description" content="Repositorio de apps para Android TV, Fire TV, LG webOS, Samsung Tizen, Roku TV y Android móvil. Códigos de Downloader, APKs y descargas directas en un solo lugar.">
+    <meta name="keywords" content="RecompXTV LIVE, XuperTV, descargar XuperTV, Docidgo Downloader, descargar Roku, apps Roku, Android TV apps, Smart TV downloader, APKs, códigos downloader">
     <meta name="theme-color" content="#0b0f19">
     <meta name="robots" content="index, follow">
 
-    <!-- TODO: cambia el dominio si publicas en otra URL -->
     <link rel="canonical" href="https://recompxtv.com/">
 
     <!-- Iconos / PWA -->
@@ -18,160 +18,183 @@
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="RecompXtv">
+    <meta property="og:site_name" content="RecompXTV LIVE">
     <meta property="og:locale" content="es_ES">
     <meta property="og:url" content="https://recompxtv.com/">
-    <meta property="og:title" content="RecompXtv - Apps para Smart TV, Android TV, Roku y Móviles">
+    <meta property="og:title" content="RecompXTV LIVE — Apps y códigos Downloader para Smart TV, Roku y Android">
     <meta property="og:description" content="Códigos de Downloader para Android TV, APKs para Android y apps oficiales para LG webOS, Samsung Tizen y Roku TV.">
     <meta property="og:image" content="https://recompxtv.com/img/og-image.jpg">
-    <meta property="og:image:alt" content="RecompXtv">
+    <meta property="og:image:alt" content="RecompXTV LIVE">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="RecompXtv - Apps para Smart TV, Android TV, Roku y Móviles">
+    <meta name="twitter:title" content="RecompXTV LIVE — Apps para Smart TV, Android TV, Roku y Móviles">
     <meta name="twitter:description" content="Códigos de Downloader para Android TV, APKs para Android y apps oficiales para LG webOS, Samsung Tizen y Roku TV.">
     <meta name="twitter:image" content="https://recompxtv.com/img/og-image.jpg">
 
-    <!-- Tailwind CSS CDN + configuración -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f5f3ff',
-                            100: '#ede9fe',
-                            400: '#a78bfa',
-                            500: '#8b5cf6',
-                            600: '#7c3aed',
-                            700: '#6d28d9',
-                            900: '#4c1d95',
-                        },
-                        darkbg: '#0b0f19',
-                        darkcard: '#161e2e',
-                        darkborder: '#26334d',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-            },
-        };
-    </script>
-    <script src="js/app.js" defer></script>
+    <!-- CSS compilado en local (sin CDN de Tailwind) -->
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <!-- Iconos y tipografía -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Estilos propios -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Datos estructurados -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "RecompXtv",
-        "url": "https://recompxtv.com/",
-        "description": "Repositorio de apps para Android TV, Fire TV, LG webOS, Samsung Tizen, Roku TV y Android móvil con códigos de Downloader y enlaces oficiales.",
-        "inLanguage": "es"
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "name": "RecompXTV LIVE",
+                "url": "https://recompxtv.com/",
+                "description": "Repositorio de apps para Android TV, Fire TV, LG webOS, Samsung Tizen, Roku TV y Android móvil con códigos de Downloader y enlaces oficiales.",
+                "inLanguage": "es"
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "¿Cómo descargar XuperTV en Roku?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Descarga el archivo ZIP de XuperTV desde la sección 'Descarga directa' y sigue las instrucciones de sideloading en Roku usando el modo de desarrollador."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "¿Qué es Downloader y cómo usarlo?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Downloader es una herramienta para instalar apps en Android TV y Fire TV. Abre la app, introduce el código de 6 dígitos y pulsa 'Go'."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "¿Dónde encuentro códigos actualizados para XuperTV?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Los códigos se actualizan regularmente en la página principal; si un código no funciona, revisa el enlace oficial de la app o usa la descarga directa."
+                        }
+                    }
+                ]
+            }
+        ]
     }
     </script>
-</head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
 
-    <a href="#mainContent" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-brand-600 focus:text-white focus:text-sm focus:font-bold">
+    <script src="js/app.js" defer></script>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <a href="#mainContent" class="skip-link">
         Saltar al contenido principal
     </a>
 
     <!-- Header Navigation -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-darkborder/60">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+    <header class="site-header sticky top-0 z-40">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
             <!-- Brand Logo -->
-            <button type="button" data-action="reset" class="flex items-center gap-3 text-left" aria-label="RecompXtv, volver al inicio y limpiar filtros">
-                <img src="img/icon-192.png" alt="" aria-hidden="true" width="44" height="44"
-                     class="w-11 h-11 rounded-xl object-cover shadow-lg shadow-brand-500/30 ring-1 ring-white/10">
-                <span>
-                    <span class="text-2xl font-extrabold tracking-tight text-white">Recomp<span class="text-brand-400">Xtv</span></span>
-                    <span class="block text-xs text-gray-400 font-medium">Apps &amp; Downloader Codes</span>
+            <button type="button" data-action="reset" class="flex items-center gap-2.5 text-left min-w-0" aria-label="RecompXTV LIVE, volver al inicio y limpiar filtros">
+                <img src="img/icon-192.png" alt="" aria-hidden="true" width="40" height="40"
+                     class="w-10 h-10 rounded-xl object-cover shadow-lg shadow-brand-500/25 ring-1 ring-white/10 shrink-0">
+                <span class="min-w-0">
+                    <span class="brand-title">RecompXTV <span class="text-brand-400">LIVE</span></span>
+                    <span class="brand-subtitle">Apps &amp; Downloader Codes</span>
                 </span>
             </button>
 
             <!-- Quick Action Links -->
-            <nav class="flex items-center gap-3" aria-label="Acciones rápidas">
-                <a href="#downloader-guide" class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-lg bg-darkcard hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors">
+            <nav class="flex items-center gap-2" aria-label="Acciones rápidas">
+                <a href="#downloader-guide" class="header-link hidden lg:inline-flex">
                     <i class="fa-solid fa-circle-question text-brand-400" aria-hidden="true"></i> ¿Cómo usar Downloader?
                 </a>
-                <a href="#descarga-directa" class="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-lg bg-darkcard hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors">
-                    <i class="fa-solid fa-download text-emerald-400" aria-hidden="true"></i> Descarga directa
+                <a href="#descarga-directa" class="header-link hidden md:inline-flex">
+                    <i class="fa-solid fa-download text-emerald-400" aria-hidden="true"></i> Descargas
                 </a>
-                <a href="#apoya-seccion" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-xs font-bold text-white shadow-md shadow-brand-600/30 transition-all transform hover:scale-105">
-                    <i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Apoya el proyecto
+                <a href="#apoya-seccion" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-mug-hot" aria-hidden="true"></i>
+                    <span class="hidden sm:inline">Apoya el proyecto</span>
+                    <span class="sm:hidden">Apoyar</span>
                 </a>
             </nav>
         </div>
     </header>
 
     <!-- Main Content Container -->
-    <main id="mainContent" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+    <main id="mainContent" class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow">
 
-        <!-- Hero Notice & Quick Info Banner -->
-        <section class="mb-8 rounded-2xl bg-gradient-to-r from-brand-900/40 via-darkcard to-darkcard p-6 border border-brand-500/20 shadow-xl relative overflow-hidden" aria-labelledby="heroTitle">
-            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-600/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
-                <div class="max-w-2xl">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 text-xs font-semibold mb-3 border border-brand-500/20">
-                        <i class="fa-solid fa-bolt" aria-hidden="true"></i> Códigos Downloader y APKs
+        <!-- Hero -->
+        <section class="hero-panel mb-6" aria-labelledby="heroTitle">
+            <div class="hero-grid">
+                <div class="min-w-0">
+                    <span class="eyebrow">
+                        <i class="fa-solid fa-bolt" aria-hidden="true"></i> Códigos Downloader y descargas oficiales
                     </span>
-                    <h1 id="heroTitle" class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                        Repositorio de Apps para Smart TV, Roku y Móviles
+                    <h1 id="heroTitle" class="hero-title">
+                        Apps para Smart TV, Roku y Android<br class="hidden sm:block"> en un solo lugar
                     </h1>
-                    <p class="mt-2 text-sm text-gray-400 leading-relaxed">
-                        Encuentra apps para Android TV y Fire TV con códigos de <strong class="text-gray-300">Downloader</strong>, APKs para Android y accesos directos a las tiendas oficiales de LG webOS, Samsung Tizen y Roku TV. También tienes un apartado de <strong class="text-gray-300">descarga directa</strong> con archivos oficiales APK, IPK, WGT y ZIP.
+                    <p class="hero-text">
+                        Encuentra apps para Android TV y Fire TV con códigos de <strong>Downloader</strong>, APKs para Android y accesos directos a las tiendas oficiales de LG webOS, Samsung Tizen y Roku TV.
                     </p>
-                    <div class="mt-4 flex flex-wrap items-center gap-2">
-                        <a href="#descarga-directa" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white shadow-md shadow-emerald-600/30 transition-all">
-                            <i class="fa-solid fa-download" aria-hidden="true"></i> Ir a descarga directa
+                    <div class="mt-5 flex flex-wrap items-center gap-2.5">
+                        <a href="#appGrid" class="btn btn-primary">
+                            <i class="fa-solid fa-layer-group" aria-hidden="true"></i> Explorar apps
                         </a>
-                        <span class="text-[11px] text-gray-500">Solo archivos publicados por el desarrollador.</span>
+                        <a href="#descarga-directa" class="btn btn-outline">
+                            <i class="fa-solid fa-download text-emerald-400" aria-hidden="true"></i> Descarga directa
+                        </a>
                     </div>
+                    <dl class="hero-stats">
+                        <div>
+                            <dt>Apps</dt>
+                            <dd id="statApps">—</dd>
+                        </div>
+                        <div>
+                            <dt>Plataformas</dt>
+                            <dd>5</dd>
+                        </div>
+                        <div>
+                            <dt>Formatos</dt>
+                            <dd>4</dd>
+                        </div>
+                    </dl>
                 </div>
 
                 <!-- Downloader Quick Steps -->
-                <div id="downloader-guide" class="w-full md:w-auto bg-darkbg/80 p-4 rounded-xl border border-darkborder/80 flex flex-col gap-2 min-w-[260px]">
-                    <h2 class="text-xs font-bold uppercase tracking-wider text-brand-400 flex items-center gap-2">
-                        <i class="fa-solid fa-download" aria-hidden="true"></i> Uso rápido (Android TV):
+                <aside id="downloader-guide" class="guide-card" aria-labelledby="guideTitle">
+                    <h2 id="guideTitle" class="guide-title">
+                        <i class="fa-solid fa-download" aria-hidden="true"></i> Instalar en Android TV
                     </h2>
-                    <ol class="text-xs text-gray-300 space-y-1.5 list-decimal list-inside">
-                        <li>Abre la app <strong class="text-white">Downloader</strong> en tu TV.</li>
-                        <li>Escribe el <strong class="text-brand-400">código de 6 dígitos</strong>.</li>
-                        <li>Haz clic en <strong class="text-white">"Go"</strong> y listo.</li>
+                    <ol class="guide-steps">
+                        <li><span>1</span> Abre la app <strong>Downloader</strong> en tu TV.</li>
+                        <li><span>2</span> Escribe el <strong>código de 6 dígitos</strong>.</li>
+                        <li><span>3</span> Pulsa <strong>Go</strong> y espera la instalación.</li>
                     </ol>
-                    <p class="text-[11px] text-gray-500 leading-relaxed">
-                        Solo Android TV / Fire TV usan códigos. Formatos: <strong class="text-gray-300">APK</strong> (Android), <strong class="text-gray-300">IPK</strong> (LG webOS), <strong class="text-gray-300">WGT</strong> (Samsung Tizen) y <strong class="text-gray-300">ZIP</strong> (Roku sideload). En LG, Tizen y Roku también puedes instalar desde su tienda oficial. Los códigos pueden caducar: si uno no funciona, usa el enlace oficial.
+                    <p class="guide-note">
+                        Solo Android TV / Fire TV usan códigos. LG usa <strong>IPK</strong>, Samsung usa <strong>WGT</strong> y Roku usa <strong>ZIP</strong> mediante sideload.
                     </p>
-                </div>
+                </aside>
             </div>
         </section>
 
         <!-- Search & Filter Controls -->
-        <section class="mb-8 space-y-3" aria-label="Buscar y filtrar aplicaciones">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-
+        <section class="toolbar-panel mb-6" aria-label="Buscar y filtrar aplicaciones">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-3">
                 <!-- Instant Search Bar -->
-                <div class="relative w-full md:w-96">
+                <div class="relative w-full sm:max-w-sm">
                     <label for="searchInput" class="sr-only">Buscar aplicación</label>
-                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400" aria-hidden="true">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-500" aria-hidden="true">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </span>
-                    <input type="search" id="searchInput" autocomplete="off" placeholder="Buscar app (ej. Xuper TV, VLC, IPTV)..."
+                    <input type="search" id="searchInput" autocomplete="off" placeholder="Buscar app (Xuper TV, VLC, IPTV...)"
                            aria-controls="appGrid"
-                           class="w-full pl-10 pr-10 py-2.5 bg-darkcard text-sm text-white rounded-xl border border-darkborder focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all placeholder-gray-500">
+                           class="search-input">
                     <button type="button" id="searchClear" hidden
                             class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-500 hover:text-white transition-colors"
                             aria-label="Limpiar búsqueda">
@@ -179,43 +202,49 @@
                     </button>
                 </div>
 
-                <!-- Category Tabs -->
-                <div id="categoryBar" class="flex items-center gap-2 overflow-x-auto min-w-0 w-full md:w-auto pb-2 md:pb-0 no-scrollbar" role="group" aria-label="Filtrar por categoría">
-                    <button type="button" data-category="all" aria-pressed="true" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-brand-600 text-white transition-all">
-                        <i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Todas
-                    </button>
-                    <button type="button" data-category="smarttv" aria-pressed="false" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-darkcard text-gray-400 hover:text-white hover:bg-gray-800 border border-darkborder transition-all">
-                        <i class="fa-solid fa-tv mr-1" aria-hidden="true"></i> Smart TV
-                    </button>
-                    <button type="button" data-category="mobile" aria-pressed="false" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-darkcard text-gray-400 hover:text-white hover:bg-gray-800 border border-darkborder transition-all">
-                        <i class="fa-solid fa-mobile-screen-button mr-1" aria-hidden="true"></i> Móviles
-                    </button>
-                    <button type="button" data-category="herramientas" aria-pressed="false" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-darkcard text-gray-400 hover:text-white hover:bg-gray-800 border border-darkborder transition-all">
-                        <i class="fa-solid fa-wrench mr-1" aria-hidden="true"></i> Herramientas
-                    </button>
-                    <button type="button" data-category="reproductores" aria-pressed="false" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap bg-darkcard text-gray-400 hover:text-white hover:bg-gray-800 border border-darkborder transition-all">
-                        <i class="fa-solid fa-play mr-1" aria-hidden="true"></i> Reproductores
-                    </button>
-                </div>
-
+                <!-- Results count -->
+                <p id="resultsCount" class="text-xs text-gray-500 sm:ml-auto sm:text-right" role="status" aria-live="polite"></p>
             </div>
 
-            <!-- Subcategorías por plataforma (se muestran en Smart TV y Móviles) -->
-            <div id="subcategoryWrapper" hidden class="rounded-xl border border-darkborder bg-darkcard/40 p-3 space-y-2">
+            <div class="mt-3 flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between">
+                <!-- Category Tabs -->
+                <div id="categoryBar" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 lg:pb-0" role="group" aria-label="Filtrar por categoría">
+                    <button type="button" data-category="all" aria-pressed="true" class="cat-btn">
+                        <i class="fa-solid fa-layer-group" aria-hidden="true"></i> Todas
+                        <span class="cat-count" data-count="all">0</span>
+                    </button>
+                    <button type="button" data-category="smarttv" aria-pressed="false" class="cat-btn">
+                        <i class="fa-solid fa-tv" aria-hidden="true"></i> Smart TV
+                        <span class="cat-count" data-count="smarttv">0</span>
+                    </button>
+                    <button type="button" data-category="mobile" aria-pressed="false" class="cat-btn">
+                        <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Móviles
+                        <span class="cat-count" data-count="mobile">0</span>
+                    </button>
+                    <button type="button" data-category="herramientas" aria-pressed="false" class="cat-btn">
+                        <i class="fa-solid fa-wrench" aria-hidden="true"></i> Herramientas
+                        <span class="cat-count" data-count="herramientas">0</span>
+                    </button>
+                    <button type="button" data-category="reproductores" aria-pressed="false" class="cat-btn">
+                        <i class="fa-solid fa-play" aria-hidden="true"></i> Reproductores
+                        <span class="cat-count" data-count="reproductores">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Subcategorías por plataforma -->
+            <div id="subcategoryWrapper" hidden class="subcategory-panel">
                 <div class="flex items-center gap-2">
                     <span class="text-[10px] uppercase tracking-wider text-gray-500 font-semibold shrink-0">Plataforma:</span>
                     <div id="subcategoryBar" class="flex items-center gap-2 overflow-x-auto no-scrollbar" role="group" aria-label="Filtrar por plataforma"></div>
                 </div>
                 <p id="platformHint" hidden class="text-[11px] leading-relaxed text-gray-500"></p>
             </div>
-
-            <!-- Results count -->
-            <p id="resultsCount" class="text-xs text-gray-500 md:text-right" role="status" aria-live="polite"></p>
         </section>
 
         <!-- App Grid -->
         <section aria-label="Listado de aplicaciones">
-            <div id="appGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="appGrid" class="app-grid">
                 <!-- Las tarjetas se generan dinámicamente desde js/app.js -->
             </div>
 
@@ -232,30 +261,30 @@
                 </div>
                 <h2 id="emptyTitle" class="text-lg font-semibold text-white">No se encontraron aplicaciones</h2>
                 <p id="emptyText" class="text-sm text-gray-400 mt-1">Intenta buscar con otro término o selecciona otra categoría.</p>
-                <button type="button" data-action="reset" class="mt-4 px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-xs font-bold text-white transition-all">
+                <button type="button" data-action="reset" class="btn btn-primary mt-4">
                     Ver todas las apps
                 </button>
             </div>
         </section>
 
         <!-- Direct Download Section -->
-        <section id="descarga-directa" class="mt-16 pt-8 border-t border-darkborder/60" aria-labelledby="directDownloadTitle">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+        <section id="descarga-directa" class="section-divider mt-12 pt-8" aria-labelledby="directDownloadTitle">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5">
                 <div>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold mb-3 border border-emerald-500/20">
+                    <span class="eyebrow eyebrow-success">
                         <i class="fa-solid fa-download" aria-hidden="true"></i> Descarga directa
                     </span>
-                    <h2 id="directDownloadTitle" class="text-2xl font-bold text-white">Archivos oficiales APK, IPK, WGT y ZIP</h2>
-                    <p class="text-sm text-gray-400 mt-2 max-w-2xl leading-relaxed">
-                        Enlaces directos a los archivos publicados por el desarrollador. No alojamos archivos: abrimos la descarga oficial. Si tu equipo es antiguo, usa la página oficial para elegir la variante ARMv7 o x86.
+                    <h2 id="directDownloadTitle" class="section-title">Archivos oficiales APK, IPK, WGT y ZIP</h2>
+                    <p class="section-text">
+                        Enlaces directos a los archivos publicados por el desarrollador. Si tu equipo es antiguo, usa la página oficial para elegir la variante ARMv7 o x86.
                     </p>
                 </div>
-                <a href="#appGrid" class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-darkcard hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors shrink-0">
+                <a href="#appGrid" class="btn btn-outline shrink-0">
                     <i class="fa-solid fa-layer-group text-brand-400" aria-hidden="true"></i> Ver todas las apps
                 </a>
             </div>
 
-            <div id="directDownloadGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+            <div id="directDownloadGrid" class="download-grid"></div>
 
             <div id="directDownloadEmpty" hidden class="rounded-2xl border border-darkborder bg-darkcard/40 p-6 text-center text-sm text-gray-400">
                 Todavía no hay archivos directos oficiales. Usa los enlaces oficiales de cada app.
@@ -264,7 +293,7 @@
             <div class="mt-8 pt-6 border-t border-darkborder/60">
                 <h3 class="text-sm font-bold text-white">También desde la página oficial</h3>
                 <p class="text-xs text-gray-500 mt-1 mb-3">Apps sin archivo directo oficial: se instalan desde Google Play o la web del creador.</p>
-                <div id="officialDownloadList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+                <div id="officialDownloadList" class="official-grid"></div>
             </div>
 
             <p class="text-[11px] text-gray-500 mt-5">
@@ -273,44 +302,28 @@
             </p>
         </section>
 
-        <!-- Privacy-Friendly Donation Section -->
-        <section id="apoya-seccion" class="mt-16 pt-8 border-t border-darkborder/60" aria-labelledby="donationTitle">
-            <div class="max-w-4xl mx-auto rounded-2xl glass-panel p-6 sm:p-8 border border-brand-500/30 relative overflow-hidden">
-                <div class="text-center max-w-xl mx-auto mb-6">
-                    <span class="inline-block p-3 rounded-full bg-brand-500/10 text-brand-400 mb-3 border border-brand-500/20" aria-hidden="true">
-                        <i class="fa-solid fa-heart text-xl"></i>
+        <!-- Donation Section -->
+        <section id="apoya-seccion" class="section-divider mt-12 pt-8" aria-labelledby="donationTitle">
+            <div class="support-card">
+                <div class="flex items-center gap-4 min-w-0">
+                    <span class="support-icon" aria-hidden="true">
+                        <i class="fa-solid fa-heart"></i>
                     </span>
-                    <h2 id="donationTitle" class="text-2xl font-bold text-white">Apoya a mantener RecompXtv</h2>
-                    <p class="text-xs sm:text-sm text-gray-400 mt-2 leading-relaxed">
-                        Este repositorio es mantenido por un estudiante de forma independiente para ahorrarle tiempo a la comunidad. Si algún código te ahorró un dolor de cabeza, ¡considera invitarme un café!
-                    </p>
+                    <div class="min-w-0">
+                        <h2 id="donationTitle" class="text-lg sm:text-xl font-bold text-white">Apoya a mantener RecompXTV LIVE</h2>
+                        <p class="text-xs sm:text-sm text-gray-400 mt-1 leading-relaxed">
+                            Proyecto independiente y gratuito, sin anuncios ni rastreadores. Si te ahorró tiempo, puedes invitarme un café.
+                        </p>
+                    </div>
                 </div>
-
-                <!-- TODO: reemplaza estas URLs por tus perfiles reales de donación. -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <!-- Ko-fi -->
-                    <a href="https://ko-fi.com" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-darkcard hover:bg-gray-800 border border-darkborder hover:border-brand-500/50 flex flex-col items-center text-center transition-all group">
-                        <span class="w-10 h-10 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fa-solid fa-cup-togo text-lg"></i>
-                        </span>
-                        <span class="text-sm font-bold text-white">Ko-fi</span>
-                        <span class="text-xs text-gray-400 mt-0.5">Donar desde $1 USD</span>
+                <div class="flex flex-col sm:flex-row gap-2.5 shrink-0 w-full sm:w-auto">
+                    <a href="https://ko-fi.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                        <i class="fa-solid fa-cup-togo text-red-400" aria-hidden="true"></i> Ko-fi
                     </a>
-
-                    <!-- Buy Me a Coffee -->
-                    <a href="https://buymeacoffee.com" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-darkcard hover:bg-gray-800 border border-darkborder hover:border-brand-500/50 flex flex-col items-center text-center transition-all group">
-                        <span class="w-10 h-10 rounded-full bg-yellow-500/10 text-yellow-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" aria-hidden="true">
-                            <i class="fa-solid fa-mug-hot text-lg"></i>
-                        </span>
-                        <span class="text-sm font-bold text-white">Buy Me a Coffee</span>
-                        <span class="text-xs text-gray-400 mt-0.5">Apoyo directo rápido</span>
+                    <a href="https://buymeacoffee.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                        <i class="fa-solid fa-mug-hot text-yellow-400" aria-hidden="true"></i> Buy Me a Coffee
                     </a>
-
                 </div>
-
-                <p class="text-center text-[11px] text-gray-500 mt-6">
-                    <i class="fa-solid fa-shield-halved text-gray-400 mr-1" aria-hidden="true"></i> Proyecto 100% independiente. La publicidad de terceros ayuda a mantener el sitio.
-                </p>
             </div>
         </section>
 
@@ -320,7 +333,7 @@
     <div id="appModal" hidden
          class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
          role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
-        <div class="bg-darkcard border border-darkborder rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative animate-fade-in">
+        <div class="modal-card max-w-xl">
             <!-- Close Button -->
             <button type="button" id="modalCloseBtn" data-action="close-modal"
                     class="absolute top-4 right-4 text-gray-400 hover:text-white w-8 h-8 rounded-full bg-darkbg flex items-center justify-center border border-darkborder transition-colors"
@@ -360,10 +373,10 @@
                     <h4 class="text-xs font-bold uppercase tracking-wider text-brand-400 mb-1.5 flex items-center gap-1.5">
                         <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Guía de instalación:
                     </h4>
-                    <p id="modalGuide" class="text-xs text-gray-400 leading-relaxed">---</p>
+                    <p id="modalGuide" class="text-xs text-gray-400 leading-relaxed whitespace-pre-line">---</p>
                 </div>
 
-                <!-- Código Downloader (apps Android TV) -->
+                <!-- Código Downloader -->
                 <div id="modalCodeBox" class="bg-gradient-to-r from-brand-900/30 to-darkbg p-4 rounded-xl border border-brand-500/30">
                     <div class="flex items-center justify-between gap-3">
                         <div class="min-w-0">
@@ -373,46 +386,43 @@
                                 <span id="modalCodeStatus" hidden class="inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wide bg-amber-500/10 text-amber-400 border border-amber-500/20">Sin verificar</span>
                             </div>
                         </div>
-                        <button type="button" id="modalCopyBtn"
-                                class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-xs font-bold text-white shadow-md shadow-brand-600/30 transition-all flex items-center gap-2 shrink-0">
+                        <button type="button" id="modalCopyBtn" class="btn btn-primary shrink-0">
                             <i class="fa-regular fa-copy" aria-hidden="true"></i> Copiar Código
                         </button>
                     </div>
                 </div>
 
-                <!-- Instalación desde tienda oficial (sin código) -->
+                <!-- Instalación desde tienda oficial -->
                 <div id="modalStoreBox" hidden class="bg-gradient-to-r from-emerald-900/30 to-darkbg p-4 rounded-xl border border-emerald-500/30">
                     <div class="flex items-center justify-between gap-3">
                         <div>
                             <span class="text-[11px] font-medium text-gray-400 block">Instalación:</span>
                             <span id="modalStoreText" class="text-sm font-semibold text-emerald-400">Tienda oficial</span>
                         </div>
-                        <a id="modalStoreLink" href="#" target="_blank" rel="noopener noreferrer"
-                           class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white shadow-md shadow-emerald-600/30 transition-all flex items-center gap-2">
+                        <a id="modalStoreLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-success">
                             <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Abrir enlace
                         </a>
                     </div>
                 </div>
 
-                <!-- Descargas directas disponibles en el modal -->
+                <!-- Descargas directas disponibles -->
                 <div id="modalDownloadsBox" hidden class="bg-gradient-to-r from-emerald-950/20 to-darkbg p-4 rounded-xl border border-emerald-500/30">
                     <div class="flex items-center justify-between mb-2.5">
                         <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                            <i class="fa-solid fa-download" aria-hidden="true"></i> Descargas directas disponibles:
+                            <i class="fa-solid fa-download" aria-hidden="true"></i> Descargas directas:
                         </span>
                         <span id="modalDownloadsCount" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">0 archivos</span>
                     </div>
-                    <div id="modalDownloadsList" class="space-y-1.5 max-h-48 overflow-y-auto pr-1"></div>
+                    <div id="modalDownloadsList" class="space-y-1.5 max-h-56 overflow-y-auto pr-1"></div>
                 </div>
             </div>
 
             <!-- Modal Actions Footer -->
-            <div class="mt-6 flex items-center justify-end gap-3 pt-4 border-t border-darkborder/60">
-                <button type="button" data-action="close-modal" class="px-4 py-2 rounded-xl bg-darkbg hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors">
+            <div class="mt-5 flex items-center justify-end gap-3 pt-4 border-t border-darkborder/60">
+                <button type="button" data-action="close-modal" class="btn btn-outline">
                     Cerrar
                 </button>
-                <a id="modalDirectLink" href="#" target="_blank" rel="noopener noreferrer"
-                   class="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-xs font-semibold text-white border border-gray-600 flex items-center gap-1.5 transition-colors">
+                <a id="modalDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
                     <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                     <span id="modalDirectLinkLabel">Enlace Directo APK</span>
                 </a>
@@ -424,7 +434,7 @@
     <div id="privacyModal" hidden
          class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
          role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
-        <div class="bg-darkcard border border-darkborder rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative animate-fade-in">
+        <div class="modal-card max-w-lg">
             <button type="button" data-action="close-privacy"
                     class="absolute top-4 right-4 text-gray-400 hover:text-white w-8 h-8 rounded-full bg-darkbg flex items-center justify-center border border-darkborder transition-colors"
                     aria-label="Cerrar aviso de privacidad">
@@ -435,16 +445,13 @@
 
             <div class="space-y-3 text-xs text-gray-300 leading-relaxed">
                 <p>
-                    <strong class="text-white">RecompXtv</strong> es un repositorio comunitario independiente. No vendemos productos ni servicios; la publicidad de terceros ayuda a cubrir los costos del sitio.
+                    <strong class="text-white">RecompXTV LIVE</strong> es un repositorio comunitario independiente, gratuito y sin publicidad. No vendemos productos ni servicios.
                 </p>
                 <p>
                     Todas las aplicaciones mostradas pertenecen a sus respectivos desarrolladores. Este sitio solo facilita el acceso mediante enlaces y códigos públicos de Downloader; no aloja archivos de instalación (APK, IPK, WGT o ZIP).
                 </p>
                 <p>
-                    No recopilamos datos personales directamente ni vendemos información. Los enlaces a tiendas, sitios oficiales y plataformas de donación se abren en sitios de terceros con sus propias políticas.
-                </p>
-                <p>
-                    Este sitio puede mostrar anuncios de terceros para ayudar a mantener el proyecto. Los proveedores de publicidad pueden usar cookies, identificadores o tecnologías similares para medir los anuncios y, según su configuración, personalizarlos. No controlamos esos datos; revisa las políticas de privacidad de cada proveedor y configura tu navegador si deseas bloquearlos.
+                    No recopilamos datos personales, no usamos cookies de seguimiento ni vendemos información. Los enlaces a tiendas, sitios oficiales y plataformas de donación se abren en sitios de terceros con sus propias políticas.
                 </p>
                 <p>
                     Los códigos de Downloader son públicos y pueden caducar en cualquier momento. Si un código no funciona, utiliza el enlace oficial de la app.
@@ -456,83 +463,8 @@
             </div>
 
             <div class="mt-6 flex justify-end pt-4 border-t border-darkborder/60">
-                <button type="button" data-action="close-privacy" class="px-4 py-2 rounded-xl bg-darkbg hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder transition-colors">
+                <button type="button" data-action="close-privacy" class="btn btn-outline">
                     Cerrar
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Anti-Adblock / Advertencia de Bloqueador de Anuncios y Brave -->
-    <div id="adblockModal" hidden
-         class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
-         role="dialog" aria-modal="true" aria-labelledby="adblockTitle" aria-describedby="adblockDesc">
-        <div id="adblockCard" class="bg-darkcard border border-amber-500/30 rounded-2xl max-w-lg w-full max-h-[92vh] overflow-y-auto p-6 sm:p-7 shadow-2xl relative text-center">
-
-            <!-- Icono cabecera -->
-            <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-amber-500/20 to-red-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 text-3xl mb-4 shadow-lg shadow-amber-500/10">
-                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-            </div>
-
-            <!-- Título y descripción -->
-            <h2 id="adblockTitle" class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-                Bloqueador de anuncios detectado
-            </h2>
-            <p id="adblockDesc" class="text-xs sm:text-sm text-gray-300 mt-2 leading-relaxed">
-                <strong class="text-white">RecompXtv</strong> es un repositorio 100% gratuito. Para mantener los servidores y actualizar los códigos sin cobrar suscripciones, dependemos de la publicidad. Por favor, desactiva temporalmente tu bloqueador para acceder al sitio.
-            </p>
-
-            <!-- Badge si se detecta Brave -->
-            <div id="braveDetectedBadge" hidden class="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-400 text-xs font-semibold">
-                <i class="fa-brands fa-brave text-sm" aria-hidden="true"></i>
-                <span>Estás navegando desde Brave Browser</span>
-            </div>
-
-            <!-- Instrucciones paso a paso -->
-            <div class="mt-5 space-y-3 text-left">
-                <!-- Opción 1: Navegador Brave (Shields) -->
-                <div id="braveGuideBox" class="p-4 rounded-xl bg-darkbg/80 border border-darkborder transition-colors">
-                    <div class="flex items-center gap-2.5 mb-2">
-                        <span class="w-7 h-7 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center text-sm font-bold shrink-0">
-                            <i class="fa-brands fa-brave" aria-hidden="true"></i>
-                        </span>
-                        <h3 class="text-xs sm:text-sm font-bold text-white">Si usas Brave (Escudos / Shields)</h3>
-                    </div>
-                    <ol class="text-[11px] sm:text-xs text-gray-300 space-y-1.5 list-decimal list-inside ml-1">
-                        <li>Haz clic en el icono del <strong class="text-orange-400">león naranja</strong> en la barra de direcciones (URL).</li>
-                        <li>Apaga el interruptor principal de los <strong class="text-white">Escudos (Shields DOWN)</strong> para este sitio.</li>
-                        <li>La página se recargará automáticamente y tendrás acceso completo.</li>
-                    </ol>
-                </div>
-
-                <!-- Opción 2: Extensiones (uBlock Origin, AdBlock, AdGuard, etc.) -->
-                <div class="p-4 rounded-xl bg-darkbg/80 border border-darkborder transition-colors">
-                    <div class="flex items-center gap-2.5 mb-2">
-                        <span class="w-7 h-7 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center text-sm font-bold shrink-0">
-                            <i class="fa-solid fa-puzzle-piece" aria-hidden="true"></i>
-                        </span>
-                        <h3 class="text-xs sm:text-sm font-bold text-white">Si usas extensiones (uBlock, AdBlock, etc.)</h3>
-                    </div>
-                    <ol class="text-[11px] sm:text-xs text-gray-300 space-y-1.5 list-decimal list-inside ml-1">
-                        <li>Haz clic en el icono de la extensión en la barra superior del navegador.</li>
-                        <li>Selecciona <strong class="text-white">"Pausar en este sitio"</strong> o apaga el botón de encendido.</li>
-                        <li>Pulsa el botón de abajo para verificar y continuar.</li>
-                    </ol>
-                </div>
-            </div>
-
-            <!-- Mensaje de estado dinámico al verificar -->
-            <div id="adblockStatusMsg" hidden class="mt-4 p-2.5 rounded-lg text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20"></div>
-
-            <!-- Botones de acción -->
-            <div class="mt-6 flex flex-col gap-2">
-                <button type="button" id="adblockCheckBtn"
-                        class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-brand-500/25 transition-all flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
-                    <span>Ya desactivé el bloqueador / Continuar</span>
-                </button>
-                <button type="button" data-action="privacy" class="text-[11px] text-gray-400 hover:text-gray-300 transition-colors py-1">
-                    Leer Aviso de Privacidad y Publicidad
                 </button>
             </div>
         </div>
@@ -540,17 +472,16 @@
 
     <!-- Aviso de nueva versión de la web -->
     <div id="updateBanner" role="status" aria-live="polite" hidden
-         class="fixed top-24 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg">
+         class="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-lg">
         <div class="glass-panel rounded-2xl border border-emerald-500/30 p-4 shadow-2xl flex items-center gap-3">
             <span class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0" aria-hidden="true">
                 <i class="fa-solid fa-rotate"></i>
             </span>
             <div class="min-w-0 flex-1">
-                <p class="text-xs font-bold text-white">Hay una versión nueva de RecompXtv</p>
+                <p class="text-xs font-bold text-white">Hay una versión nueva de RecompXTV LIVE</p>
                 <p class="text-[11px] text-gray-400 mt-0.5" data-update-version>Actualiza la página para ver los últimos cambios.</p>
             </div>
-            <button type="button" data-action="reload-app"
-                    class="px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-[11px] font-bold text-white transition-colors shrink-0">
+            <button type="button" data-action="reload-app" class="btn btn-success btn-sm shrink-0">
                 Actualizar
             </button>
         </div>
@@ -558,21 +489,21 @@
 
     <!-- Toast Notification -->
     <div id="toast" role="status" aria-live="polite"
-         class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-        <div class="bg-brand-600 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl border border-brand-400/30 flex items-center gap-2">
+         class="fixed bottom-5 right-5 left-5 sm:left-auto z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-brand-600 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl border border-brand-400/30 flex items-center gap-2 justify-center sm:justify-start">
             <i class="fa-solid fa-circle-check text-base" aria-hidden="true"></i>
             <span id="toastMsg">¡Código copiado al portapapeles!</span>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="mt-16 bg-darkcard/40 border-t border-darkborder/60 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+    <footer class="mt-12 bg-darkcard/40 border-t border-darkborder/60 py-7">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
             <div class="flex items-center gap-2 text-center sm:text-left">
                 <span class="w-6 h-6 rounded-md bg-brand-600 flex items-center justify-center text-white font-bold text-xs shrink-0" aria-hidden="true">
                     R
                 </span>
-                <span>© 2026 <strong>RecompXtv</strong>. Repositorio comunitario independiente. Última actualización: noviembre 2026.</span>
+                <span>© 2026 <strong class="text-gray-400">RecompXTV LIVE</strong>. Repositorio comunitario independiente. Sin anuncios ni rastreadores.</span>
             </div>
             <div class="flex flex-wrap items-center justify-center gap-4">
                 <a href="#descarga-directa" class="hover:text-gray-400 transition-colors">Descarga directa</a>
@@ -583,10 +514,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Publicidad de terceros -->
-    <script data-cfasync="false" src="https://bauval.org/14/6d9e4d23e96e383e9f59af17d418ba59" onerror="window.__adsterraBlocked = true;"></script>
-    <script data-cfasync="false" src="https://abscloud.org/1/d74ff0654af1e2ff6ec19ba2d07a9bcd" onerror="window.__adsterraBlocked = true;"></script>
 
 </body>
 </html>
