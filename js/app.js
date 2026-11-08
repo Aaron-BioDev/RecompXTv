@@ -1,5 +1,5 @@
 /**
- * RecompXTV LIVE - Configuración, datos y lógica de la interfaz.
+ * RecompXTv - Configuración, datos y lógica de la interfaz.
  *
  * Para añadir una app, agrega un objeto al array `apps`:
  *   id:           identificador único (sin espacios)
@@ -14,8 +14,8 @@
     'use strict';
 
     /* ======================================================================
-       1. La configuración de Tailwind (Play CDN) se define en index.html.
-          Este archivo solo contiene los datos y la lógica de la interfaz.
+       1. Tailwind se compila en local (css/tailwind.css). Este archivo solo
+          contiene los datos y la lógica de la interfaz.
        ====================================================================== */
 
     /* ======================================================================
@@ -717,7 +717,7 @@
         query: '',
     };
 
-    const APP_VERSION = '2026.11.07.4';
+    const APP_VERSION = '2026.11.07.7';
     const UPDATE_CHECK_INTERVAL = 5 * 60 * 1000;
 
     let els = {};
@@ -815,24 +815,7 @@
             if (!matchesPlatform) return false;
 
             if (!query) return true;
-
-            const downloadTerms = (app.downloads || []).flatMap((d) => [
-                d.label,
-                d.variant,
-                d.format,
-                d.version,
-            ]);
-
-            return [
-                app.name,
-                app.desc,
-                app.tag,
-                app.code,
-                app.installLabel,
-                categoryLabels[app.categories[0]],
-                ...getPlatformNames(app),
-                ...downloadTerms,
-            ].some((field) => normalize(field).includes(query));
+            return (app.searchText || '').includes(query);
         });
     }
 
@@ -857,23 +840,27 @@
     }
 
     function createInstallBlock(app) {
+        const format = app.format
+            ? `<span class="install-format" data-format="${escapeHtml(app.format)}">Formato: <strong>${escapeHtml(app.format)}</strong></span>`
+            : '';
+
         if (app.code) {
             const codeBadge =
                 app.verified === false
-                    ? '<span class="ml-2 inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wide bg-amber-500/10 text-amber-400 border border-amber-500/20 align-middle">Sin verificar</span>'
+                    ? '<span class="ml-1.5 inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wide bg-amber-500/10 text-amber-400 border border-amber-500/20 align-middle">Sin verificar</span>'
                     : '';
 
             return `
-                <div class="flex items-center justify-between gap-2 mb-3 bg-darkbg/60 p-2.5 rounded-xl border border-darkborder">
+                <div class="install-block">
                     <div class="min-w-0">
-                        <span class="text-[10px] text-gray-500 uppercase tracking-wider block font-semibold">Código Downloader:</span>
-                        <span class="text-lg font-mono font-extrabold text-brand-400">${escapeHtml(app.code)}</span>${codeBadge}
-                        ${app.format ? `<span class="text-[10px] text-gray-500 block mt-0.5" data-format="${escapeHtml(app.format)}">Formato: <span class="text-gray-300 font-semibold">${escapeHtml(app.format)}</span></span>` : ''}
+                        <span class="install-label">Código Downloader</span>
+                        <span class="install-code">${escapeHtml(app.code)}</span>${codeBadge}
+                        ${format}
                     </div>
                     <button type="button"
                             data-copy="${escapeHtml(app.code)}"
                             data-copy-label="Código"
-                            class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-xs font-bold text-white shadow-sm transition-all flex items-center gap-1.5 shrink-0"
+                            class="btn btn-primary btn-sm shrink-0"
                             aria-label="Copiar código ${escapeHtml(app.code)} de ${escapeHtml(app.name)}">
                         <i class="fa-regular fa-copy" aria-hidden="true"></i> Copiar
                     </button>
@@ -883,13 +870,13 @@
 
         if (!app.directUrl) {
             return `
-                <div class="flex items-center justify-between gap-2 mb-3 bg-darkbg/60 p-2.5 rounded-xl border border-darkborder">
+                <div class="install-block">
                     <div class="min-w-0">
-                        <span class="text-[10px] text-gray-500 uppercase tracking-wider block font-semibold">Instalación:</span>
+                        <span class="install-label">Instalación</span>
                         <span class="text-xs font-semibold text-gray-400">Enlace pendiente de confirmar</span>
-                        ${app.format ? `<span class="text-[10px] text-gray-500 block mt-0.5" data-format="${escapeHtml(app.format)}">Formato: <span class="text-gray-300 font-semibold">${escapeHtml(app.format)}</span></span>` : ''}
+                        ${format}
                     </div>
-                    <span class="px-3 py-1.5 rounded-lg bg-darkbg text-[11px] font-semibold text-gray-500 border border-darkborder shrink-0">
+                    <span class="px-2.5 py-1.5 rounded-lg bg-darkbg text-[11px] font-semibold text-gray-500 border border-darkborder shrink-0">
                         Próximamente
                     </span>
                 </div>
@@ -897,21 +884,21 @@
         }
 
         const isFileDownload = Boolean(
-            app.directUrl && (app.directUrl.startsWith('apps/') || /\.(apk|ipk|wgt|zip|rtf)$/i.test(app.directUrl))
+            app.directUrl.startsWith('apps/') || /\.(apk|ipk|wgt|zip|rtf)$/i.test(app.directUrl)
         );
 
         return `
-            <div class="flex items-center justify-between gap-2 mb-3 bg-darkbg/60 p-2.5 rounded-xl border border-darkborder">
+            <div class="install-block">
                 <div class="min-w-0">
-                    <span class="text-[10px] text-gray-500 uppercase tracking-wider block font-semibold">Instalación:</span>
-                    <span class="text-xs font-semibold text-emerald-400">${escapeHtml(app.installLabel || (isFileDownload ? 'Descarga directa' : 'Enlace oficial'))}</span>
-                    ${app.format ? `<span class="text-[10px] text-gray-500 block mt-0.5" data-format="${escapeHtml(app.format)}">Formato: <span class="text-gray-300 font-semibold">${escapeHtml(app.format)}</span></span>` : ''}
+                    <span class="install-label">Instalación</span>
+                    <span class="install-value">${escapeHtml(app.installLabel || (isFileDownload ? 'Descarga directa' : 'Enlace oficial'))}</span>
+                    ${format}
                 </div>
                 <a href="${escapeHtml(app.directUrl)}"
                    ${isFileDownload ? 'download' : ''}
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white shadow-sm transition-all flex items-center gap-1.5 shrink-0">
+                   class="btn btn-success btn-sm shrink-0">
                     <i class="fa-solid ${isFileDownload ? 'fa-download' : 'fa-arrow-up-right-from-square'}" aria-hidden="true"></i> ${isFileDownload ? 'Descargar' : 'Abrir'}
                 </a>
             </div>
@@ -920,33 +907,29 @@
 
     function createCard(app) {
         const card = document.createElement('article');
-        card.className = 'glass-card rounded-2xl p-5 flex flex-col justify-between relative group';
+        card.className = 'app-card';
         card.innerHTML = `
-            <div>
-                <div class="flex items-start justify-between gap-3 mb-4">
-                    <div class="relative w-12 h-12 rounded-xl bg-gradient-to-tr ${escapeHtml(app.bgColor)} flex items-center justify-center text-white text-xl shadow-md shrink-0" aria-hidden="true">
-                        <i class="fa-solid ${escapeHtml(app.iconClass)}"></i>
-                        ${app.iconImage ? `<img src="${escapeHtml(app.iconImage)}" alt="" class="absolute inset-0 m-auto w-8 h-8 object-contain drop-shadow" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">` : ''}
-                    </div>
-                    <div class="flex flex-col items-end gap-1.5 min-w-0">
-                        <span class="px-2.5 py-1 rounded-md bg-darkbg/80 text-gray-300 text-[11px] font-medium border border-darkborder text-right">
-                            ${escapeHtml(app.tag)}
-                        </span>
-                        ${createPlatformBadges(app)}
-                    </div>
+            <div class="flex items-start justify-between gap-3">
+                <div class="relative w-11 h-11 rounded-xl bg-gradient-to-tr ${escapeHtml(app.bgColor)} flex items-center justify-center text-white text-lg shadow-md shrink-0" aria-hidden="true">
+                    <i class="fa-solid ${escapeHtml(app.iconClass)}"></i>
+                    ${app.iconImage ? `<img src="${escapeHtml(app.iconImage)}" alt="" width="28" height="28" loading="lazy" decoding="async" class="absolute inset-0 m-auto w-7 h-7 object-contain drop-shadow" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">` : ''}
                 </div>
-
-                <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition-colors">${escapeHtml(app.name)}</h3>
-                <p class="text-xs text-gray-400 mt-1.5 line-clamp-2 leading-relaxed">${escapeHtml(app.desc)}</p>
+                <div class="flex flex-col items-end gap-1 min-w-0">
+                    <span class="app-tag">${escapeHtml(app.tag)}</span>
+                    ${createPlatformBadges(app)}
+                </div>
             </div>
 
-            <div class="mt-5 pt-4 border-t border-darkborder/60">
+            <h3 class="app-title">${escapeHtml(app.name)}</h3>
+            <p class="app-desc">${escapeHtml(app.desc)}</p>
+
+            <div class="mt-auto pt-4">
                 ${createInstallBlock(app)}
 
                 <button type="button"
                         data-app-id="${escapeHtml(app.id)}"
-                        class="w-full py-2 rounded-xl bg-darkcard hover:bg-gray-800 text-xs font-semibold text-gray-300 border border-darkborder hover:border-gray-600 transition-colors flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-circle-info text-brand-400" aria-hidden="true"></i> Ver Guía e Instalación
+                        class="card-action">
+                    <i class="fa-solid fa-circle-info text-brand-400" aria-hidden="true"></i> Ver guía e instalación
                 </button>
             </div>
         `;
@@ -963,14 +946,14 @@
         return `
             <div class="relative ${selected.box} bg-gradient-to-tr ${escapeHtml(app.bgColor)} flex items-center justify-center text-white font-bold shadow-md shrink-0" aria-hidden="true">
                 <i class="fa-solid ${escapeHtml(app.iconClass)}"></i>
-                ${app.iconImage ? `<img src="${escapeHtml(app.iconImage)}" alt="" class="absolute inset-0 m-auto ${selected.image} object-contain drop-shadow" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">` : ''}
+                ${app.iconImage ? `<img src="${escapeHtml(app.iconImage)}" alt="" width="28" height="28" loading="lazy" decoding="async" class="absolute inset-0 m-auto ${selected.image} object-contain drop-shadow" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">` : ''}
             </div>
         `;
     }
 
     function createDirectDownloadCard(app) {
         const card = document.createElement('article');
-        card.className = 'glass-card rounded-2xl p-5 flex flex-col gap-4';
+        card.className = 'download-card';
         card.dataset.downloadAppId = app.id;
 
         const platformNames = (app.platforms || [])
@@ -996,14 +979,14 @@
                        data-direct-download
                        data-download-format="${escapeHtml(item.format)}"
                        aria-label="Descargar ${escapeHtml(item.label)} de ${escapeHtml(app.name)} en formato ${escapeHtml(item.format)}"
-                       class="flex items-center justify-between gap-3 p-3 rounded-xl bg-darkbg/70 border border-darkborder hover:border-emerald-500/50 hover:bg-darkbg transition-colors group/download">
+                       class="download-row">
                         <span class="min-w-0">
-                            <span class="block text-xs font-bold text-white group-hover/download:text-emerald-400 transition-colors">${escapeHtml(item.label)}</span>
-                            <span class="block text-[10px] text-gray-400 mt-0.5">
+                            <span class="download-row-title">${escapeHtml(item.label)}</span>
+                            <span class="download-row-meta">
                                 ${escapeHtml(item.variant)}${item.version ? ` · v${escapeHtml(item.version)}` : ''}${item.size ? ` · ${escapeHtml(item.size)}` : ''}${item.source ? ` · ${escapeHtml(item.source)}` : ''}
                             </span>
                         </span>
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-600 group-hover/download:bg-emerald-500 text-[10px] font-bold text-white shrink-0">
+                        <span class="download-format">
                             ${escapeHtml(item.format)} <i class="fa-solid fa-download" aria-hidden="true"></i>
                         </span>
                     </a>
@@ -1061,6 +1044,24 @@
         }
     }
 
+    /** Pinta el total de apps por categoría en los botones del filtro. */
+    function updateCategoryCounts() {
+        const counts = { all: apps.length };
+
+        apps.forEach((app) => {
+            app.categories.forEach((category) => {
+                counts[category] = (counts[category] || 0) + 1;
+            });
+        });
+
+        document.querySelectorAll('[data-count]').forEach((element) => {
+            element.textContent = counts[element.dataset.count] ?? 0;
+        });
+
+        const statApps = document.getElementById('statApps');
+        if (statApps) statApps.textContent = apps.length;
+    }
+
     function render() {
         const filtered = getFilteredApps();
         const hasResults = filtered.length > 0;
@@ -1096,14 +1097,7 @@
        ====================================================================== */
     function syncPlatformButtons() {
         els.subcategoryBar.querySelectorAll('[data-platform]').forEach((button) => {
-            const isActive = button.dataset.platform === state.platform;
-            button.setAttribute('aria-pressed', String(isActive));
-            button.classList.toggle('bg-brand-600', isActive);
-            button.classList.toggle('text-white', isActive);
-            button.classList.toggle('border-brand-500', isActive);
-            button.classList.toggle('bg-darkcard', !isActive);
-            button.classList.toggle('text-gray-400', !isActive);
-            button.classList.toggle('border-darkborder', !isActive);
+            button.setAttribute('aria-pressed', String(button.dataset.platform === state.platform));
         });
     }
 
@@ -1134,8 +1128,7 @@
                 const button = document.createElement('button');
                 button.type = 'button';
                 button.dataset.platform = item.id;
-                button.className =
-                    'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap border transition-all';
+                button.className = 'subcat-btn';
                 button.innerHTML = `<i class="${item.icon} ${item.color}" aria-hidden="true"></i> ${escapeHtml(item.label)}`;
                 return button;
             })
@@ -1174,10 +1167,6 @@
         els.categoryBar.querySelectorAll('[data-category]').forEach((button) => {
             const isActive = button.dataset.category === category;
             button.setAttribute('aria-pressed', String(isActive));
-            button.classList.toggle('bg-brand-600', isActive);
-            button.classList.toggle('text-white', isActive);
-            button.classList.toggle('bg-darkcard', !isActive);
-            button.classList.toggle('text-gray-400', !isActive);
 
             if (isActive && focus) button.focus();
         });
@@ -1327,7 +1316,7 @@
         if (els.modal.hidden) return;
 
         els.modal.hidden = true;
-        if (els.privacyModal.hidden && (!els.adblockModal || els.adblockModal.hidden)) {
+        if (els.privacyModal.hidden) {
             document.body.classList.remove('modal-open');
         }
 
@@ -1350,7 +1339,7 @@
         if (els.privacyModal.hidden) return;
 
         els.privacyModal.hidden = true;
-        if (els.modal.hidden && (!els.adblockModal || els.adblockModal.hidden)) {
+        if (els.modal.hidden) {
             document.body.classList.remove('modal-open');
         }
 
@@ -1491,152 +1480,6 @@
     }
 
     /* ======================================================================
-       12c. Anti-Adblock y Detección de Brave Shields
-       ====================================================================== */
-    let isAdblockOpen = false;
-
-    async function detectIsBrave() {
-        try {
-            if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
-                return Boolean(await navigator.brave.isBrave());
-            }
-        } catch {
-            /* Error en API de Brave */
-        }
-        return false;
-    }
-
-    function checkDomBait() {
-        try {
-            const bait = document.createElement('div');
-            bait.className = 'ad-banner adsbox ad_unit ad-zone banner-ad pub_300x250 textads text-ad';
-            bait.style.cssText =
-                'position:absolute!important;top:-9999px!important;left:-9999px!important;width:100px!important;height:100px!important;pointer-events:none!important;';
-            bait.setAttribute('aria-hidden', 'true');
-            document.body.appendChild(bait);
-
-            const computed = window.getComputedStyle(bait);
-            const isBlocked =
-                bait.offsetParent === null ||
-                bait.offsetHeight === 0 ||
-                bait.offsetWidth === 0 ||
-                computed.display === 'none' ||
-                computed.visibility === 'hidden';
-
-            bait.remove();
-            return isBlocked;
-        } catch {
-            return false;
-        }
-    }
-
-    async function checkNetworkBait() {
-        if (navigator.onLine === false) return false;
-        try {
-            // URL publicitaria de referencia que es bloqueada por EasyList, uBlock y Brave Shields
-            const baitUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-            await fetch(baitUrl, {
-                method: 'HEAD',
-                mode: 'no-cors',
-                cache: 'no-store',
-            });
-            return false;
-        } catch {
-            return true;
-        }
-    }
-
-    function checkScriptError() {
-        return Boolean(window.__adsterraBlocked);
-    }
-
-    async function verifyAdBlockActive() {
-        const isDom = checkDomBait();
-        const isScript = checkScriptError();
-        const isNet = await checkNetworkBait();
-        return isDom || isScript || isNet;
-    }
-
-    function showAdblockModal(isBrave) {
-        if (!els.adblockModal) return;
-        isAdblockOpen = true;
-        els.adblockModal.hidden = false;
-        document.body.classList.add('modal-open');
-
-        if (els.braveDetectedBadge) {
-            els.braveDetectedBadge.hidden = !isBrave;
-        }
-
-        if (isBrave && els.braveGuideBox) {
-            els.braveGuideBox.classList.add('border-orange-500/60', 'bg-orange-500/10');
-        }
-
-        if (els.adblockCheckBtn) {
-            els.adblockCheckBtn.focus();
-        }
-    }
-
-    function hideAdblockModal() {
-        if (!els.adblockModal || els.adblockModal.hidden) return;
-        isAdblockOpen = false;
-        els.adblockModal.hidden = true;
-
-        if (els.modal.hidden && els.privacyModal.hidden) {
-            document.body.classList.remove('modal-open');
-        }
-
-        if (els.adblockStatusMsg) {
-            els.adblockStatusMsg.hidden = true;
-            els.adblockStatusMsg.textContent = '';
-        }
-    }
-
-    async function handleAdblockCheck() {
-        if (!els.adblockCheckBtn) return;
-
-        const originalHtml = els.adblockCheckBtn.innerHTML;
-        els.adblockCheckBtn.disabled = true;
-        els.adblockCheckBtn.innerHTML =
-            '<i class="fa-solid fa-circle-notch fa-spin mr-2" aria-hidden="true"></i> Comprobando bloqueador...';
-
-        await new Promise((resolve) => setTimeout(resolve, 500));
-
-        const stillBlocked = await verifyAdBlockActive();
-
-        els.adblockCheckBtn.disabled = false;
-        els.adblockCheckBtn.innerHTML = originalHtml;
-
-        if (stillBlocked) {
-            if (els.adblockCard) {
-                els.adblockCard.classList.remove('animate-shake');
-                void els.adblockCard.offsetWidth; // reiniciar animación
-                els.adblockCard.classList.add('animate-shake');
-            }
-
-            if (els.adblockStatusMsg) {
-                els.adblockStatusMsg.hidden = false;
-                els.adblockStatusMsg.innerHTML =
-                    '<i class="fa-solid fa-triangle-exclamation mr-1.5" aria-hidden="true"></i> El bloqueador sigue activo. Recuerda apagar los <strong>Escudos de Brave (Shields DOWN)</strong> o pausar tu extensión y vuelve a pulsar aquí.';
-            }
-        } else {
-            hideAdblockModal();
-            showToast('¡Gracias por apoyar a RecompXtv! Ya puedes navegar.');
-        }
-    }
-
-    async function initAdblockDetector() {
-        // Breve espera para que los estilos y peticiones del navegador se inicialicen
-        await new Promise((resolve) => setTimeout(resolve, 350));
-
-        const isBrave = await detectIsBrave();
-        const isBlocked = await verifyAdBlockActive();
-
-        if (isBlocked) {
-            showAdblockModal(isBrave);
-        }
-    }
-
-    /* ======================================================================
        13. Eventos
        ====================================================================== */
     function bindEvents() {
@@ -1675,11 +1518,6 @@
             if (trigger) openModal(trigger.dataset.appId);
         });
 
-        // Botón de comprobación del Anti-Adblock
-        if (els.adblockCheckBtn) {
-            els.adblockCheckBtn.addEventListener('click', handleAdblockCheck);
-        }
-
         // Acciones globales y copiado (delegación de eventos)
         document.addEventListener('click', (event) => {
             const actionElement = event.target.closest('[data-action]');
@@ -1702,21 +1540,15 @@
 
         // Cerrar modales con Escape y atrapar el foco
         document.addEventListener('keydown', (event) => {
-            const activeModal = !els.adblockModal?.hidden
-                ? els.adblockModal
-                : !els.privacyModal.hidden
-                  ? els.privacyModal
-                  : !els.modal.hidden
-                    ? els.modal
-                    : null;
+            const activeModal = !els.privacyModal.hidden
+                ? els.privacyModal
+                : !els.modal.hidden
+                  ? els.modal
+                  : null;
 
             if (!activeModal) return;
 
             if (event.key === 'Escape') {
-                if (activeModal === els.adblockModal) {
-                    event.preventDefault();
-                    return;
-                }
                 event.preventDefault();
                 if (activeModal === els.privacyModal) closePrivacy();
                 else closeModal();
@@ -1726,24 +1558,13 @@
             trapFocus(event, activeModal);
         });
 
-        // Cerrar modales al hacer clic en el fondo (el modal de adblock no se cierra con clic)
+        // Cerrar modales al hacer clic en el fondo
         els.modal.addEventListener('click', (event) => {
             if (event.target === els.modal) closeModal();
         });
 
         els.privacyModal.addEventListener('click', (event) => {
             if (event.target === els.privacyModal) closePrivacy();
-        });
-
-        // Comprobación automática al recuperar el foco de la ventana
-        window.addEventListener('focus', async () => {
-            if (isAdblockOpen) {
-                const stillBlocked = await verifyAdBlockActive();
-                if (!stillBlocked) {
-                    hideAdblockModal();
-                    showToast('¡Bloqueador desactivado! Bienvenido a RecompXtv.');
-                }
-            }
         });
 
         // Sincroniza el buscador si el usuario vuelve con el historial
@@ -1755,15 +1576,60 @@
     /* ======================================================================
        14. Inicialización
        ====================================================================== */
+    const SCHEMA_OS = {
+        androidtv: 'Android TV',
+        lg: 'webOS',
+        tizen: 'Tizen',
+        roku: 'Roku OS',
+        mobile: 'Android',
+    };
+
+    // Genera un ItemList de schema.org con las apps del catálogo para SEO.
+    function injectAppListSchema() {
+        if (document.getElementById('appListSchema')) return;
+
+        const itemListElement = apps.map((app, index) => {
+            const operatingSystems = [...new Set(
+                app.platforms.map((platform) => SCHEMA_OS[platform]).filter(Boolean)
+            )];
+
+            return {
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                    '@type': 'SoftwareApplication',
+                    name: app.name,
+                    description: app.desc,
+                    applicationCategory: 'MultimediaApplication',
+                    operatingSystem: operatingSystems.join(', '),
+                    ...(app.directUrl ? { url: app.directUrl } : {}),
+                },
+            };
+        });
+
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = 'appListSchema';
+        script.textContent = JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'Apps para Smart TV, Roku y Android',
+            itemListElement,
+        });
+        document.head.appendChild(script);
+    }
+
     function init() {
         cacheElements();
         if (!els.grid || !els.emptyState) return;
 
         bindEvents();
         renderDirectDownloads();
+        buildSearchIndex();
+        injectAppListSchema();
+        updateCategoryCounts();
         setCategory('all');
         els.searchClear.hidden = true;
-        initAdblockDetector();
 
         if (/^https?:$/.test(window.location.protocol)) {
             checkForWebUpdate();

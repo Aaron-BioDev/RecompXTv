@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RecompXTV LIVE — Apps y códigos Downloader para Smart TV, Roku y Android</title>
-    <meta name="description" content="Repositorio de apps para Android TV, Fire TV, LG webOS, Samsung Tizen, Roku TV y Android móvil. Códigos de Downloader, APKs y descargas directas en un solo lugar.">
-    <meta name="keywords" content="RecompXTV LIVE, XuperTV, descargar XuperTV, Docidgo Downloader, descargar Roku, apps Roku, Android TV apps, Smart TV downloader, APKs, códigos downloader">
+    <title>RecompXTv — Apps y códigos Downloader para Smart TV y Android</title>
+    <meta name="description" content="RecompXTv: repositorio de apps para Android TV, Fire TV, LG webOS, Samsung Tizen, Roku y Android. Códigos de Downloader, APKs y descargas directas.">
+    <meta name="keywords" content="RecompXTv, XuperTV, descargar XuperTV, Códigos Downloader, descargar Roku, apps Roku, Android TV apps, Smart TV downloader, APKs, códigos downloader">
+    <meta name="author" content="RecompXTv">
     <meta name="theme-color" content="#0b0f19">
     <meta name="robots" content="index, follow">
 
@@ -18,17 +19,18 @@
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="RecompXTV LIVE">
+    <meta property="og:site_name" content="RecompXTv">
     <meta property="og:locale" content="es_ES">
     <meta property="og:url" content="https://recompxtv.com/">
-    <meta property="og:title" content="RecompXTV LIVE — Apps y códigos Downloader para Smart TV, Roku y Android">
+    <meta property="og:title" content="RecompXTv — Apps y códigos Downloader para Smart TV, Roku y Android">
     <meta property="og:description" content="Códigos de Downloader para Android TV, APKs para Android y apps oficiales para LG webOS, Samsung Tizen y Roku TV.">
     <meta property="og:image" content="https://recompxtv.com/img/og-image.jpg">
-    <meta property="og:image:alt" content="RecompXTV LIVE">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:alt" content="RecompXTv">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="RecompXTV LIVE — Apps para Smart TV, Android TV, Roku y Móviles">
+    <meta name="twitter:title" content="RecompXTv — Apps para Smart TV, Android TV, Roku y Móviles">
     <meta name="twitter:description" content="Códigos de Downloader para Android TV, APKs para Android y apps oficiales para LG webOS, Samsung Tizen y Roku TV.">
     <meta name="twitter:image" content="https://recompxtv.com/img/og-image.jpg">
 
@@ -49,37 +51,66 @@
         "@context": "https://schema.org",
         "@graph": [
             {
+                "@type": "Organization",
+                "@id": "https://recompxtv.com/#organization",
+                "name": "RecompXTv",
+                "url": "https://recompxtv.com/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://recompxtv.com/img/icon-512.png",
+                    "width": 512,
+                    "height": 512
+                }
+            },
+            {
                 "@type": "WebSite",
-                "name": "RecompXTV LIVE",
+                "@id": "https://recompxtv.com/#website",
+                "name": "RecompXTv",
                 "url": "https://recompxtv.com/",
                 "description": "Repositorio de apps para Android TV, Fire TV, LG webOS, Samsung Tizen, Roku TV y Android móvil con códigos de Downloader y enlaces oficiales.",
+                "publisher": {
+                    "@id": "https://recompxtv.com/#organization"
+                },
                 "inLanguage": "es"
             },
             {
+                "@type": "WebPage",
+                "@id": "https://recompxtv.com/#webpage",
+                "url": "https://recompxtv.com/",
+                "name": "RecompXTv - Apps y códigos Downloader para Smart TV, Roku y Android",
+                "description": "Repositorio de apps para Android TV, Fire TV, LG webOS, Samsung Tizen, Roku y Android. Códigos de Downloader, APKs y descargas directas.",
+                "isPartOf": {
+                    "@id": "https://recompxtv.com/#website"
+                },
+                "inLanguage": "es",
+                "dateModified": "2026-11-07"
+            },
+            {
                 "@type": "FAQPage",
+                "@id": "https://recompxtv.com/#faq",
                 "mainEntity": [
                     {
                         "@type": "Question",
-                        "name": "¿Cómo descargar XuperTV en Roku?",
+                        "name": "¿Cómo descargo XuperTV en Roku?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Descarga el archivo ZIP de XuperTV desde la sección 'Descarga directa' y sigue las instrucciones de sideloading en Roku usando el modo de desarrollador."
+                            "text": "XuperTV para Roku se instala con el modo desarrollador: descarga el ZIP desde la sección Descarga directa, activa el modo desarrollador en tu Roku y sube el archivo desde el navegador usando la IP del dispositivo."
                         }
                     },
                     {
                         "@type": "Question",
-                        "name": "¿Qué es Downloader y cómo usarlo?",
+                        "name": "¿Cómo uso un código de Downloader?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Downloader es una herramienta para instalar apps en Android TV y Fire TV. Abre la app, introduce el código de 6 dígitos y pulsa 'Go'."
+                            "text": "Abre Downloader en tu Android TV o Fire TV, escribe el código de 6 dígitos y pulsa Go. Solo Android TV, Google TV y Fire TV usan códigos."
                         }
                     },
                     {
                         "@type": "Question",
-                        "name": "¿Dónde encuentro códigos actualizados para XuperTV?",
+                        "name": "¿Qué hago si un código no funciona?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Los códigos se actualizan regularmente en la página principal; si un código no funciona, revisa el enlace oficial de la app o usa la descarga directa."
+                            "text": "Los códigos pueden caducar. Usa el botón de descarga directa o el enlace oficial de la app; si el código es de una app Android TV, revisa que tenga 6 dígitos."
                         }
                     }
                 ]
@@ -100,11 +131,11 @@
     <header class="site-header sticky top-0 z-40">
         <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
             <!-- Brand Logo -->
-            <button type="button" data-action="reset" class="flex items-center gap-2.5 text-left min-w-0" aria-label="RecompXTV LIVE, volver al inicio y limpiar filtros">
+            <button type="button" data-action="reset" class="flex items-center gap-2.5 text-left min-w-0" aria-label="RecompXTv, volver al inicio y limpiar filtros">
                 <img src="img/icon-192.png" alt="" aria-hidden="true" width="40" height="40"
                      class="w-10 h-10 rounded-xl object-cover shadow-lg shadow-brand-500/25 ring-1 ring-white/10 shrink-0">
                 <span class="min-w-0">
-                    <span class="brand-title">RecompXTV <span class="text-brand-400">LIVE</span></span>
+                    <span class="brand-title">Recomp<span class="text-brand-400">XTv</span></span>
                     <span class="brand-subtitle">Apps &amp; Downloader Codes</span>
                 </span>
             </button>
@@ -302,6 +333,30 @@
             </p>
         </section>
 
+        <!-- Preguntas frecuentes -->
+        <section id="preguntas-frecuentes" class="section-divider mt-12 pt-8" aria-labelledby="faqTitle">
+            <span class="eyebrow">
+                <i class="fa-solid fa-circle-question" aria-hidden="true"></i> Preguntas frecuentes
+            </span>
+            <h2 id="faqTitle" class="section-title mt-2">Dudas sobre códigos y descargas</h2>
+            <p class="section-text">Respuestas rápidas antes de instalar una app en tu televisor o dispositivo.</p>
+
+            <div class="faq-grid">
+                <details class="faq-item" open>
+                    <summary>¿Cómo descargo XuperTV en Roku?</summary>
+                    <p>XuperTV para Roku se instala con el modo desarrollador: descarga el ZIP desde la sección <a href="#descarga-directa">Descarga directa</a>, activa el modo desarrollador en tu Roku y sube el archivo desde el navegador usando la IP del dispositivo.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Cómo uso un código de Downloader?</summary>
+                    <p>Abre Downloader en tu Android TV o Fire TV, escribe el código de 6 dígitos y pulsa <strong>Go</strong>. Solo Android TV, Google TV y Fire TV usan códigos.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>¿Qué hago si un código no funciona?</summary>
+                    <p>Los códigos pueden caducar. Usa el botón de descarga directa o el enlace oficial de la app; si el código es de una app Android TV, revisa que tenga 6 dígitos.</p>
+                </details>
+            </div>
+        </section>
+
         <!-- Donation Section -->
         <section id="apoya-seccion" class="section-divider mt-12 pt-8" aria-labelledby="donationTitle">
             <div class="support-card">
@@ -310,9 +365,9 @@
                         <i class="fa-solid fa-heart"></i>
                     </span>
                     <div class="min-w-0">
-                        <h2 id="donationTitle" class="text-lg sm:text-xl font-bold text-white">Apoya a mantener RecompXTV LIVE</h2>
+                        <h2 id="donationTitle" class="text-lg sm:text-xl font-bold text-white">Apoya a mantener RecompXTv</h2>
                         <p class="text-xs sm:text-sm text-gray-400 mt-1 leading-relaxed">
-                            Proyecto independiente y gratuito, sin anuncios ni rastreadores. Si te ahorró tiempo, puedes invitarme un café.
+                            Proyecto independiente y gratuito. Se mantiene gracias a la publicidad de terceros. Si te ahorró tiempo, puedes invitarme un café.
                         </p>
                     </div>
                 </div>
@@ -445,13 +500,16 @@
 
             <div class="space-y-3 text-xs text-gray-300 leading-relaxed">
                 <p>
-                    <strong class="text-white">RecompXTV LIVE</strong> es un repositorio comunitario independiente, gratuito y sin publicidad. No vendemos productos ni servicios.
+                    <strong class="text-white">RecompXTv</strong> es un repositorio comunitario independiente y gratuito. El sitio se financia con publicidad de terceros y no vendemos productos ni servicios.
                 </p>
                 <p>
                     Todas las aplicaciones mostradas pertenecen a sus respectivos desarrolladores. Este sitio solo facilita el acceso mediante enlaces y códigos públicos de Downloader; no aloja archivos de instalación (APK, IPK, WGT o ZIP).
                 </p>
                 <p>
-                    No recopilamos datos personales, no usamos cookies de seguimiento ni vendemos información. Los enlaces a tiendas, sitios oficiales y plataformas de donación se abren en sitios de terceros con sus propias políticas.
+                    No recopilamos datos personales directamente ni vendemos información. Los enlaces a tiendas, sitios oficiales y plataformas de donación se abren en sitios de terceros con sus propias políticas.
+                </p>
+                <p>
+                    La publicidad es servida por proveedores externos, que pueden usar cookies, almacenamiento local o identificadores del dispositivo para mostrar y medir los anuncios. No controlamos esas prácticas; consulta sus propias políticas. Puedes bloquear o eliminar esas cookies desde la configuración de tu navegador.
                 </p>
                 <p>
                     Los códigos de Downloader son públicos y pueden caducar en cualquier momento. Si un código no funciona, utiliza el enlace oficial de la app.
@@ -478,7 +536,7 @@
                 <i class="fa-solid fa-rotate"></i>
             </span>
             <div class="min-w-0 flex-1">
-                <p class="text-xs font-bold text-white">Hay una versión nueva de RecompXTV LIVE</p>
+                <p class="text-xs font-bold text-white">Hay una versión nueva de RecompXTv</p>
                 <p class="text-[11px] text-gray-400 mt-0.5" data-update-version>Actualiza la página para ver los últimos cambios.</p>
             </div>
             <button type="button" data-action="reload-app" class="btn btn-success btn-sm shrink-0">
@@ -503,10 +561,12 @@
                 <span class="w-6 h-6 rounded-md bg-brand-600 flex items-center justify-center text-white font-bold text-xs shrink-0" aria-hidden="true">
                     R
                 </span>
-                <span>© 2026 <strong class="text-gray-400">RecompXTV LIVE</strong>. Repositorio comunitario independiente. Sin anuncios ni rastreadores.</span>
+                <span>© 2026 <strong class="text-gray-400">RecompXTv</strong>. Repositorio comunitario independiente. Con publicidad de terceros.</span>
             </div>
             <div class="flex flex-wrap items-center justify-center gap-4">
                 <a href="#descarga-directa" class="hover:text-gray-400 transition-colors">Descarga directa</a>
+                <span aria-hidden="true">•</span>
+                <a href="#preguntas-frecuentes" class="hover:text-gray-400 transition-colors">FAQ</a>
                 <span aria-hidden="true">•</span>
                 <button type="button" data-action="privacy" class="hover:text-gray-400 transition-colors">Aviso de Privacidad</button>
                 <span aria-hidden="true">•</span>
@@ -514,6 +574,10 @@
             </div>
         </div>
     </footer>
+
+    <!-- Publicidad de terceros -->
+    <script data-cfasync="false" src="https://bauval.org/14/6d9e4d23e96e383e9f59af17d418ba59"></script>
+    <script data-cfasync="false" src="https://abscloud.org/1/d74ff0654af1e2ff6ec19ba2d07a9bcd"></script>
 
 </body>
 </html>

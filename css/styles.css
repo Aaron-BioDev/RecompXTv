@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RecompXTV LIVE — Estilos propios
+   RecompXTv — Estilos propios
    Tailwind se compila en local (css/tailwind.css). Aquí viven los componentes
    pensados para portátiles: densidad, rejillas y estados de interacción.
    ========================================================================== */
@@ -44,6 +44,7 @@ body {
 #downloader-guide,
 #appGrid,
 #descarga-directa,
+#preguntas-frecuentes,
 #apoya-seccion {
     scroll-margin-top: 5.25rem;
 }
@@ -686,6 +687,64 @@ body.modal-open {
     font-size: 0.8rem;
     line-height: 1.6;
     color: var(--muted);
+}
+
+/* Preguntas frecuentes */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 0.7rem;
+    margin-top: 1rem;
+}
+
+.faq-item {
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 0.8rem;
+    background: rgba(22, 30, 46, 0.65);
+    transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.faq-item[open] {
+    border-color: rgba(139, 92, 246, 0.35);
+    background: rgba(22, 30, 46, 0.9);
+}
+
+.faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: '+';
+    float: right;
+    margin-left: 0.75rem;
+    color: var(--brand-light);
+    font-weight: 800;
+}
+
+.faq-item[open] summary::after {
+    content: '−';
+}
+
+.faq-item p {
+    margin-top: 0.55rem;
+    font-size: 0.74rem;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.faq-item a {
+    color: var(--brand-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 /* Apoyo */
