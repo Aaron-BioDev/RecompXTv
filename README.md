@@ -6,6 +6,12 @@ Repositorio estático de apps para Android TV, Fire TV, LG webOS, Samsung Tizen,
 
 ```text
 RecompXTV/
+├── apps/               # Paquetes y archivos para descarga directa (APK, IPK, WGT, ZIP)
+│   ├── Android/
+│   ├── Android TV  Fire OS/
+│   ├── LG WebOs/
+│   ├── Roku/
+│   └── Samsung Tizen/
 ├── index.html          # Página principal (única versión activa)
 ├── css/styles.css      # Estilos propios y accesibilidad
 ├── js/app.js           # Datos de apps y lógica de la interfaz
@@ -152,9 +158,32 @@ La web cuenta con un detector automático multicapa (`js/app.js`):
 
 El aviso de privacidad ya indica que los proveedores de publicidad pueden usar cookies o identificadores. Si el sitio recibe visitantes de la Unión Europea, conviene añadir un banner de consentimiento antes de cargar estos scripts; cargarlos siempre puede incumplir la normativa de cookies.
 
-## Despliegue
+## Alojamiento de Descargas con GitHub Releases
 
-Es un sitio estático: puedes subir la carpeta a Netlify, Vercel, Cloudflare Pages o GitHub Pages sin compilación.
+Para evitar caídas de la web por límites de ancho de banda (el límite mensual de 100 GB de GitHub Pages), los archivos pesados (APKs, IPKs, WGT y ZIPs) se alojan en **GitHub Releases**:
+
+1. En tu repositorio de GitHub, ve a **Releases** → **Draft a new release**.
+2. Pon la etiqueta `v1.0.0` y arrastra los archivos de la carpeta `apps/`.
+3. En `js/app.js`, pon tu nombre de usuario de GitHub:
+   ```js
+   const GITHUB_RELEASES_CONFIG = {
+       user: 'TU_USUARIO', // Pon aquí tu usuario de GitHub
+       repo: 'RecompXTV',
+       tag: 'v1.0.0',
+   };
+   ```
+4. Con esto, todas las descargas se entregarán a máxima velocidad desde la CDN global de GitHub con ancho de banda ilimitado, garantizando que la página web nunca se sature ni se caiga.
+
+## Despliegue en GitHub Pages
+
+Es un sitio estático ultra ligero (~3.5 MB):
+1. `git init`
+2. `git add .`
+3. `git commit -m "Lanzamiento RecompXtv"`
+4. `git branch -M main`
+5. `git remote add origin https://github.com/TU_USUARIO/RecompXTV.git`
+6. `git push -u origin main`
+7. En GitHub: **Settings** → **Pages** → seleccionar rama `main` y guardar.
 
 ## Nota sobre Tailwind
 

@@ -393,6 +393,17 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- Descargas directas disponibles en el modal -->
+                <div id="modalDownloadsBox" hidden class="bg-gradient-to-r from-emerald-950/20 to-darkbg p-4 rounded-xl border border-emerald-500/30">
+                    <div class="flex items-center justify-between mb-2.5">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-download" aria-hidden="true"></i> Descargas directas disponibles:
+                        </span>
+                        <span id="modalDownloadsCount" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">0 archivos</span>
+                    </div>
+                    <div id="modalDownloadsList" class="space-y-1.5 max-h-48 overflow-y-auto pr-1"></div>
+                </div>
             </div>
 
             <!-- Modal Actions Footer -->

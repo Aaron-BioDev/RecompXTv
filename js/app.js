@@ -91,6 +91,51 @@
     };
 
     /* ======================================================================
+       Configuración de Descargas en GitHub Releases
+       ====================================================================== */
+    const GITHUB_RELEASES_CONFIG = {
+        // Configuración para GitHub Releases (no usado cuando se usan MediaFire)
+        // Si se deja 'TU_USUARIO' o vacío, se usan URLs de MediaFire definidas en mediafireMap.
+        user: 'TU_USUARIO',
+        repo: 'RecompXTV',
+        tag: 'v1.0.0',
+    };
+
+    // Mapeo de nombres de archivo a URLs de MediaFire (descarga directa).
+    const mediafireMap = {
+        'WiwyXuper_patched.apk': 'https://www.mediafire.com/file/qts49wop40nj7mq/WiwyXuper_patched.apk/file',
+        'Xuper NF.apk': 'https://www.mediafire.com/file/7gudjrd4klsy1q7/Xuper_NF.apk/file',
+        'Xuper_beshaka_patched.apk': 'https://www.mediafire.com/file/rorpoip24duqgc9/Xuper_beshaka_patched.apk/file',
+        'Xuper_EMGv3_patched.apk': 'https://www.mediafire.com/file/v85rshssxpz572l/Xuper_EMGv3_patched.apk/file',
+        'Xuper_mobile_patched.apk': 'https://www.mediafire.com/file/6tjqky3zxm3ov0v/Xuper_mobile_patched.apk/file',
+        'Xuper_patched.apk': 'https://www.mediafire.com/file/9vjx1jpip5vdtua/Xuper_patched.apk/file',
+        'Xuper_secneo_patched.apk': 'https://www.mediafire.com/file/wiqlxhabwmdiozh/Xuper_secneo_patched.apk/file',
+        'com.webosflux.xuptertv.fidelity_patched.ipk': 'https://www.mediafire.com/file/3ra3nosnnb47et9/com.webosflux.xuptertv.fidelity_patched.ipk/file',
+        'XuperTV-LG-PLUS-v2.25patched.ipk': 'https://www.mediafire.com/file/8bdp62ez1qvjv7e/XuperTV-LG-PLUS-v2.25patched.ipk/file',
+        '4k_xsuper_lil.zip': 'https://www.mediafire.com/file/gku6jtskir93gpi/4k_xsuper_lil.zip/file',
+        'Instalación_XUPER_TV_para_Roku.rtf': 'https://www.mediafire.com/file/kzdizfy5bzrk46b/Instalacio%25CC%2581n_XUPER_TV_para_Roku.rtf/file',
+        'Roku_plus_X_HD_patched.zip': 'https://www.mediafire.com/file/71c1t26wibrl4sb/Roku_plus_X_HD_patched.zip/file',
+        'XuperTV-v3_patched.zip': 'https://www.mediafire.com/file/hx9d1anokalb5ul/XuperTV-v3_patched.zip/file',
+        'XuperTVnuevo_patched.zip': 'https://www.mediafire.com/file/uixktj2e3ecws50/XuperTVnuevo_patched.zip/file',
+        'EpmStreamTv_patched.wgt.zip': 'https://www.mediafire.com/file/rnr6ja3cut7m1ap/EpmStreamTv_patched.wgt.zip/file',
+    };
+
+
+    function resolveDownloadUrl(filename, localPath) {
+        // If a MediaFire URL exists for the filename, return it (direct download).
+        if (mediafireMap.hasOwnProperty(filename)) {
+            return mediafireMap[filename];
+        }
+        // Fallback: if GitHub config is provided, build a GitHub Release URL.
+        if (GITHUB_RELEASES_CONFIG.user && GITHUB_RELEASES_CONFIG.user !== 'TU_USUARIO') {
+            return `https://github.com/${GITHUB_RELEASES_CONFIG.user}/${GITHUB_RELEASES_CONFIG.repo}/releases/download/${GITHUB_RELEASES_CONFIG.tag}/${encodeURIComponent(filename)}`;
+        }
+        // Default to the local path (useful for development).
+        return localPath;
+    }
+    
+
+    /* ======================================================================
        3. Datos de las aplicaciones
        ====================================================================== */
     // IMPORTANTE: los códigos de Downloader son de 6 dígitos.
@@ -118,7 +163,7 @@
                     format: 'APK',
                     variant: 'Universal',
                     version: '1.0.0',
-                    source: 'GitHub Releases',
+                    source: 'MediaFire',
                     url: 'https://github.com/NuvioMedia/NuvioTV/releases/download/1.0.0/app-full-universal-release.apk',
                 },
                 {
@@ -126,7 +171,7 @@
                     format: 'IPK',
                     variant: 'webOS',
                     version: '1.3.7',
-                    source: 'GitHub Releases',
+                    source: 'MediaFire',
                     url: 'https://github.com/NuvioMedia/NuvioTVSmart/releases/download/1.3.7/NuvioTV-webOS-1.3.7.ipk',
                 },
                 {
@@ -134,7 +179,7 @@
                     format: 'WGT',
                     variant: 'Tizen',
                     version: '1.3.7',
-                    source: 'GitHub Releases',
+                    source: 'MediaFire',
                     url: 'https://github.com/NuvioMedia/NuvioTVSmart/releases/download/1.3.7/NuvioTV-Tizen-1.3.7.wgt',
                 },
                 {
@@ -142,7 +187,7 @@
                     format: 'APK',
                     variant: 'ARM64',
                     version: '0.6.9-beta',
-                    source: 'GitHub Releases',
+                    source: 'MediaFire',
                     url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.9-beta/androidApp-full-arm64-v8a-release.apk',
                 },
             ],
@@ -175,20 +220,238 @@
         },
         {
             id: 'xuper-tv',
-            name: 'Xuper TV',
-            categories: ['smarttv'],
+            name: 'Xuper TV (Android TV)',
+            categories: ['smarttv', 'reproductores'],
             platforms: ['androidtv'],
-            tag: 'Android TV / Firestick',
+            tag: 'Android TV / Fire OS',
             format: 'APK',
             code: '74829',
             verified: false,
-            installLabel: 'Google Play',
+            installLabel: 'Descarga Directa APK',
             iconClass: 'fa-tv',
             iconImage: 'img/apps/xuper-tv.png',
             bgColor: 'from-purple-600 to-indigo-600',
-            desc: 'Aplicación optimizada para streaming en Smart TV y TV Boxes. Interfaz ligera diseñada específicamente para control remoto sin necesidad de mouse.',
-            guide: 'Abre Downloader en tu Firestick o TV Box, ingresa el código que aparece en la tarjeta y pulsa Go. Permite la instalación de orígenes desconocidos si tu sistema lo solicita. También puedes abrir la ficha oficial de Google Play desde el enlace.',
-            directUrl: 'https://play.google.com/store/apps/details?id=com.xuper.tv',
+            desc: 'Edición oficial para Smart TVs con Android TV, Google TV y Fire TV Stick. Múltiples versiones adaptadas para control remoto sin cursor.',
+            guide: 'Abre Downloader en tu Android TV o Fire TV, ingresa el código 74829 y pulsa Go. O descarga directamente cualquiera de los APKs oficiales disponibles abajo.',
+            directUrl: resolveDownloadUrl('Xuper NF.apk', 'apps/Android TV  Fire OS/Xuper NF.apk'),
+            downloads: [
+                {
+                    label: 'Android TV / Fire TV',
+                    format: 'APK',
+                    variant: 'Edición NF (Estilo Netflix)',
+                    version: '4.35.0',
+                    size: '50.8 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('Xuper NF.apk', 'apps/Android TV  Fire OS/Xuper NF.apk'),
+                },
+                {
+                    label: 'Android TV / Fire TV',
+                    format: 'APK',
+                    variant: 'Edición Wiwy (Deportes y Eventos)',
+                    version: '4.34.59',
+                    size: '44.2 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('WiwyXuper_patched.apk', 'apps/Android TV  Fire OS/WiwyXuper_patched.apk'),
+                },
+                {
+                    label: 'Android TV / Fire TV',
+                    format: 'APK',
+                    variant: 'Edición SecNeo (Optimizada)',
+                    version: '6.2.4',
+                    size: '27.2 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('Xuper_secneo_patched.apk', 'apps/Android TV  Fire OS/Xuper_secneo_patched.apk'),
+                },
+                {
+                    label: 'Android TV / Fire TV',
+                    format: 'APK',
+                    variant: 'Edición Estándar Estable',
+                    version: '4.34.4',
+                    size: '34.3 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('Xuper_patched.apk', 'apps/Android TV  Fire OS/Xuper_patched.apk'),
+                },
+                {
+                    label: 'Android TV / Fire TV',
+                    format: 'APK',
+                    variant: 'Edición EMG v3',
+                    version: '3.0',
+                    size: '38.1 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('Xuper_EMGv3_patched.apk', 'apps/Android TV  Fire OS/Xuper_EMGv3_patched.apk'),
+                },
+                {
+                    label: 'Android TV / Fire TV',
+                    format: 'APK',
+                    variant: 'Edición Beshaka',
+                    version: '4.34.4',
+                    size: '34.4 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('Xuper_beshaka_patched.apk', 'apps/Android TV  Fire OS/Xuper_beshaka_patched.apk'),
+                },
+            ],
+        },
+        {
+            id: 'xuper-tv-mobile',
+            name: 'Xuper TV (Android Móvil)',
+            categories: ['mobile', 'reproductores'],
+            platforms: ['mobile'],
+            tag: 'Android Móvil (Touch)',
+            format: 'APK',
+            code: null,
+            installLabel: 'Descargar APK Móvil',
+            iconClass: 'fa-mobile-screen-button',
+            iconImage: 'img/apps/xuper-tv.png',
+            bgColor: 'from-indigo-600 to-purple-600',
+            desc: 'Versión adaptada exclusivamente para celulares y tablets Android con controles táctiles nativos en pantalla.',
+            guide: 'Descarga el APK en tu celular Android, abre el archivo descargado desde tu barra de notificaciones y selecciona "Instalar". Habilita la instalación desde fuentes desconocidas si tu navegador te lo solicita.',
+            directUrl: resolveDownloadUrl('Xuper_mobile_patched.apk', 'apps/Android/Xuper_mobile_patched.apk'),
+            downloads: [
+                {
+                    label: 'Android Móvil',
+                    format: 'APK',
+                    variant: 'Edición Móvil Táctil Oficial',
+                    version: '6.5.9',
+                    size: '52.9 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('Xuper_mobile_patched.apk', 'apps/Android/Xuper_mobile_patched.apk'),
+                },
+                {
+                    label: 'Android Móvil',
+                    format: 'APK',
+                    variant: 'Edición NF Móvil',
+                    version: '4.35.0',
+                    size: '50.8 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('Xuper NF.apk', 'apps/Android/Xuper NF.apk'),
+                },
+            ],
+        },
+        {
+            id: 'xuper-tv-lg',
+            name: 'Xuper TV (LG webOS)',
+            categories: ['smarttv'],
+            platforms: ['lg'],
+            tag: 'LG webOS (Smart TV)',
+            format: 'IPK',
+            code: null,
+            installLabel: 'Descargar paquete IPK',
+            iconClass: 'fa-tv',
+            iconImage: 'img/apps/xuper-tv.png',
+            bgColor: 'from-red-600 to-rose-700',
+            desc: 'Paquete de instalación oficial .ipk para televisores inteligentes LG con sistema webOS (compatible desde webOS 3.0 hasta webOS 24).',
+            guide: 'Los televisores LG no instalan APK de Android ni usan Downloader. Para instalar:\n1. Descarga el paquete .ipk en tu PC.\n2. Conecta tu TV LG mediante la aplicación gratuita webOS Dev Manager (o Device Manager for webOS).\n3. Presiona "Install Package" y selecciona el archivo .ipk.',
+            directUrl: resolveDownloadUrl('com.webosflux.xuptertv.fidelity_patched.ipk', 'apps/LG WebOs/com.webosflux.xuptertv.fidelity_patched.ipk'),
+            downloads: [
+                {
+                    label: 'LG webOS',
+                    format: 'IPK',
+                    variant: 'Fidelity Edition (webOS 3.0+)',
+                    version: '2.2.45',
+                    size: '21.5 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('com.webosflux.xuptertv.fidelity_patched.ipk', 'apps/LG WebOs/com.webosflux.xuptertv.fidelity_patched.ipk'),
+                },
+                {
+                    label: 'LG webOS',
+                    format: 'IPK',
+                    variant: 'LG Plus Edition',
+                    version: '1.6.15 (v2.25)',
+                    size: '21.6 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('XuperTV-LG-PLUS-v2.25patched.ipk', 'apps/LG WebOs/XuperTV-LG-PLUS-v2.25patched.ipk'),
+                },
+            ],
+        },
+        {
+            id: 'xuper-tv-tizen',
+            name: 'Xuper TV / EPM (Samsung Tizen)',
+            categories: ['smarttv'],
+            platforms: ['tizen'],
+            tag: 'Samsung Tizen',
+            format: 'WGT',
+            code: null,
+            installLabel: 'Descargar paquete WGT',
+            iconClass: 'fa-tv',
+            iconImage: 'img/apps/xuper-tv.png',
+            bgColor: 'from-blue-600 to-cyan-600',
+            desc: 'Paquete de instalación oficial .wgt (EPM Stream TV / Xuper TV) para televisores inteligentes Samsung Smart TV con sistema Tizen 3.0 o superior.',
+            guide: 'Las Smart TV Samsung usan Tizen (no admiten APKs ni Downloader). Para instalar:\n1. Descarga el archivo .wgt.\n2. En tu televisor Samsung, ve a la sección Apps y teclea "12345" en el control remoto para activar Developer Mode.\n3. Configura la IP de tu PC y reinicia la TV.\n4. Desde tu PC con Tizen Studio o SDB ejecuta: sdb install EpmStreamTv_patched.wgt',
+            directUrl: resolveDownloadUrl('EpmStreamTv_patched.wgt.zip', 'apps/Samsung Tizen/EpmStreamTv_patched.wgt.zip'),
+            downloads: [
+                {
+                    label: 'Samsung Tizen',
+                    format: 'WGT',
+                    variant: 'EPM Stream TV Widget (Tizen 3.0+)',
+                    version: '1.0.1',
+                    size: '138 KB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('EpmStreamTv_patched.wgt.zip', 'apps/Samsung Tizen/EpmStreamTv_patched.wgt.zip'),
+                },
+            ],
+        },
+        {
+            id: 'xuper-tv-roku',
+            name: 'Xuper TV (Roku TV)',
+            categories: ['smarttv'],
+            platforms: ['roku'],
+            tag: 'Roku TV / Roku Box',
+            format: 'ZIP',
+            code: null,
+            installLabel: 'Descargar canal ZIP',
+            iconClass: 'fa-tv',
+            iconImage: 'img/apps/xuper-tv.png',
+            bgColor: 'from-purple-600 to-violet-700',
+            desc: 'Canal oficial de Xuper TV para reproductores Roku y Roku TV en formato .zip para instalación mediante Modo Desarrollador (Sideloading oficial).',
+            guide: 'Roku no instala APKs de Android. Para instalar mediante Modo Desarrollador:\n1. En tu control de Roku presiona: HOME 3 veces, ARRIBA 2 veces, DERECHA, IZQUIERDA, DERECHA, IZQUIERDA, DERECHA.\n2. Acepta los términos, fija una contraseña y anota la dirección IP de tu Roku.\n3. En tu navegador web (PC o móvil) ingresa a http://IP_DE_TU_ROKU (usuario: rokudev y la clave asignada).\n4. Carga el archivo .zip descargado (sin descomprimir) y pulsa "Install".',
+            directUrl: resolveDownloadUrl('XuperTVnuevo_patched.zip', 'apps/Roku/XuperTVnuevo_patched.zip'),
+            downloads: [
+                {
+                    label: 'Roku TV',
+                    format: 'ZIP',
+                    variant: 'XuperTV Nuevo (+ Manual PDF)',
+                    version: '2.0.41',
+                    size: '1.8 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('XuperTVnuevo_patched.zip', 'apps/Roku/XuperTVnuevo_patched.zip'),
+                },
+                {
+                    label: 'Roku TV',
+                    format: 'ZIP',
+                    variant: 'XuperTV v3 Lite',
+                    version: '2.0.41',
+                    size: '583 KB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('XuperTV-v3_patched.zip', 'apps/Roku/XuperTV-v3_patched.zip'),
+                },
+                {
+                    label: 'Roku TV',
+                    format: 'ZIP',
+                    variant: 'Roku Plus X HD',
+                    version: '1.7.2',
+                    size: '2.2 MB',
+                    source: 'MediaFire',
+                    url: resolveDownloadUrl('Roku_plus_X_HD_patched.zip', 'apps/Roku/Roku_plus_X_HD_patched.zip'),
+                },
+                {
+                    label: 'Roku TV',
+                    format: 'ZIP',
+                    variant: 'xsuper Lil 4K (Streaming + IPTV)',
+                    version: '1.0.39',
+                    size: '700 KB',
+                    source: 'Descarga Directa',
+                    url: resolveDownloadUrl('4k_xsuper_lil.zip', 'apps/Roku/4k_xsuper_lil.zip'),
+                },
+                {
+                    label: 'Roku TV (Manual)',
+                    format: 'RTF',
+                    variant: 'Manual Paso a Paso Modo Desarrollador',
+                    version: 'Oficial',
+                    size: '5.3 KB',
+                    source: 'Documentación',
+                    url: resolveDownloadUrl('Instalación XUPER TV para Roku.rtf', 'apps/Roku/Instalacio%CC%81n%20XUPER%20TV%20para%20Roku.rtf'),
+                },
+            ],
         },
         {
             id: 'downloader',
@@ -321,7 +584,7 @@
                     format: 'APK',
                     variant: 'Universal',
                     version: '0.19.10',
-                    source: 'GitHub Releases',
+                    source: 'MediaFire',
                     url: 'https://github.com/jellyfin/jellyfin-androidtv/releases/download/v0.19.10/jellyfin-androidtv-v0.19.10-release.apk',
                 },
                 {
@@ -329,7 +592,7 @@
                     format: 'ZIP',
                     variant: 'Sideload',
                     version: '3.2.4',
-                    source: 'GitHub Releases',
+                    source: 'MediaFire',
                     url: 'https://github.com/jellyfin/jellyfin-roku/releases/download/3.2.4/jellyfin-roku.zip',
                 },
                 {
@@ -337,7 +600,7 @@
                     format: 'APK',
                     variant: 'Libre',
                     version: '2.7.3',
-                    source: 'GitHub Releases',
+                    source: 'MediaFire',
                     url: 'https://github.com/jellyfin/jellyfin-android/releases/download/v2.7.3/jellyfin-android-v2.7.3-libre-release.apk',
                 },
             ],
@@ -443,7 +706,7 @@
         query: '',
     };
 
-    const APP_VERSION = '2026.11.07.1';
+    const APP_VERSION = '2026.11.07.4';
     const UPDATE_CHECK_INTERVAL = 5 * 60 * 1000;
 
     let els = {};
@@ -480,6 +743,9 @@
             modalStoreBox: document.getElementById('modalStoreBox'),
             modalStoreText: document.getElementById('modalStoreText'),
             modalStoreLink: document.getElementById('modalStoreLink'),
+            modalDownloadsBox: document.getElementById('modalDownloadsBox'),
+            modalDownloadsCount: document.getElementById('modalDownloadsCount'),
+            modalDownloadsList: document.getElementById('modalDownloadsList'),
             modalDirectLink: document.getElementById('modalDirectLink'),
             modalDirectLinkLabel: document.getElementById('modalDirectLinkLabel'),
             modalCloseBtn: document.getElementById('modalCloseBtn'),
@@ -545,6 +811,13 @@
 
             if (!query) return true;
 
+            const downloadTerms = (app.downloads || []).flatMap((d) => [
+                d.label,
+                d.variant,
+                d.format,
+                d.version,
+            ]);
+
             return [
                 app.name,
                 app.desc,
@@ -553,6 +826,7 @@
                 app.installLabel,
                 categoryLabels[app.categories[0]],
                 ...getPlatformNames(app),
+                ...downloadTerms,
             ].some((field) => normalize(field).includes(query));
         });
     }
@@ -617,18 +891,23 @@
             `;
         }
 
+        const isFileDownload = Boolean(
+            app.directUrl && (app.directUrl.startsWith('apps/') || /\.(apk|ipk|wgt|zip|rtf)$/i.test(app.directUrl))
+        );
+
         return `
             <div class="flex items-center justify-between gap-2 mb-3 bg-darkbg/60 p-2.5 rounded-xl border border-darkborder">
                 <div class="min-w-0">
                     <span class="text-[10px] text-gray-500 uppercase tracking-wider block font-semibold">Instalación:</span>
-                    <span class="text-xs font-semibold text-emerald-400">${escapeHtml(app.installLabel || 'Enlace oficial')}</span>
+                    <span class="text-xs font-semibold text-emerald-400">${escapeHtml(app.installLabel || (isFileDownload ? 'Descarga directa' : 'Enlace oficial'))}</span>
                     ${app.format ? `<span class="text-[10px] text-gray-500 block mt-0.5" data-format="${escapeHtml(app.format)}">Formato: <span class="text-gray-300 font-semibold">${escapeHtml(app.format)}</span></span>` : ''}
                 </div>
                 <a href="${escapeHtml(app.directUrl)}"
+                   ${isFileDownload ? 'download' : ''}
                    target="_blank"
                    rel="noopener noreferrer"
                    class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white shadow-sm transition-all flex items-center gap-1.5 shrink-0">
-                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Abrir
+                    <i class="fa-solid ${isFileDownload ? 'fa-download' : 'fa-arrow-up-right-from-square'}" aria-hidden="true"></i> ${isFileDownload ? 'Descargar' : 'Abrir'}
                 </a>
             </div>
         `;
@@ -703,9 +982,10 @@
                 <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 text-[10px] font-bold border border-emerald-500/20 shrink-0">Directo</span>
             </div>
 
-            <div class="space-y-2">
+            <div class="space-y-2 max-h-96 overflow-y-auto pr-1">
                 ${(app.downloads || []).map((item) => `
                     <a href="${escapeHtml(item.url)}"
+                       download
                        target="_blank"
                        rel="noopener noreferrer"
                        data-direct-download
@@ -713,9 +993,9 @@
                        aria-label="Descargar ${escapeHtml(item.label)} de ${escapeHtml(app.name)} en formato ${escapeHtml(item.format)}"
                        class="flex items-center justify-between gap-3 p-3 rounded-xl bg-darkbg/70 border border-darkborder hover:border-emerald-500/50 hover:bg-darkbg transition-colors group/download">
                         <span class="min-w-0">
-                            <span class="block text-xs font-bold text-white">${escapeHtml(item.label)}</span>
-                            <span class="block text-[10px] text-gray-500 mt-0.5">
-                                ${escapeHtml(item.variant)}${item.version ? ` · v${escapeHtml(item.version)}` : ''}${item.source ? ` · ${escapeHtml(item.source)}` : ''}
+                            <span class="block text-xs font-bold text-white group-hover/download:text-emerald-400 transition-colors">${escapeHtml(item.label)}</span>
+                            <span class="block text-[10px] text-gray-400 mt-0.5">
+                                ${escapeHtml(item.variant)}${item.version ? ` · v${escapeHtml(item.version)}` : ''}${item.size ? ` · ${escapeHtml(item.size)}` : ''}${item.source ? ` · ${escapeHtml(item.source)}` : ''}
                             </span>
                         </span>
                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-600 group-hover/download:bg-emerald-500 text-[10px] font-bold text-white shrink-0">
@@ -980,11 +1260,58 @@
             els.modalDirectLink.href = app.directUrl;
         }
 
-        els.modalDirectLinkLabel.textContent = hasCode
-            ? app.installLabel
-                ? `Abrir ${app.installLabel}`
-                : 'Página oficial'
-            : 'Abrir enlace oficial';
+        // Descargas directas en el modal
+        const hasDownloads = Array.isArray(app.downloads) && app.downloads.length > 0;
+        if (els.modalDownloadsBox) {
+            els.modalDownloadsBox.hidden = !hasDownloads;
+            if (hasDownloads && els.modalDownloadsList) {
+                if (els.modalDownloadsCount) {
+                    els.modalDownloadsCount.textContent = `${app.downloads.length} ${
+                        app.downloads.length === 1 ? 'opción' : 'opciones'
+                    }`;
+                }
+                els.modalDownloadsList.replaceChildren(
+                    ...app.downloads.map((item) => {
+                        const a = document.createElement('a');
+                        a.href = item.url;
+                        a.download = '';
+                        a.target = '_blank';
+                        a.rel = 'noopener noreferrer';
+                        a.className =
+                            'flex items-center justify-between gap-3 p-2.5 rounded-lg bg-darkbg/80 border border-darkborder hover:border-emerald-500/50 hover:bg-darkbg transition-colors group/mdown';
+                        a.innerHTML = `
+                            <span class="min-w-0">
+                                <span class="block text-xs font-bold text-white group-hover/mdown:text-emerald-400 transition-colors">${escapeHtml(item.label)}</span>
+                                <span class="block text-[10px] text-gray-400 mt-0.5">
+                                    ${escapeHtml(item.variant)}${item.version ? ` · v${escapeHtml(item.version)}` : ''}${item.size ? ` · ${escapeHtml(item.size)}` : ''}
+                                </span>
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-emerald-600 group-hover/mdown:bg-emerald-500 text-[10px] font-bold text-white shrink-0">
+                                ${escapeHtml(item.format)} <i class="fa-solid fa-download" aria-hidden="true"></i>
+                            </span>
+                        `;
+                        return a;
+                    })
+                );
+            }
+        }
+
+        const isDirectFile = Boolean(
+            app.directUrl && (app.directUrl.startsWith('apps/') || /\.(apk|ipk|wgt|zip|rtf)$/i.test(app.directUrl))
+        );
+        if (isDirectFile) {
+            els.modalDirectLink.setAttribute('download', '');
+        } else {
+            els.modalDirectLink.removeAttribute('download');
+        }
+
+        els.modalDirectLinkLabel.textContent = isDirectFile
+            ? `Descargar ${app.format || 'archivo'}`
+            : hasCode
+              ? app.installLabel
+                  ? `Abrir ${app.installLabel}`
+                  : 'Página oficial'
+              : 'Abrir enlace oficial';
 
         els.modal.hidden = false;
         document.body.classList.add('modal-open');
